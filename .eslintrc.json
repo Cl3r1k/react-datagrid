@@ -26,5 +26,12 @@
     "import/newline-after-import": "error",
     "import/prefer-default-export": 0,
     "prettier/prettier": ["error"]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   }
 }
