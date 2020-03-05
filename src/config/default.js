@@ -1,0 +1,5 @@
+export const DEFAULT_CONFIG = {
+  DATA_LENGTH: 10,
+  MAX_SCORE: 3000,
+  MAX_AMOUNT: 10000,
+};
