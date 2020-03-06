@@ -1,23 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// Components
+import HeaderDataCell from 'components/HeaderDataCell/HeaderDataCell';
+
+// Styles
+import './HeaderDataGrid.scss';
+
 const HeaderDataGrid = ({ data }) => {
   console.log('in HeaderDataGrid', data);
 
   return (
-    <div>
-      <table>
+    <div className="header-data-grid">
+      <table className="header-data-grid--table">
         <thead>
-          <tr>
-            <th>Avatar</th>
-            <th>Name</th>
-            <th>Score</th>
-            <th>RegisterDate</th>
-            <th>LastVisit</th>
-            <th>Status</th>
-            <th>Instant</th>
-            <th>Money currencySymbol</th>
-            <th>Mentor</th>
+          <tr className="header-data-grid--row">
+            <HeaderDataCell title="Avatar" />
+            <HeaderDataCell title="Name" isSortable isSearchable />
+            <HeaderDataCell title="Score" isSortable isSearchable />
+            <HeaderDataCell title="RegisterDate" isSortable />
+            <HeaderDataCell title="LastVisit" isSortable />
+            <HeaderDataCell title="Status" />
+            <HeaderDataCell title="Instant" />
+            <HeaderDataCell title="Money currencySymbol" />
+            <HeaderDataCell title="Mentor" />
           </tr>
         </thead>
       </table>

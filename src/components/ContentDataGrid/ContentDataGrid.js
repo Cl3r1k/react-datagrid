@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// Styles
+import './ContentDataGrid.scss';
+
 const ContentDataGrid = ({ data }) => {
   return (
-    <div>
-      <table>
+    <div className="content-data-grid">
+      <table className="content-data-grid--table">
         <tbody>
           {data.map(el => (
             <tr key={el.id}>
@@ -16,7 +19,7 @@ const ContentDataGrid = ({ data }) => {
               <td>{el.status}</td>
               <td>{el.instant}</td>
               <td>{el.money.currencySymbol}</td>
-              <td>{el.mentor}</td>
+              <td>{el.mentor ? 'true' : 'false'}</td>
             </tr>
           ))}
         </tbody>
