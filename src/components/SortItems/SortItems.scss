@@ -1,0 +1,26 @@
+.sort-icons-block {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0.25rem;
+  .sort-icon {        
+    width: 11px;
+    height: 11px;
+    border: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    cursor: pointer;
+    &.icon-up {
+      background-image: url('../../assets/sort-up.svg');
+      &.active {
+        opacity: 1;
+      }
+    }
+    &.icon-down {
+      background-image: url('../../assets/sort-down.svg');
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
+}

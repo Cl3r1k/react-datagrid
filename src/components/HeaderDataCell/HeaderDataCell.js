@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// Components
+import SortItems from 'components/SortItems/SortItems';
+import SearchItems from 'components/SearchItems/SearchItems';
+
 // Styles
 import './HeaderDataCell.scss';
 
@@ -9,20 +13,11 @@ const HeaderDataCell = ({ title, isSortable, isSearchable }) => {
 
   return (
     <th className="header-data-cell">
-      <div
-        className={
-          isSortable ? 'title-container sortable-row' : 'title-container'
-        }
-      >
+      <div className="title-container">
         <span className="cell-title">{title}</span>
-        {isSortable && (
-          <div className="sort-icons-block">
-            <button type="button" className="sort-icon icon-up" />
-            <button type="button" className="sort-icon icon-down" />
-          </div>
-        )}
+        {isSortable && <SortItems title={title} />}
       </div>
-      {isSearchable && <button type="button" className="search-icon" />}
+      {isSearchable && <SearchItems title={title} />}
     </th>
   );
 };

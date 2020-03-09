@@ -1,0 +1,12 @@
+.search-icon {
+  width: 22px;
+  // height: 22px;
+  border: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url('../../assets/icons8-search.svg');
+  cursor: pointer;
+  &:hover {
+    background-color: #cad4d4;
+  }
+}
