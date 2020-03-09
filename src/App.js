@@ -1,22 +1,17 @@
 import React from 'react';
 
-// Modules
-import { generateFakeData } from 'utils/dataUtils';
-
-// Components
-import ReactDataGrid from 'components/ReactDataGrid/ReactDataGrid';
+// Containers
+import ReactDataGrid from 'containers/ReactDataGrid/ReactDataGrid';
 
 // Styles
 import './App.scss';
 
-function App() {
-  const fakeData = generateFakeData();
-
+const App = () => {
   return (
     <div className="app wrapper">
-      <ReactDataGrid data={fakeData} />
+      <ReactDataGrid />
     </div>
   );
-}
+};
 
 export default App;
