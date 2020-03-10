@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+// Actions
+import { sortData } from 'actions/sortActions';
 
 // Styles
 import './SortItems.scss';
 
-const SortItems = ({ title }) => {
+const SortItems = props => {
+  const { title } = props;
+  console.log('SortItems props', props);
+  // TODO: here we probably use 'useEffect' hook and set 'sortState' according to state in redux-store
   const [sortState, setSortState] = useState(-1);
 
   const sortBy = ({ target: { value } }) => {
+    const { sortDataAction } = props;
     // console.log('value', !!+value);
     const isAscending = !!+value;
     console.log('sortBy title', title);
     console.log('sortBy isAscending', isAscending);
+    // TODO: We even shouldn't probably change state directly (it will be changed by 'useEffect' and incoming state, [from parent???])
+    sortDataAction(title);
     setSortState(+value);
   };
 
@@ -35,10 +45,19 @@ const SortItems = ({ title }) => {
 
 SortItems.propTypes = {
   title: PropTypes.string,
+  sortDataAction: PropTypes.func.isRequired,
 };
 
 SortItems.defaultProps = {
   title: '',
 };
 
-export default SortItems;
+// TODO: Consider to 'map' and 'connect' 'store'
+
+const mapDispatchToProps = dispatch => {
+  return {
+    sortDataAction: sortName => dispatch(sortData(sortName)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SortItems);

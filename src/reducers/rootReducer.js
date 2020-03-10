@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { filterReducer } from 'reducers/filterReducer';
+import { searchReducer } from 'reducers/searchReducer';
 import { sortReducer } from 'reducers/sortReducer';
 
 export const rootReducer = combineReducers({
-  filterState: filterReducer,
+  searchState: searchReducer,
   sortState: sortReducer,
 });
