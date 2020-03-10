@@ -1,42 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-// Actions
-import { sortData } from 'actions/sortActions';
+// Constants
+import { DIRECTION_VALUES } from 'utils/constants';
 
 // Styles
 import './SortItems.scss';
 
-const SortItems = props => {
-  const { title } = props;
-  console.log('SortItems props', props);
-  // TODO: here we probably use 'useEffect' hook and set 'sortState' according to state in redux-store
-  const [sortState, setSortState] = useState(-1);
+const SortItems = ({ fieldName, sortName, sortDirection, sortDataAction }) => {
+  const {
+    DEFAULT_DIRECTION,
+    ASCENDING_DIRECTION,
+    DESCENDING_DIRECTION,
+  } = DIRECTION_VALUES;
+  const [sortState, setSortState] = useState(DEFAULT_DIRECTION);
+
+  useEffect(() => {
+    if (fieldName === sortName) {
+      setSortState(sortDirection);
+    } else {
+      setSortState(DEFAULT_DIRECTION);
+    }
+  }, [fieldName, sortName, sortDirection, DEFAULT_DIRECTION]);
 
   const sortBy = ({ target: { value } }) => {
-    const { sortDataAction } = props;
+    // console.log('<SortItems /> sortDataAction', sortDataAction);
     // console.log('value', !!+value);
     const isAscending = !!+value;
-    console.log('sortBy title', title);
+    console.log('sortBy fieldName', fieldName);
     console.log('sortBy isAscending', isAscending);
-    // TODO: We even shouldn't probably change state directly (it will be changed by 'useEffect' and incoming state, [from parent???])
-    sortDataAction(title);
-    setSortState(+value);
+    sortDataAction(fieldName, +value);
   };
 
   return (
     <div className="sort-icons-block">
       <button
         type="button"
-        className={`sort-icon icon-up ${sortState === 1 && 'active'}`}
-        value="1"
+        className={`sort-icon icon-up ${sortState === ASCENDING_DIRECTION &&
+          'active'}`}
+        value={ASCENDING_DIRECTION}
         onClick={sortBy}
       />
       <button
         type="button"
-        className={`sort-icon icon-down ${sortState === 0 && 'active'}`}
-        value="0"
+        className={`sort-icon icon-down ${sortState === DESCENDING_DIRECTION &&
+          'active'}`}
+        value={DESCENDING_DIRECTION}
         onClick={sortBy}
       />
     </div>
@@ -44,20 +53,14 @@ const SortItems = props => {
 };
 
 SortItems.propTypes = {
-  title: PropTypes.string,
-  sortDataAction: PropTypes.func.isRequired,
+  fieldName: PropTypes.string.isRequired,
+  sortName: PropTypes.string.isRequired,
+  sortDirection: PropTypes.number.isRequired,
+  sortDataAction: PropTypes.func,
 };
 
 SortItems.defaultProps = {
-  title: '',
+  sortDataAction: undefined,
 };
 
-// TODO: Consider to 'map' and 'connect' 'store'
-
-const mapDispatchToProps = dispatch => {
-  return {
-    sortDataAction: sortName => dispatch(sortData(sortName)),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(SortItems);
+export default SortItems;
