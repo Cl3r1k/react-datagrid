@@ -27,8 +27,7 @@ const SortItems = ({ fieldName, sortName, sortDirection, sortDataAction }) => {
     // console.log('<SortItems /> sortDataAction', sortDataAction);
     // console.log('value', !!+value);
     const isAscending = !!+value;
-    console.log('sortBy fieldName', fieldName);
-    console.log('sortBy isAscending', isAscending);
+    console.log('sortBy fieldName', fieldName, ' isAscending', isAscending);
     sortDataAction(fieldName, +value);
   };
 

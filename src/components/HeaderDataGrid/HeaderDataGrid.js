@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // Actions
 import { sortData } from 'actions/sortActions';
+import { searchData, setSearchPopup } from 'actions/searchActions';
 
 // Components
 import HeaderDataCell from 'components/HeaderDataCell/HeaderDataCell';
@@ -11,10 +12,15 @@ import HeaderDataCell from 'components/HeaderDataCell/HeaderDataCell';
 // Styles
 import './HeaderDataGrid.scss';
 
-const HeaderDataGrid = ({ /* data, */ sortState, sortDataAction }) => {
+const HeaderDataGrid = ({
+  /* data, */
+  sortState,
+  searchState,
+  sortDataAction,
+  setSearchPopupAction,
+  searchDataAction,
+}) => {
   // console.log('in HeaderDataGrid', data);
-
-  // TODO: Use action for header in <tr>
 
   return (
     <div className="header-data-grid">
@@ -30,6 +36,11 @@ const HeaderDataGrid = ({ /* data, */ sortState, sortDataAction }) => {
               isSortable
               isSearchable
               sortDataAction={sortDataAction}
+              searchField={searchState.searchField}
+              searchValue={searchState.searchValue}
+              searchPopupName={searchState.searchPopupName}
+              setSearchPopupAction={setSearchPopupAction}
+              searchDataAction={searchDataAction}
             />
             <HeaderDataCell
               title="Score"
@@ -39,6 +50,11 @@ const HeaderDataGrid = ({ /* data, */ sortState, sortDataAction }) => {
               isSortable
               isSearchable
               sortDataAction={sortDataAction}
+              searchField={searchState.searchField}
+              searchValue={searchState.searchValue}
+              searchPopupName={searchState.searchPopupName}
+              setSearchPopupAction={setSearchPopupAction}
+              searchDataAction={searchDataAction}
             />
             <HeaderDataCell
               title="RegisterDate"
@@ -46,7 +62,13 @@ const HeaderDataGrid = ({ /* data, */ sortState, sortDataAction }) => {
               sortName={sortState.sortName}
               sortDirection={sortState.sortDirection}
               isSortable
+              isSearchable
               sortDataAction={sortDataAction}
+              searchField={searchState.searchField}
+              searchValue={searchState.searchValue}
+              searchPopupName={searchState.searchPopupName}
+              setSearchPopupAction={setSearchPopupAction}
+              searchDataAction={searchDataAction}
             />
             <HeaderDataCell
               title="LastVisit"
@@ -56,10 +78,10 @@ const HeaderDataGrid = ({ /* data, */ sortState, sortDataAction }) => {
               isSortable
               sortDataAction={sortDataAction}
             />
-            <HeaderDataCell title="Status" />
+            <HeaderDataCell title="Role" />
             <HeaderDataCell title="Instant" />
             <HeaderDataCell title="Money currencySymbol" />
-            <HeaderDataCell title="Mentor" />
+            <HeaderDataCell title="Active" />
           </tr>
         </thead>
       </table>
@@ -75,7 +97,16 @@ HeaderDataGrid.propTypes = {
     error: PropTypes.string,
     isSorting: PropTypes.bool,
   }).isRequired,
+  searchState: PropTypes.shape({
+    searchField: PropTypes.string,
+    searchValue: PropTypes.string,
+    searchPopupName: PropTypes.string,
+    error: PropTypes.string,
+    isSearching: PropTypes.bool,
+  }).isRequired,
   sortDataAction: PropTypes.func.isRequired,
+  setSearchPopupAction: PropTypes.func.isRequired,
+  searchDataAction: PropTypes.func.isRequired,
 };
 
 // HeaderDataGrid.defaultProps = {
@@ -85,6 +116,7 @@ HeaderDataGrid.propTypes = {
 const mapStateToProps = state => {
   return {
     sortState: state.sortState,
+    searchState: state.searchState,
   };
 };
 
@@ -92,6 +124,10 @@ const mapDispatchToProps = dispatch => {
   return {
     sortDataAction: (fieldName, sortDirection) =>
       dispatch(sortData(fieldName, sortDirection)),
+    setSearchPopupAction: searchPopupName =>
+      dispatch(setSearchPopup(searchPopupName)),
+    searchDataAction: (searchField, searchValue) =>
+      dispatch(searchData(searchField, searchValue)),
   };
 };
 

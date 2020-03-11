@@ -3,21 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Utils
-import { sortDataByFieldName } from 'utils/dataUtils';
+import { sortDataByFieldName, filterDataByFieldName } from 'utils/dataUtils';
 
 // Styles
 import './ContentDataGrid.scss';
 
-const ContentDataGrid = ({ data, sortState }) => {
+const ContentDataGrid = ({ data, sortState, searchState }) => {
   const renderTableRow = () => {
-    console.log('%c renderTableRow() sortState: ', 'color: green;', sortState);
-    const sortedData = sortDataByFieldName(
-      data,
-      sortState.sortName,
-      sortState.sortDirection
-    );
-
-    if (sortState.isSorting) {
+    if (sortState.isSorting || searchState.isSearching) {
       return (
         <tr>
           <td>
@@ -27,7 +20,20 @@ const ContentDataGrid = ({ data, sortState }) => {
       );
     }
 
-    return sortedData.map(el => (
+    console.log('%c renderTableRow() sortState: ', 'color: green;', sortState);
+    const sortedData = sortDataByFieldName(
+      data,
+      sortState.sortName,
+      sortState.sortDirection
+    );
+
+    const filteredData = filterDataByFieldName(
+      sortedData,
+      searchState.searchField,
+      searchState.searchValue
+    );
+
+    return filteredData.map(el => (
       <tr key={el.id}>
         <td>{el.avatar}</td>
         <td>{el.name}</td>
@@ -37,7 +43,7 @@ const ContentDataGrid = ({ data, sortState }) => {
         <td>{el.status}</td>
         <td>{el.instant}</td>
         <td>{el.money.currencySymbol}</td>
-        <td>{el.mentor ? 'true' : 'false'}</td>
+        <td>{el.active ? 'true' : 'false'}</td>
       </tr>
     ));
   };
@@ -59,6 +65,13 @@ ContentDataGrid.propTypes = {
     error: PropTypes.string,
     isSorting: PropTypes.bool,
   }).isRequired,
+  searchState: PropTypes.shape({
+    searchField: PropTypes.string,
+    searchValue: PropTypes.string,
+    searchPopupName: PropTypes.string,
+    error: PropTypes.string,
+    isSearching: PropTypes.bool,
+  }).isRequired,
 };
 
 ContentDataGrid.defaultProps = {
@@ -68,6 +81,7 @@ ContentDataGrid.defaultProps = {
 const mapStoreToProps = state => {
   return {
     sortState: state.sortState,
+    searchState: state.searchState,
   };
 };
 

@@ -4,25 +4,29 @@ import Faker from 'faker';
 // Constants
 import { DEFAULT_CONFIG } from 'config/default';
 
-export const generateFakeData = () => {
-  const { DATA_LENGTH, MAX_SCORE, MAX_AMOUNT } = DEFAULT_CONFIG;
+const { DATA_LENGTH, MAX_SCORE, MAX_AMOUNT } = DEFAULT_CONFIG;
 
-  return new Array(DATA_LENGTH).fill(0).map(el => ({
+const generateFakeRecord = () => {
+  return {
     id: Faker.random.uuid(),
     avatar: Faker.image.avatar(),
     name: Faker.internet.userName(),
     score: Faker.random.number(MAX_SCORE),
     registerDate: Faker.date.recent().toLocaleDateString(),
     lastVisit: Faker.date.weekday(),
-    status: 'active',
+    role: 'active',
     instant: new Date().getTime(),
     money: {
       currency: Faker.finance.currencyName(),
       currencySymbol: Faker.finance.currencySymbol(),
       amount: Faker.random.number(MAX_AMOUNT),
     },
-    mentor: !!el,
-  }));
+    active: !(Math.floor(Math.random() * 10) % 2),
+  };
+};
+
+export const generateFakeData = () => {
+  return Array.from({ length: DATA_LENGTH }, () => generateFakeRecord());
 };
 
 export const sortDataByFieldName = (data, sortName, sortDirection) => {
@@ -47,6 +51,29 @@ export const sortDataByFieldName = (data, sortName, sortDirection) => {
 
     console.log('%c sortedData: ', 'color: pink', sortedData);
     return sortedData;
+  }
+
+  return data;
+};
+
+export const filterDataByFieldName = (data, searchField, searchValue) => {
+  console.log(
+    `in filterDataByFieldName searchField: ${searchField}, searchValue: ${searchValue}`
+  );
+
+  if (searchField) {
+    const filteredData = [...data].filter(item => {
+      // console.log('item[searchField]', item[searchField]);
+      // console.log('item[searchField].toString()', item[searchField].toString());
+      // console.log(
+      //   'item[searchField].toString().includes(searchValue)',
+      //   item[searchField].toString().includes(searchValue)
+      // );
+      return item[searchField].toString().includes(searchValue);
+    });
+
+    console.log('%c filteredData: ', 'color: pink', filteredData);
+    return filteredData;
   }
 
   return data;

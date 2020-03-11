@@ -2,12 +2,15 @@ import {
   SEARCH_DATA_REQUEST,
   SEARCH_DATA_SUCCESS,
   SEARCH_DATA_FAIL,
+  SEARCH_POPUP,
 } from 'actions/searchActions';
 
 const initialState = {
-  searchName: 'asdf',
+  searchField: '',
+  searchValue: '',
+  searchPopupName: '',
   error: '',
-  isSearched: false,
+  isSearching: false,
 };
 
 export const searchReducer = (state = initialState, action) => {
@@ -15,21 +18,25 @@ export const searchReducer = (state = initialState, action) => {
     case SEARCH_DATA_REQUEST:
       return {
         ...state,
-        searchName: action.payload,
-        isSearched: true,
+        searchValue: action.payload,
+        isSearching: true,
         error: '',
       };
 
     case SEARCH_DATA_SUCCESS:
       return {
         ...state,
-        searchName: action.payload,
-        isSearched: false,
+        searchField: action.payload.searchField,
+        searchValue: action.payload.searchValue,
+        isSearching: false,
         error: '',
       };
 
     case SEARCH_DATA_FAIL:
-      return { ...state, isSearched: false, error: action.payload };
+      return { ...state, isSearching: false, error: action.payload };
+
+    case SEARCH_POPUP:
+      return { ...state, searchPopupName: action.payload };
 
     default:
       return state;

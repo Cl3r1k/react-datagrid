@@ -11,17 +11,24 @@ import { DIRECTION_VALUES } from 'utils/constants';
 // Styles
 import './HeaderDataCell.scss';
 
-const HeaderDataCell = ({
-  title,
-  isSortable,
-  isSearchable,
-  fieldName,
-  sortName,
-  sortDirection,
-  sortDataAction,
-}) => {
+const HeaderDataCell = props => {
+  const {
+    title,
+    isSortable,
+    isSearchable,
+    fieldName,
+    sortName,
+    sortDirection,
+    sortDataAction,
+    searchField,
+    searchValue,
+    searchPopupName,
+    searchDataAction,
+    setSearchPopupAction,
+  } = props;
   // console.log('HeaderDataCell title: ', title);
   // console.log('HeaderDataCell fieldName: ', fieldName);
+  // console.log('HeaderDataCell sortName: ', sortName);
   // console.log('HeaderDataCell sortDataAction: ', sortDataAction);
 
   return (
@@ -37,7 +44,16 @@ const HeaderDataCell = ({
           />
         )}
       </div>
-      {isSearchable && <SearchItems fieldName={fieldName} />}
+      {isSearchable && (
+        <SearchItems
+          fieldName={fieldName}
+          searchField={searchField}
+          searchValue={searchValue}
+          searchPopupName={searchPopupName}
+          searchDataAction={searchDataAction}
+          setSearchPopupAction={setSearchPopupAction}
+        />
+      )}
     </th>
   );
 };
@@ -50,6 +66,11 @@ HeaderDataCell.propTypes = {
   isSortable: PropTypes.bool,
   isSearchable: PropTypes.bool,
   sortDataAction: PropTypes.func,
+  searchField: PropTypes.string,
+  searchValue: PropTypes.string,
+  searchPopupName: PropTypes.string,
+  searchDataAction: PropTypes.func,
+  setSearchPopupAction: PropTypes.func,
 };
 
 HeaderDataCell.defaultProps = {
@@ -60,6 +81,11 @@ HeaderDataCell.defaultProps = {
   isSortable: false,
   isSearchable: false,
   sortDataAction: undefined,
+  searchField: '',
+  searchValue: '',
+  searchPopupName: '',
+  searchDataAction: undefined,
+  setSearchPopupAction: undefined,
 };
 
 export default HeaderDataCell;
