@@ -26,7 +26,8 @@ const SearchItems = ({
       if (fieldName === searchField) {
         // Here we can set searched value for popup
         console.log('%c searchValue: ', 'color: pink', searchValue);
-        setSearchValueState({ value: searchValue, isActive: true });
+        console.log('!searchValue', !!searchValue);
+        setSearchValueState({ value: searchValue, isActive: !!searchValue });
       }
     } else {
       setVisibleState(false);
@@ -44,7 +45,7 @@ const SearchItems = ({
   const resetHandler = () => {
     // TODO: Here we should reset 'searched' data and close popup
     searchDataAction(fieldName, '');
-    setSearchValueState({ isActive: false });
+    // setSearchValueState({ isActive: false });
     setSearchPopupAction('');
   };
 

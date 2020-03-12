@@ -56,12 +56,16 @@ export const sortDataByFieldName = (data, sortName, sortDirection) => {
   return data;
 };
 
-export const filterDataByFieldName = (data, searchField, searchValue) => {
+export const filterData = (data, searchField, searchValue, filterToggle) => {
+  const ACTIVE_TOGGLE = 1;
+  const TOGGLE_FIELD = 'active';
+
   console.log(
-    `in filterDataByFieldName searchField: ${searchField}, searchValue: ${searchValue}`
+    `in filterData searchField: ${searchField}, searchValue: ${searchValue}`
   );
 
   if (searchField) {
+    // console.log('filtering...???');
     const filteredData = [...data].filter(item => {
       // console.log('item[searchField]', item[searchField]);
       // console.log('item[searchField].toString()', item[searchField].toString());
@@ -69,6 +73,15 @@ export const filterDataByFieldName = (data, searchField, searchValue) => {
       //   'item[searchField].toString().includes(searchValue)',
       //   item[searchField].toString().includes(searchValue)
       // );
+      if (filterToggle) {
+        console.log('in filterData - filterToggle', filterToggle);
+        const toggleItem =
+          (item[TOGGLE_FIELD] && filterToggle === ACTIVE_TOGGLE) ||
+          (!item[TOGGLE_FIELD] && filterToggle !== ACTIVE_TOGGLE);
+        // console.log('in filterData - toggleItem', toggleItem);
+        return item[searchField].toString().includes(searchValue) && toggleItem;
+      }
+
       return item[searchField].toString().includes(searchValue);
     });
 

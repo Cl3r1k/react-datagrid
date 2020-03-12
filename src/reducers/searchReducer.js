@@ -3,6 +3,7 @@ import {
   SEARCH_DATA_SUCCESS,
   SEARCH_DATA_FAIL,
   SEARCH_POPUP,
+  TOGGLE_STATE,
 } from 'actions/searchActions';
 
 const initialState = {
@@ -11,6 +12,9 @@ const initialState = {
   searchPopupName: '',
   error: '',
   isSearching: false,
+  filterState: {
+    filterToggleState: 0,
+  },
 };
 
 export const searchReducer = (state = initialState, action) => {
@@ -37,6 +41,9 @@ export const searchReducer = (state = initialState, action) => {
 
     case SEARCH_POPUP:
       return { ...state, searchPopupName: action.payload };
+
+    case TOGGLE_STATE:
+      return { ...state, filterState: { filterToggleState: action.payload } };
 
     default:
       return state;

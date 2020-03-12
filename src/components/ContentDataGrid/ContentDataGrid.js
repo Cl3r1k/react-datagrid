@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Utils
-import { sortDataByFieldName, filterDataByFieldName } from 'utils/dataUtils';
+import { sortDataByFieldName, filterData } from 'utils/dataUtils';
 
 // Styles
 import './ContentDataGrid.scss';
@@ -27,10 +27,11 @@ const ContentDataGrid = ({ data, sortState, searchState }) => {
       sortState.sortDirection
     );
 
-    const filteredData = filterDataByFieldName(
+    const filteredData = filterData(
       sortedData,
       searchState.searchField,
-      searchState.searchValue
+      searchState.searchValue,
+      searchState.filterState.filterToggleState
     );
 
     return filteredData.map(el => (
@@ -71,6 +72,9 @@ ContentDataGrid.propTypes = {
     searchPopupName: PropTypes.string,
     error: PropTypes.string,
     isSearching: PropTypes.bool,
+    filterState: PropTypes.shape({
+      filterToggleState: PropTypes.number,
+    }),
   }).isRequired,
 };
 
