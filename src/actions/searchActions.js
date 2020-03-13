@@ -1,10 +1,11 @@
+import { ACTION_DELAY } from 'utils/constants';
+
 export const SEARCH_DATA_REQUEST = 'SEARCH_DATA_REQUEST';
 export const SEARCH_DATA_SUCCESS = 'SEARCH_DATA_SUCCESS';
 export const SEARCH_POPUP = 'SEARCH_POPUP';
 export const TOGGLE_STATE = 'TOGGLE_STATE';
 export const SET_ENUM_FILTER = 'SET_ENUM_FILTER';
 export const GLOBAL_SEARCH_SUCCESS = 'GLOBAL_SEARCH_SUCCESS';
-const ACTION_DELAY = 1;
 
 export const searchData = (searchField, searchValue) => {
   console.log(

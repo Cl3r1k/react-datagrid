@@ -5,9 +5,6 @@ import PropTypes from 'prop-types';
 import SortItems from 'components/SortItems/SortItems';
 import SearchItems from 'components/SearchItems/SearchItems';
 
-// Constants
-import { DIRECTION_VALUES } from 'utils/constants';
-
 // Styles
 import './HeaderDataCell.scss';
 
@@ -17,8 +14,7 @@ const HeaderDataCell = props => {
     isSortable,
     isSearchable,
     fieldName,
-    sortName,
-    sortDirection,
+    sortState,
     sortDataAction,
     searchField,
     searchValue,
@@ -28,8 +24,9 @@ const HeaderDataCell = props => {
   } = props;
   // console.log('HeaderDataCell title: ', title);
   // console.log('HeaderDataCell fieldName: ', fieldName);
-  // console.log('HeaderDataCell sortName: ', sortName);
+  // console.log('HeaderDataCell sortFields: ', sortFields);
   // console.log('HeaderDataCell sortDataAction: ', sortDataAction);
+  // console.log('HeaderDataCell sortState: ', sortState);
 
   return (
     <th className="header-data-cell">
@@ -38,8 +35,7 @@ const HeaderDataCell = props => {
         {isSortable && (
           <SortItems
             fieldName={fieldName}
-            sortName={sortName}
-            sortDirection={sortDirection}
+            sortState={sortState}
             sortDataAction={sortDataAction}
           />
         )}
@@ -61,8 +57,7 @@ const HeaderDataCell = props => {
 HeaderDataCell.propTypes = {
   title: PropTypes.string,
   fieldName: PropTypes.string,
-  sortName: PropTypes.string,
-  sortDirection: PropTypes.number,
+  sortState: PropTypes.string,
   isSortable: PropTypes.bool,
   isSearchable: PropTypes.bool,
   sortDataAction: PropTypes.func,
@@ -76,8 +71,7 @@ HeaderDataCell.propTypes = {
 HeaderDataCell.defaultProps = {
   title: 'CellTitle',
   fieldName: '',
-  sortName: '',
-  sortDirection: DIRECTION_VALUES.DEFAULT_DIRECTION,
+  sortState: '',
   isSortable: false,
   isSearchable: false,
   sortDataAction: undefined,

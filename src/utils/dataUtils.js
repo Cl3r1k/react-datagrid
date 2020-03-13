@@ -1,5 +1,6 @@
 // Modules
 import Faker from 'faker';
+import orderBy from 'lodash/orderBy';
 
 // Constants
 import { DEFAULT_CONFIG, ENUM_CONFIG } from 'config/default';
@@ -38,31 +39,8 @@ export const generateFakeData = () => {
   return Array.from({ length: DATA_LENGTH }, () => generateFakeRecord());
 };
 
-export const sortDataByFieldName = (data, sortName, sortDirection) => {
-  console.log(
-    `in sortDataByFieldName sortName: ${sortName}, sortDirection: ${sortDirection}`
-  );
-
-  if (sortName) {
-    const SORT_DIRECTION_FLAG = -1;
-    const sortValue =
-      sortDirection > 0 ? -SORT_DIRECTION_FLAG : SORT_DIRECTION_FLAG;
-    const sortedData = [...data].sort((a, b) => {
-      if (b[sortName] > a[sortName]) {
-        return -1 * sortValue;
-      }
-      if (b[sortName] < a[sortName]) {
-        return 1 * sortValue;
-      }
-
-      return 0;
-    });
-
-    console.log('%c sortedData: ', 'color: pink', sortedData);
-    return sortedData;
-  }
-
-  return data;
+export const sortDataByFieldName = (data, sortFields, sortDirections) => {
+  return orderBy(data, sortFields, sortDirections);
 };
 
 const objectContainsValue = (record, value) => {

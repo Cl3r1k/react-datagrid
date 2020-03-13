@@ -31,8 +31,9 @@ const HeaderDataGrid = ({
             <HeaderDataCell
               title="Name"
               fieldName="name"
-              sortName={sortState.sortName}
-              sortDirection={sortState.sortDirection}
+              sortState={
+                sortState.sortDirections[sortState.sortFields.indexOf('name')]
+              }
               isSortable
               isSearchable
               sortDataAction={sortDataAction}
@@ -45,8 +46,9 @@ const HeaderDataGrid = ({
             <HeaderDataCell
               title="Score"
               fieldName="score"
-              sortName={sortState.sortName}
-              sortDirection={sortState.sortDirection}
+              sortState={
+                sortState.sortDirections[sortState.sortFields.indexOf('score')]
+              }
               isSortable
               isSearchable
               sortDataAction={sortDataAction}
@@ -59,8 +61,11 @@ const HeaderDataGrid = ({
             <HeaderDataCell
               title="RegisterDate"
               fieldName="registerDate"
-              sortName={sortState.sortName}
-              sortDirection={sortState.sortDirection}
+              sortState={
+                sortState.sortDirections[
+                  sortState.sortFields.indexOf('registerDate')
+                ]
+              }
               isSortable
               isSearchable
               sortDataAction={sortDataAction}
@@ -73,8 +78,11 @@ const HeaderDataGrid = ({
             <HeaderDataCell
               title="LastVisit"
               fieldName="lastVisit"
-              sortName={sortState.sortName}
-              sortDirection={sortState.sortDirection}
+              sortState={
+                sortState.sortDirections[
+                  sortState.sortFields.indexOf('lastVisit')
+                ]
+              }
               isSortable
               sortDataAction={sortDataAction}
             />
@@ -92,16 +100,14 @@ const HeaderDataGrid = ({
 HeaderDataGrid.propTypes = {
   // data: PropTypes.arrayOf(PropTypes.object),
   sortState: PropTypes.shape({
-    sortName: PropTypes.string,
-    sortDirection: PropTypes.number,
-    error: PropTypes.string,
+    sortFields: PropTypes.arrayOf(PropTypes.string),
+    sortDirections: PropTypes.arrayOf(PropTypes.string),
     isSorting: PropTypes.bool,
   }).isRequired,
   searchState: PropTypes.shape({
     searchField: PropTypes.string,
     searchValue: PropTypes.string,
     searchPopupName: PropTypes.string,
-    error: PropTypes.string,
     isSearching: PropTypes.bool,
   }).isRequired,
   sortDataAction: PropTypes.func.isRequired,
@@ -122,8 +128,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    sortDataAction: (fieldName, sortDirection) =>
-      dispatch(sortData(fieldName, sortDirection)),
+    sortDataAction: (sortField, shiftKey) =>
+      dispatch(sortData(sortField, shiftKey)),
     setSearchPopupAction: searchPopupName =>
       dispatch(setSearchPopup(searchPopupName)),
     searchDataAction: (searchField, searchValue) =>

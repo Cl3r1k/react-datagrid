@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // Constants
@@ -7,58 +7,58 @@ import { DIRECTION_VALUES } from 'utils/constants';
 // Styles
 import './SortItems.scss';
 
-const SortItems = ({ fieldName, sortName, sortDirection, sortDataAction }) => {
-  const {
-    DEFAULT_DIRECTION,
-    ASCENDING_DIRECTION,
-    DESCENDING_DIRECTION,
-  } = DIRECTION_VALUES;
-  const [sortState, setSortState] = useState(DEFAULT_DIRECTION);
+const SortItems = ({ fieldName, sortState, sortDataAction }) => {
+  const { ASCENDING_DIRECTION, DESCENDING_DIRECTION } = DIRECTION_VALUES;
 
-  useEffect(() => {
-    if (fieldName === sortName) {
-      setSortState(sortDirection);
-    } else {
-      setSortState(DEFAULT_DIRECTION);
-    }
-  }, [fieldName, sortName, sortDirection, DEFAULT_DIRECTION]);
-
-  const sortBy = ({ target: { value } }) => {
-    // console.log('<SortItems /> sortDataAction', sortDataAction);
-    // console.log('value', !!+value);
-    const isAscending = !!+value;
-    console.log('sortBy fieldName', fieldName, ' isAscending', isAscending);
-    sortDataAction(fieldName, +value);
+  const sortBy = ({ shiftKey }) => {
+    sortDataAction(fieldName, shiftKey);
   };
+
+  // const handleKeyDown = evt => {
+  //   console.log('evt', evt);
+  // };
 
   return (
     <div className="sort-icons-block">
+      {/* {sortState && <span>$</span>} */}
+      {/* {sortState && (
+        <button
+          type="button"
+          className={`sort-icon ${
+            sortState === ASCENDING_DIRECTION ? 'icon-up' : 'icon-down'
+          }`}
+        />
+      )} */}
       <button
+        type="button"
+        className={`sort-icon ${sortState === ASCENDING_DIRECTION &&
+          'icon-up'} ${sortState === DESCENDING_DIRECTION && 'icon-down'}`}
+        onClick={sortBy}
+      />
+      {/* <button
         type="button"
         className={`sort-icon icon-up ${sortState === ASCENDING_DIRECTION &&
           'active'}`}
-        value={ASCENDING_DIRECTION}
         onClick={sortBy}
       />
       <button
         type="button"
         className={`sort-icon icon-down ${sortState === DESCENDING_DIRECTION &&
           'active'}`}
-        value={DESCENDING_DIRECTION}
         onClick={sortBy}
-      />
+      /> */}
     </div>
   );
 };
 
 SortItems.propTypes = {
   fieldName: PropTypes.string.isRequired,
-  sortName: PropTypes.string.isRequired,
-  sortDirection: PropTypes.number.isRequired,
+  sortState: PropTypes.string,
   sortDataAction: PropTypes.func,
 };
 
 SortItems.defaultProps = {
+  sortState: '',
   sortDataAction: undefined,
 };
 

@@ -21,14 +21,8 @@ const ContentDataGrid = ({ data, sortState, searchState }) => {
     }
 
     console.log('%c renderTableRow() sortState: ', 'color: green;', sortState);
-    const sortedData = sortDataByFieldName(
-      data,
-      sortState.sortName,
-      sortState.sortDirection
-    );
-
     const filteredData = filterData(
-      sortedData,
+      data,
       searchState.searchField,
       searchState.searchValue,
       searchState.globalSearchValue,
@@ -36,7 +30,13 @@ const ContentDataGrid = ({ data, sortState, searchState }) => {
       searchState.filterEnums
     );
 
-    return filteredData.map(el => (
+    const sortedData = sortDataByFieldName(
+      filteredData,
+      sortState.sortFields,
+      sortState.sortDirections
+    );
+
+    return sortedData.map(el => (
       <tr key={el.id}>
         <td>{el.avatar}</td>
         <td>{el.name}</td>
@@ -63,16 +63,14 @@ const ContentDataGrid = ({ data, sortState, searchState }) => {
 ContentDataGrid.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   sortState: PropTypes.shape({
-    sortName: PropTypes.string,
-    sortDirection: PropTypes.number,
-    error: PropTypes.string,
+    sortFields: PropTypes.arrayOf(PropTypes.string),
+    sortDirections: PropTypes.arrayOf(PropTypes.string),
     isSorting: PropTypes.bool,
   }).isRequired,
   searchState: PropTypes.shape({
     searchField: PropTypes.string,
     searchValue: PropTypes.string,
     searchPopupName: PropTypes.string,
-    error: PropTypes.string,
     isSearching: PropTypes.bool,
     globalSearchValue: PropTypes.string,
     filterToggleState: PropTypes.number,

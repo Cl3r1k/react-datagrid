@@ -1,28 +1,48 @@
-export const SORT_DATA_REQUEST = 'SORT_DATA_REQUEST';
-export const SORT_DATA_SUCCESS = 'SORT_DATA_SUCCESS';
-export const SORT_DATA_FAIL = 'SORT_DATA_FAIL';
+import { ACTION_DELAY, DIRECTION_VALUES } from 'utils/constants';
 
-const sortDataByFieldName = (sortName, sortDirection, dispatch) => {
-  console.log('in sortDataByFieldName: ', sortName, sortDirection);
+export const SORT_DATA_SUCCESS = 'SORT_DATA_SUCCESS';
+
+const sortDataByField = (sortField, shiftKey, dispatch, getState) => {
+  const { sortFields, sortDirections } = getState().sortState;
+
+  const fieldIndex = sortFields.indexOf(sortField);
+
+  if (
+    !shiftKey &&
+    ((fieldIndex !== 0 && sortFields.length > 0) ||
+      (fieldIndex === 0 && sortFields.length > 1))
+  ) {
+    sortFields.length = 0;
+    sortDirections.length = 0;
+    sortFields.push(sortField);
+    sortDirections.push(DIRECTION_VALUES.ASCENDING_DIRECTION);
+  }
+
+  if (fieldIndex < 0) {
+    sortFields.push(sortField);
+    sortDirections.push(DIRECTION_VALUES.ASCENDING_DIRECTION);
+  } else if (
+    sortDirections[fieldIndex] === DIRECTION_VALUES.ASCENDING_DIRECTION
+  ) {
+    sortDirections[fieldIndex] = DIRECTION_VALUES.DESCENDING_DIRECTION;
+  } else {
+    sortFields.splice(fieldIndex, 1);
+    sortDirections.splice(fieldIndex, 1);
+  }
 
   dispatch({
     type: SORT_DATA_SUCCESS,
     payload: {
-      sortName,
-      sortDirection,
+      sortFields,
+      sortDirections,
     },
   });
 };
 
-export const sortData = (sortName, sortDirection) => {
-  return dispatch => {
-    dispatch({
-      type: SORT_DATA_REQUEST,
-      payload: sortName,
-    });
-
+export const sortData = (sortField, shiftKey) => {
+  return (dispatch, getState) => {
     setTimeout(() => {
-      sortDataByFieldName(sortName, sortDirection, dispatch);
-    }, 1000);
+      sortDataByField(sortField, shiftKey, dispatch, getState);
+    }, ACTION_DELAY);
   };
 };

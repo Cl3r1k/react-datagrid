@@ -10,7 +10,7 @@ const SearchGlobal = ({ setGlobalSearchAction }) => {
 
   return (
     <>
-      <p>Search throw all columns</p>
+      <p>Search through all columns</p>
       <input
         type="text"
         placeholder="Enter value to search"
