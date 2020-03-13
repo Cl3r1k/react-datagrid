@@ -31,6 +31,7 @@ const ContentDataGrid = ({ data, sortState, searchState }) => {
       sortedData,
       searchState.searchField,
       searchState.searchValue,
+      searchState.globalSearchValue,
       searchState.filterToggleState,
       searchState.filterEnums
     );
@@ -73,6 +74,7 @@ ContentDataGrid.propTypes = {
     searchPopupName: PropTypes.string,
     error: PropTypes.string,
     isSearching: PropTypes.bool,
+    globalSearchValue: PropTypes.string,
     filterToggleState: PropTypes.number,
     filterEnums: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,

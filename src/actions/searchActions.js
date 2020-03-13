@@ -1,9 +1,10 @@
 export const SEARCH_DATA_REQUEST = 'SEARCH_DATA_REQUEST';
 export const SEARCH_DATA_SUCCESS = 'SEARCH_DATA_SUCCESS';
-export const SEARCH_DATA_FAIL = 'SEARCH_DATA_FAIL';
 export const SEARCH_POPUP = 'SEARCH_POPUP';
 export const TOGGLE_STATE = 'TOGGLE_STATE';
 export const SET_ENUM_FILTER = 'SET_ENUM_FILTER';
+export const GLOBAL_SEARCH_SUCCESS = 'GLOBAL_SEARCH_SUCCESS';
+const ACTION_DELAY = 1;
 
 export const searchData = (searchField, searchValue) => {
   console.log(
@@ -24,7 +25,7 @@ export const searchData = (searchField, searchValue) => {
         type: SEARCH_DATA_SUCCESS,
         payload: { searchField, searchValue },
       });
-    }, 1000);
+    }, ACTION_DELAY);
   };
 };
 
@@ -60,6 +61,15 @@ export const setEnumFilter = enumsSelected => {
     dispatch({
       type: SET_ENUM_FILTER,
       payload: enumsSelected,
+    });
+  };
+};
+
+export const setGlobalSearch = globalSearchValue => {
+  return dispatch => {
+    dispatch({
+      type: GLOBAL_SEARCH_SUCCESS,
+      payload: globalSearchValue,
     });
   };
 };

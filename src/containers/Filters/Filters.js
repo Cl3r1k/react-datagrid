@@ -3,18 +3,29 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Actions
-import { setToggle, setEnumFilter } from 'actions/searchActions';
+import {
+  setToggle,
+  setEnumFilter,
+  setGlobalSearch,
+} from 'actions/searchActions';
 
 // Components
+import SearchGlobal from 'components/SearchGlobal/SearchGlobal';
 import FilterEnum from 'components/FilterEnum/FilterEnum';
 import ToggleFilter from 'components/ToggleFilter/ToggleFilter';
 
 // Styles
 import './Filters.scss';
 
-const Filters = ({ appState, setToggleAction, setEnumFilterAction }) => {
+const Filters = ({
+  appState,
+  setToggleAction,
+  setEnumFilterAction,
+  setGlobalSearchAction,
+}) => {
   return (
     <div className="filters-container">
+      <SearchGlobal setGlobalSearchAction={setGlobalSearchAction} />
       <FilterEnum setEnumFilterAction={setEnumFilterAction} />
       <ToggleFilter
         filterToggleState={appState.filterToggleState}
@@ -31,6 +42,7 @@ Filters.propTypes = {
   }).isRequired,
   setToggleAction: PropTypes.func.isRequired,
   setEnumFilterAction: PropTypes.func.isRequired,
+  setGlobalSearchAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -45,6 +57,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(setToggle(toggleValue, checkedStatus)),
     setEnumFilterAction: enumsSelected =>
       dispatch(setEnumFilter(enumsSelected)),
+    setGlobalSearchAction: globalSearchValue =>
+      dispatch(setGlobalSearch(globalSearchValue)),
   };
 };
 

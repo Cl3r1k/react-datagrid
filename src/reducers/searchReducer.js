@@ -1,18 +1,18 @@
 import {
   SEARCH_DATA_REQUEST,
   SEARCH_DATA_SUCCESS,
-  SEARCH_DATA_FAIL,
   SEARCH_POPUP,
   TOGGLE_STATE,
   SET_ENUM_FILTER,
+  GLOBAL_SEARCH_SUCCESS,
 } from 'actions/searchActions';
 
 const initialState = {
   searchField: '',
   searchValue: '',
   searchPopupName: '',
-  error: '',
   isSearching: false,
+  globalSearchValue: '',
   filterToggleState: 0,
   filterEnums: [],
 };
@@ -24,7 +24,6 @@ export const searchReducer = (state = initialState, action) => {
         ...state,
         searchValue: action.payload,
         isSearching: true,
-        error: '',
       };
 
     case SEARCH_DATA_SUCCESS:
@@ -33,11 +32,7 @@ export const searchReducer = (state = initialState, action) => {
         searchField: action.payload.searchField,
         searchValue: action.payload.searchValue,
         isSearching: false,
-        error: '',
       };
-
-    case SEARCH_DATA_FAIL:
-      return { ...state, isSearching: false, error: action.payload };
 
     case SEARCH_POPUP:
       return { ...state, searchPopupName: action.payload };
@@ -47,6 +42,13 @@ export const searchReducer = (state = initialState, action) => {
 
     case SET_ENUM_FILTER:
       return { ...state, filterEnums: action.payload };
+
+    case GLOBAL_SEARCH_SUCCESS:
+      return {
+        ...state,
+        globalSearchValue: action.payload,
+        isSearching: false,
+      };
 
     default:
       return state;

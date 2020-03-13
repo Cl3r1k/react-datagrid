@@ -7,6 +7,7 @@ import { DEFAULT_CONFIG, ENUM_CONFIG } from 'config/default';
 const ACTIVE_TOGGLE = 1;
 const TOGGLE_FIELD = 'active';
 const ENUM_FIELD = 'type';
+const EXCLUDED_FIELD = 'id';
 
 const { DATA_LENGTH, MAX_SCORE, MAX_AMOUNT } = DEFAULT_CONFIG;
 
@@ -64,32 +65,50 @@ export const sortDataByFieldName = (data, sortName, sortDirection) => {
   return data;
 };
 
+const objectContainsValue = (record, value) => {
+  return !!Object.keys(record).filter(
+    key =>
+      key !== EXCLUDED_FIELD &&
+      record[key]
+        .toString()
+        .toLowerCase()
+        .includes(value.toLowerCase())
+  ).length;
+};
+
+const globalSearch = (data, globalSearchValue) => {
+  return data.filter(item => objectContainsValue(item, globalSearchValue));
+};
+
+const searchByFieldName = (data, searchField, searchValue) => {
+  return data.filter(item =>
+    item[searchField]
+      .toString()
+      .toLowerCase()
+      .includes(searchValue.toLowerCase())
+  );
+};
+
 const filterByEnums = (data, filterEnums) => {
   // console.log('filterByEnums filterEnums:', filterEnums);
   return data.filter(item => filterEnums.includes(item[ENUM_FIELD]));
 };
 
 const filterByToggle = (data, filterToggle) => {
-  console.log('filterByToggle filterToggle:', filterToggle);
-
+  // console.log('filterByToggle filterToggle:', filterToggle);
   return data.filter(item => {
     return (
       (item[TOGGLE_FIELD] && filterToggle === ACTIVE_TOGGLE) ||
       (!item[TOGGLE_FIELD] && filterToggle !== ACTIVE_TOGGLE)
     );
   });
-
-  // const toggleItem =
-  //     (item[TOGGLE_FIELD] && filterToggle === ACTIVE_TOGGLE) ||
-  //     (!item[TOGGLE_FIELD] && filterToggle !== ACTIVE_TOGGLE);
-  //   // console.log('in filterData - toggleItem', toggleItem);
-  //   return item[searchField].toString().includes(searchValue) && toggleItem;
 };
 
 export const filterData = (
   data,
   searchField,
   searchValue,
+  globalSearchValue,
   filterToggle,
   filterEnums
 ) => {
@@ -100,20 +119,12 @@ export const filterData = (
   let filteredData = [...data];
 
   if (searchField) {
-    // console.log('filtering...???');
-    filteredData = filteredData.filter(item => {
-      // console.log('item[searchField]', item[searchField]);
-      // console.log('item[searchField].toString()', item[searchField].toString());
-      // console.log(
-      //   'item[searchField].toString().includes(searchValue)',
-      //   item[searchField].toString().includes(searchValue)
-      // );
+    filteredData = searchByFieldName(filteredData, searchField, searchValue);
+    // console.log('%c filteredData: ', 'color: pink', filteredData);
+  }
 
-      return item[searchField].toString().includes(searchValue);
-    });
-
-    console.log('%c filteredData: ', 'color: pink', filteredData);
-    return filteredData;
+  if (globalSearchValue) {
+    filteredData = globalSearch(filteredData, globalSearchValue);
   }
 
   if (filterEnums.length) {
@@ -121,7 +132,7 @@ export const filterData = (
   }
 
   if (filterToggle) {
-    console.log('in filterData - filterToggle', filterToggle);
+    // console.log('in filterData - filterToggle', filterToggle);
     filteredData = filterByToggle(filteredData, filterToggle);
   }
 
