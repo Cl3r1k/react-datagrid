@@ -15,10 +15,7 @@ import './Filters.scss';
 const Filters = ({ appState, setToggleAction, setEnumFilterAction }) => {
   return (
     <div className="filters-container">
-      <FilterEnum
-        filterEnums={appState.filterEnums}
-        setEnumFilterAction={setEnumFilterAction}
-      />
+      <FilterEnum setEnumFilterAction={setEnumFilterAction} />
       <ToggleFilter
         filterToggleState={appState.filterToggleState}
         setToggleAction={setToggleAction}
@@ -46,8 +43,8 @@ const mapDispatchToProps = dispatch => {
   return {
     setToggleAction: (toggleValue, checkedStatus) =>
       dispatch(setToggle(toggleValue, checkedStatus)),
-    setEnumFilterAction: (enumValue, setType) =>
-      dispatch(setEnumFilter(enumValue, setType)),
+    setEnumFilterAction: enumsSelected =>
+      dispatch(setEnumFilter(enumsSelected)),
   };
 };
 
