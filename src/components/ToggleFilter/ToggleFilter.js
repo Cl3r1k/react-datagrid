@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ToggleFilter = ({ filterState, setToggleAction }) => {
-  console.log('%c ToggleFilter filterState: ', 'color: green;', filterState);
-  // console.log('ToggleFilter filterState: ', setToggleAction);
+const ToggleFilter = ({ filterToggleState, setToggleAction }) => {
+  console.log(
+    '%c ToggleFilter filterToggleState: ',
+    'color: green;',
+    filterToggleState
+  );
+  // console.log('ToggleFilter filterToggleState: ', setToggleAction);
 
   const toggleChangeHandler = ({ currentTarget: { value, checked } }) => {
     // console.log('value: ', value);
@@ -18,14 +22,14 @@ const ToggleFilter = ({ filterState, setToggleAction }) => {
       <input
         type="checkbox"
         value={1}
-        checked={filterState.filterToggleState === 1}
+        checked={filterToggleState === 1}
         onChange={toggleChangeHandler}
       />
       Active
       <input
         type="checkbox"
         value={2}
-        checked={filterState.filterToggleState === 2}
+        checked={filterToggleState === 2}
         onChange={toggleChangeHandler}
       />
       Inactive
@@ -34,9 +38,7 @@ const ToggleFilter = ({ filterState, setToggleAction }) => {
 };
 
 ToggleFilter.propTypes = {
-  filterState: PropTypes.shape({
-    filterToggleState: PropTypes.number,
-  }).isRequired,
+  filterToggleState: PropTypes.number.isRequired,
   setToggleAction: PropTypes.func.isRequired,
 };
 

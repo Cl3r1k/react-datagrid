@@ -3,6 +3,9 @@ export const SEARCH_DATA_SUCCESS = 'SEARCH_DATA_SUCCESS';
 export const SEARCH_DATA_FAIL = 'SEARCH_DATA_FAIL';
 export const SEARCH_POPUP = 'SEARCH_POPUP';
 export const TOGGLE_STATE = 'TOGGLE_STATE';
+export const SET_ENUM_FILTER = 'SET_ENUM_FILTER';
+export const SET_ENUM = 'SET_ENUM';
+export const UNSET_ENUM = 'UNSET_ENUM';
 
 export const searchData = (searchField, searchValue) => {
   console.log(
@@ -38,12 +41,9 @@ export const setSearchPopup = searchPopupName => {
 
 export const setToggle = (toggleValue, checkedStatus) => {
   return (dispatch, getState) => {
-    const { filterState } = getState().searchState;
+    const { filterToggleState } = getState().searchState;
 
-    if (
-      !filterState.filterToggleState ||
-      filterState.filterToggleState !== toggleValue
-    ) {
+    if (!filterToggleState || filterToggleState !== toggleValue) {
       dispatch({
         type: TOGGLE_STATE,
         payload: toggleValue,
@@ -53,6 +53,45 @@ export const setToggle = (toggleValue, checkedStatus) => {
         type: TOGGLE_STATE,
         payload: 0,
       });
+    }
+  };
+};
+
+export const setEnumFilter = (enumValue, setType) => {
+  return (dispatch, getState) => {
+    const { filterEnums } = getState().searchState;
+    console.log('filterEnums', filterEnums);
+
+    switch (setType) {
+      case SET_ENUM:
+        if (!filterEnums.includes(enumValue)) {
+          dispatch({
+            type: SET_ENUM_FILTER,
+            payload: [...filterEnums, enumValue],
+          });
+        }
+        break;
+
+      case UNSET_ENUM:
+        if (filterEnums.includes(enumValue)) {
+          const enumIndex = filterEnums.indexOf(enumValue);
+          // console.log('setEnumFilter enumIndex', enumIndex);
+          const newArr = [...filterEnums];
+          newArr.splice(enumIndex, 1);
+          // console.log('setEnumFilter result', result);
+          dispatch({
+            type: SET_ENUM_FILTER,
+            payload: newArr,
+          });
+        }
+        break;
+
+      default:
+        dispatch({
+          type: SET_ENUM_FILTER,
+          payload: [],
+        });
+        break;
     }
   };
 };

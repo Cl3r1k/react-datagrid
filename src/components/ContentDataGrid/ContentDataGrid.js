@@ -31,7 +31,8 @@ const ContentDataGrid = ({ data, sortState, searchState }) => {
       sortedData,
       searchState.searchField,
       searchState.searchValue,
-      searchState.filterState.filterToggleState
+      searchState.filterToggleState,
+      searchState.filterEnums
     );
 
     return filteredData.map(el => (
@@ -41,7 +42,7 @@ const ContentDataGrid = ({ data, sortState, searchState }) => {
         <td>{el.score}</td>
         <td>{el.registerDate}</td>
         <td>{el.lastVisit}</td>
-        <td>{el.status}</td>
+        <td>{el.type}</td>
         <td>{el.instant}</td>
         <td>{el.money.currencySymbol}</td>
         <td>{el.active ? 'true' : 'false'}</td>
@@ -72,9 +73,8 @@ ContentDataGrid.propTypes = {
     searchPopupName: PropTypes.string,
     error: PropTypes.string,
     isSearching: PropTypes.bool,
-    filterState: PropTypes.shape({
-      filterToggleState: PropTypes.number,
-    }),
+    filterToggleState: PropTypes.number,
+    filterEnums: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
 };
 

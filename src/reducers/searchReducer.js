@@ -4,6 +4,7 @@ import {
   SEARCH_DATA_FAIL,
   SEARCH_POPUP,
   TOGGLE_STATE,
+  SET_ENUM_FILTER,
 } from 'actions/searchActions';
 
 const initialState = {
@@ -12,9 +13,8 @@ const initialState = {
   searchPopupName: '',
   error: '',
   isSearching: false,
-  filterState: {
-    filterToggleState: 0,
-  },
+  filterToggleState: 0,
+  filterEnums: [],
 };
 
 export const searchReducer = (state = initialState, action) => {
@@ -43,7 +43,10 @@ export const searchReducer = (state = initialState, action) => {
       return { ...state, searchPopupName: action.payload };
 
     case TOGGLE_STATE:
-      return { ...state, filterState: { filterToggleState: action.payload } };
+      return { ...state, filterToggleState: action.payload };
+
+    case SET_ENUM_FILTER:
+      return { ...state, filterEnums: action.payload };
 
     default:
       return state;

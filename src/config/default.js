@@ -3,3 +3,5 @@ export const DEFAULT_CONFIG = {
   MAX_SCORE: 3000,
   MAX_AMOUNT: 10000,
 };
+
+export const ENUM_CONFIG = ['Admin', 'Student', 'Mentor', 'Worker'];

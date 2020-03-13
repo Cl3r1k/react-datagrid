@@ -78,7 +78,7 @@ const HeaderDataGrid = ({
               isSortable
               sortDataAction={sortDataAction}
             />
-            <HeaderDataCell title="Role" />
+            <HeaderDataCell title="Type" />
             <HeaderDataCell title="Instant" />
             <HeaderDataCell title="Money currencySymbol" />
             <HeaderDataCell title="Active" />

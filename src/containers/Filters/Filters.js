@@ -3,19 +3,24 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Actions
-import { setToggle } from 'actions/searchActions';
+import { setToggle, setEnumFilter } from 'actions/searchActions';
 
 // Components
+import FilterEnum from 'components/FilterEnum/FilterEnum';
 import ToggleFilter from 'components/ToggleFilter/ToggleFilter';
 
 // Styles
 import './Filters.scss';
 
-const Filters = ({ filterState, setToggleAction }) => {
+const Filters = ({ appState, setToggleAction, setEnumFilterAction }) => {
   return (
     <div className="filters-container">
+      <FilterEnum
+        filterEnums={appState.filterEnums}
+        setEnumFilterAction={setEnumFilterAction}
+      />
       <ToggleFilter
-        filterState={filterState}
+        filterToggleState={appState.filterToggleState}
         setToggleAction={setToggleAction}
       />
     </div>
@@ -23,15 +28,17 @@ const Filters = ({ filterState, setToggleAction }) => {
 };
 
 Filters.propTypes = {
-  filterState: PropTypes.shape({
+  appState: PropTypes.shape({
+    filterEnums: PropTypes.arrayOf(PropTypes.string),
     filterToggleState: PropTypes.number,
   }).isRequired,
   setToggleAction: PropTypes.func.isRequired,
+  setEnumFilterAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
   return {
-    filterState: state.searchState.filterState,
+    appState: state.searchState,
   };
 };
 
@@ -39,6 +46,8 @@ const mapDispatchToProps = dispatch => {
   return {
     setToggleAction: (toggleValue, checkedStatus) =>
       dispatch(setToggle(toggleValue, checkedStatus)),
+    setEnumFilterAction: (enumValue, setType) =>
+      dispatch(setEnumFilter(enumValue, setType)),
   };
 };
 
