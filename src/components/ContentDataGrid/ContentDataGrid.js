@@ -1,12 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FixedSizeList as List } from 'react-window';
+import AutoSizer from 'react-virtualized-auto-sizer';
 import { connect } from 'react-redux';
+
+// Components
+import ContentDataRow from 'components/ContentDataRow/ContentDataRow';
 
 // Utils
 import { sortDataByFieldName, filterData } from 'utils/dataUtils';
 
 // Styles
 import './ContentDataGrid.scss';
+
+const FIXED_ROW_HEIGHT = 40;
 
 const ContentDataGrid = ({ data, sortState, searchState }) => {
   const renderTableRow = () => {
@@ -20,7 +27,7 @@ const ContentDataGrid = ({ data, sortState, searchState }) => {
       );
     }
 
-    console.log('%c renderTableRow() sortState: ', 'color: green;', sortState);
+    // console.log('%c renderTableRow() sortState: ', 'color: green;', sortState);
     const filteredData = filterData(
       data,
       searchState.searchField,
@@ -36,19 +43,22 @@ const ContentDataGrid = ({ data, sortState, searchState }) => {
       sortState.sortDirections
     );
 
-    return sortedData.map(el => (
-      <tr key={el.id}>
-        <td>{el.avatar}</td>
-        <td>{el.name}</td>
-        <td>{el.score}</td>
-        <td>{el.registerDate}</td>
-        <td>{el.lastVisit}</td>
-        <td>{el.type}</td>
-        <td>{el.instant}</td>
-        <td>{el.money.currencySymbol}</td>
-        <td>{el.active ? 'true' : 'false'}</td>
-      </tr>
-    ));
+    return (
+      <AutoSizer>
+        {({ width }) => (
+          <List
+            className="List"
+            height={500} // TODO: improve height to auto-height
+            width={width}
+            itemCount={sortedData.length}
+            itemSize={FIXED_ROW_HEIGHT}
+            itemData={sortedData}
+          >
+            {ContentDataRow}
+          </List>
+        )}
+      </AutoSizer>
+    );
   };
 
   return (

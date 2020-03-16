@@ -27,11 +27,11 @@ const generateFakeRecord = () => {
     type: getRandomEnumValue(),
     instant: new Date().getTime(),
     money: {
-      currency: Faker.finance.currencyName(),
       currencySymbol: Faker.finance.currencySymbol(),
       amount: Faker.random.number(MAX_AMOUNT),
     },
     active: !(Math.floor(Math.random() * 10) % 2),
+    description: Faker.lorem.paragraph(),
   };
 };
 
