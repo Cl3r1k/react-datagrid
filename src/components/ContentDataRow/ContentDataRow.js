@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import DataCellAvatar from 'components/DataCellAvatar/DataCellAvatar';
 import DataCellText from 'components/DataCellText/DataCellText';
 import DataCellBool from 'components/DataCellBool/DataCellBool';
+import DataCellObject from 'components/DataCellObject/DataCellObject';
 
 // Constants
 import { MAP, DATA_TYPES } from 'config/default';
@@ -17,9 +18,10 @@ const ContentDataRow = ({ index, style, data }) => {
   const renderCell = key => {
     const fieldName = MAP[key].name;
 
-    // console.log('fieldName:', fieldName);
-    // console.log('MAP[key].dataType:', MAP[key].dataType);
     switch (MAP[key].dataType) {
+      case DATA_TYPES.HIDDEN_TYPE:
+        return undefined;
+
       case DATA_TYPES.AVATAR_TYPE:
         return (
           <DataCellAvatar
@@ -35,6 +37,7 @@ const ContentDataRow = ({ index, style, data }) => {
             key={`${key}-${fieldName}`}
             dataContent={data[index][fieldName]}
             style={{ width: MAP[key].columnWidth }}
+            largeText={MAP[key].largeText}
           />
         );
 
@@ -52,19 +55,18 @@ const ContentDataRow = ({ index, style, data }) => {
         return (
           <DataCellBool
             key={`${key}-${fieldName}`}
-            dataContent={data[index][fieldName]}
+            flagState={data[index][fieldName]}
             style={{ width: MAP[key].columnWidth }}
           />
         );
 
       case DATA_TYPES.OBJECT_TYPE:
         return (
-          <div
-            style={{ width: MAP[key].columnWidth }}
+          <DataCellObject
             key={`${key}-${fieldName}`}
-          >
-            Some Object
-          </div>
+            data={data[index][fieldName]}
+            style={{ width: MAP[key].columnWidth }}
+          />
         );
 
       default:
@@ -73,7 +75,10 @@ const ContentDataRow = ({ index, style, data }) => {
   };
 
   return (
-    <div className="row-item" style={{ ...style, width: 'auto' }}>
+    <div
+      className={`row-item ${index === 0 ? 'sticky' : ''}`}
+      style={{ ...style, width: 'auto' }}
+    >
       {Object.keys(MAP).map(key => renderCell(key))}
     </div>
   );
@@ -82,11 +87,12 @@ const ContentDataRow = ({ index, style, data }) => {
 ContentDataRow.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   index: PropTypes.number.isRequired,
-  style: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  style: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 ContentDataRow.defaultProps = {
   data: [],
+  style: '',
 };
 
 export default ContentDataRow;

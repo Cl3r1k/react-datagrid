@@ -6,8 +6,8 @@ import './DataCellAvatar.scss';
 
 const DataCellAvatar = ({ imageUrl, style }) => {
   return (
-    <div style={style}>
-      <img src={imageUrl} alt="avatar" />
+    <div style={style} className="avatar-block">
+      <img className="avatar-image" src={imageUrl} alt="avatar" />
     </div>
   );
 };

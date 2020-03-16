@@ -2,11 +2,13 @@ export const DEFAULT_CONFIG = {
   DATA_LENGTH: 1000,
   MAX_SCORE: 3000,
   MAX_AMOUNT: 10000,
+  FIXED_ROW_HEIGHT: 40,
 };
 
 export const ENUM_CONFIG = ['Admin', 'Student', 'Mentor', 'Worker'];
 
 export const DATA_TYPES = {
+  HIDDEN_TYPE: 'hidden',
   AVATAR_TYPE: 'avatar',
   TEXT_TYPE: 'text',
   OBJECT_TYPE: 'object',
@@ -19,7 +21,7 @@ export const MAP = {
     name: 'id',
     columnWidth: 100,
     isHidden: true,
-    dataType: DATA_TYPES.TEXT_TYPE,
+    dataType: DATA_TYPES.HIDDEN_TYPE,
   },
   1: {
     name: 'avatar',
@@ -70,5 +72,6 @@ export const MAP = {
     name: 'description',
     columnWidth: 350,
     dataType: DATA_TYPES.TEXT_TYPE,
+    largeText: true,
   },
 };

@@ -6,8 +6,8 @@ import './DataCellBool.scss';
 
 const DataCellBool = ({ flagState, style }) => {
   return (
-    <div style={style}>
-      <p>{flagState ? 'true' : 'false'}</p>
+    <div style={style} className="flag-block">
+      <div className={`flag-state ${flagState ? 'active' : ''}`} />
     </div>
   );
 };

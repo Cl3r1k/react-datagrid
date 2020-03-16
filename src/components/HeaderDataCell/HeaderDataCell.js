@@ -21,6 +21,7 @@ const HeaderDataCell = props => {
     searchPopupName,
     searchDataAction,
     setSearchPopupAction,
+    style,
   } = props;
   // console.log('HeaderDataCell title: ', title);
   // console.log('HeaderDataCell fieldName: ', fieldName);
@@ -29,7 +30,7 @@ const HeaderDataCell = props => {
   // console.log('HeaderDataCell sortState: ', sortState);
 
   return (
-    <th className="header-data-cell">
+    <div className="header-data-cell" style={style}>
       <div className="title-container">
         <span className="cell-title">{title}</span>
         {isSortable && (
@@ -50,7 +51,7 @@ const HeaderDataCell = props => {
           setSearchPopupAction={setSearchPopupAction}
         />
       )}
-    </th>
+    </div>
   );
 };
 
@@ -66,6 +67,7 @@ HeaderDataCell.propTypes = {
   searchPopupName: PropTypes.string,
   searchDataAction: PropTypes.func,
   setSearchPopupAction: PropTypes.func,
+  style: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 HeaderDataCell.defaultProps = {
@@ -80,6 +82,7 @@ HeaderDataCell.defaultProps = {
   searchPopupName: '',
   searchDataAction: undefined,
   setSearchPopupAction: undefined,
+  style: '',
 };
 
 export default HeaderDataCell;

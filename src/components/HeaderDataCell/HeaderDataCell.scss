@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: 1fr auto;
   border-right: 1px solid #7ef5cd;
+  padding: 0 5px;
   &:first-child {
     border-left: 1px solid #7ef5cd;
   }

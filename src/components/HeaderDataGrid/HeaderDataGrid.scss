@@ -1,13 +1,6 @@
 .header-data-grid {
-  .header-data-grid--table {
-    width: 100%;
-    border-bottom: 2px solid #b3b362;
-    .header-data-grid--row {
-      // display: flex;
-      // justify-content: space-between;
-      display: grid;
-      grid-template-columns: repeat(9, 1fr);
-      background-color: #e9f1f1;
-    }
-  }
+  width: 135%;
+  border-bottom: 2px solid #b3b362;
+  border-top: 2px solid #b3b362;
+  display: flex;
 }

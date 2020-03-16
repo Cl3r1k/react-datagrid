@@ -4,10 +4,16 @@ import PropTypes from 'prop-types';
 // Styles
 import './DataCellText.scss';
 
-const DataCellText = ({ dataContent, isNumber, style }) => {
+const DataCellText = ({ dataContent, isNumber, largeText, style }) => {
   return (
-    <div style={style}>
-      <p className={isNumber ? 'number-cell' : undefined}>{dataContent}</p>
+    <div style={style} className="text-block">
+      <p
+        className={`${isNumber ? 'number-cell' : undefined} ${
+          largeText ? 'large-text' : undefined
+        }`}
+      >
+        {dataContent}
+      </p>
     </div>
   );
 };
@@ -15,12 +21,14 @@ const DataCellText = ({ dataContent, isNumber, style }) => {
 DataCellText.propTypes = {
   dataContent: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   isNumber: PropTypes.bool,
+  largeText: PropTypes.bool,
   style: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 DataCellText.defaultProps = {
   dataContent: '',
   isNumber: false,
+  largeText: false,
   style: '',
 };
 
