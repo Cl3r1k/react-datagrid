@@ -5,6 +5,7 @@ import {
   TOGGLE_STATE,
   SET_ENUM_FILTER,
   GLOBAL_SEARCH_SUCCESS,
+  SET_VIRTUALIZATION,
 } from 'actions/searchActions';
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   globalSearchValue: '',
   filterToggleState: 0,
   filterEnums: [],
+  virtualizationState: true,
 };
 
 export const searchReducer = (state = initialState, action) => {
@@ -49,6 +51,9 @@ export const searchReducer = (state = initialState, action) => {
         globalSearchValue: action.payload,
         isSearching: false,
       };
+
+    case SET_VIRTUALIZATION:
+      return { ...state, virtualizationState: action.payload };
 
     default:
       return state;

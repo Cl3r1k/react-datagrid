@@ -24,8 +24,6 @@ StickyListContext.displayName = 'StickyListContext';
 
 const ItemWrapper = ({ data, index, style }) => {
   const { ItemRenderer, stickyIndices, customData } = data;
-  // console.log('ItemWrapper data: ', data);
-  // console.log('ItemWrapper customData: ', customData);
   if (stickyIndices && stickyIndices.includes(index)) {
     return null;
   }
@@ -40,7 +38,6 @@ const innerElementType = forwardRef(({ children, ...rest }, ref) => (
           style={{
             top: 0,
             left: 0,
-            // width: '100%',
             height: DEFAULT_CONFIG.FIXED_ROW_HEIGHT,
           }}
         />
@@ -89,6 +86,31 @@ const ContentDataGrid = ({ data, sortState, searchState }) => {
     );
 
     // console.log('sortedData', sortedData);
+    if (!searchState.virtualizationState) {
+      return (
+        <AutoSizer>
+          {({ height }) => (
+            <div className="table-container" style={{ height }}>
+              <HeaderDataGrid
+                style={{
+                  top: 0,
+                  left: 0,
+                  height: DEFAULT_CONFIG.FIXED_ROW_HEIGHT,
+                }}
+              />
+              {sortedData.map((item, i) => (
+                <ContentDataRow
+                  key={item.id}
+                  index={i}
+                  data={sortedData}
+                  isVirtualization={searchState.virtualizationState}
+                />
+              ))}
+            </div>
+          )}
+        </AutoSizer>
+      );
+    }
 
     return (
       <AutoSizer>
@@ -128,6 +150,7 @@ ContentDataGrid.propTypes = {
     globalSearchValue: PropTypes.string,
     filterToggleState: PropTypes.number,
     filterEnums: PropTypes.arrayOf(PropTypes.string).isRequired,
+    virtualizationState: PropTypes.bool,
   }).isRequired,
 };
 

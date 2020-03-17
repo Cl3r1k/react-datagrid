@@ -1,8 +1,8 @@
 import React from 'react';
 
 // Containers
-import Filters from 'containers/Filters/Filters';
-import ReactDataGrid from 'containers/ReactDataGrid/ReactDataGrid';
+import AppActions from 'components/AppActions/AppActions';
+import ReactDataGrid from 'components/ReactDataGrid/ReactDataGrid';
 
 // Styles
 import './App.scss';
@@ -10,7 +10,7 @@ import './App.scss';
 const App = () => {
   return (
     <div className="app wrapper">
-      <Filters />
+      <AppActions />
       <ReactDataGrid />
     </div>
   );

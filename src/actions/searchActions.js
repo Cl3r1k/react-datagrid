@@ -6,6 +6,7 @@ export const SEARCH_POPUP = 'SEARCH_POPUP';
 export const TOGGLE_STATE = 'TOGGLE_STATE';
 export const SET_ENUM_FILTER = 'SET_ENUM_FILTER';
 export const GLOBAL_SEARCH_SUCCESS = 'GLOBAL_SEARCH_SUCCESS';
+export const SET_VIRTUALIZATION = 'SET_VIRTUALIZATION';
 
 export const searchData = (searchField, searchValue) => {
   console.log(
@@ -71,6 +72,15 @@ export const setGlobalSearch = globalSearchValue => {
     dispatch({
       type: GLOBAL_SEARCH_SUCCESS,
       payload: globalSearchValue,
+    });
+  };
+};
+
+export const setVirtualization = virtualizationState => {
+  return dispatch => {
+    dispatch({
+      type: SET_VIRTUALIZATION,
+      payload: virtualizationState,
     });
   };
 };

@@ -14,7 +14,7 @@ import { MAP, DATA_TYPES } from 'config/default';
 // Styles
 import './ContentDataRow.scss';
 
-const ContentDataRow = ({ index, style, data }) => {
+const ContentDataRow = ({ index, style, data, isVirtualization }) => {
   const renderCell = key => {
     const fieldName = MAP[key].name;
 
@@ -76,8 +76,8 @@ const ContentDataRow = ({ index, style, data }) => {
 
   return (
     <div
-      className={`row-item ${index === 0 ? 'sticky' : ''}`}
-      style={{ ...style, width: 'auto' }}
+      className="row-item"
+      style={{ ...style, width: isVirtualization ? 'auto' : '135%' }}
     >
       {Object.keys(MAP).map(key => renderCell(key))}
     </div>
@@ -87,11 +87,13 @@ const ContentDataRow = ({ index, style, data }) => {
 ContentDataRow.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   index: PropTypes.number.isRequired,
+  isVirtualization: PropTypes.bool,
   style: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 ContentDataRow.defaultProps = {
   data: [],
+  isVirtualization: false,
   style: '',
 };
 

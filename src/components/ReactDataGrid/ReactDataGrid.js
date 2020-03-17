@@ -4,8 +4,7 @@ import React from 'react';
 import { generateFakeData } from 'utils/dataUtils';
 
 // Components
-// import HeaderDataGrid from 'components/HeaderDataGrid/HeaderDataGrid';
-import ContentDataGrid from 'components/ContentDataGrid/ContentDataGrid';
+import ContentDataGrid from 'containers/ContentDataGrid/ContentDataGrid';
 
 // Styles
 import './ReactDataGrid.scss';
@@ -16,7 +15,6 @@ const ReactDataGrid = () => {
 
   return (
     <div className="react-data-grid">
-      {/* <HeaderDataGrid /> */}
       <ContentDataGrid data={fakeData} />
     </div>
   );
