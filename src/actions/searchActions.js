@@ -9,15 +9,9 @@ export const GLOBAL_SEARCH_SUCCESS = 'GLOBAL_SEARCH_SUCCESS';
 export const SET_VIRTUALIZATION = 'SET_VIRTUALIZATION';
 export const SET_SELECT = 'SET_SELECT';
 export const DELETE_ROWS = 'DELETE_ROWS';
+export const SET_HIDDEN = 'SET_HIDDEN';
 
 export const searchData = (searchField, searchValue) => {
-  console.log(
-    '%c ------- searchData called! searchField: ',
-    'color: brown;',
-    searchField,
-    'searchValue',
-    searchValue
-  );
   return dispatch => {
     dispatch({
       type: SEARCH_DATA_REQUEST,
@@ -114,6 +108,18 @@ export const deleteRows = () => {
       payload: {
         selectedItems: [],
         deletedItems: [...deletedItems, ...selectedItems],
+      },
+    });
+  };
+};
+
+export const setVisibility = (fieldName, hiddenState) => {
+  return dispatch => {
+    dispatch({
+      type: SET_HIDDEN,
+      payload: {
+        fieldName,
+        hiddenState,
       },
     });
   };

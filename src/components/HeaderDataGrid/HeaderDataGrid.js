@@ -24,8 +24,6 @@ const HeaderDataGrid = ({
   searchDataAction,
   style,
 }) => {
-  // console.log('in HeaderDataGrid', data);
-
   return (
     <div className="sticky header-data-grid" style={style}>
       <HeaderDataCell title="" style={{ width: MAP[0].columnWidth }} />
@@ -44,6 +42,7 @@ const HeaderDataGrid = ({
         searchPopupName={searchState.searchPopupName}
         setSearchPopupAction={setSearchPopupAction}
         searchDataAction={searchDataAction}
+        isHidden={searchState.hiddenColumns.name}
         style={{ width: MAP[2].columnWidth }}
       />
       <HeaderDataCell
@@ -60,6 +59,7 @@ const HeaderDataGrid = ({
         searchPopupName={searchState.searchPopupName}
         setSearchPopupAction={setSearchPopupAction}
         searchDataAction={searchDataAction}
+        isHidden={searchState.hiddenColumns.score}
         style={{ width: MAP[3].columnWidth }}
       />
       <HeaderDataCell
@@ -76,6 +76,7 @@ const HeaderDataGrid = ({
         searchPopupName={searchState.searchPopupName}
         setSearchPopupAction={setSearchPopupAction}
         searchDataAction={searchDataAction}
+        isHidden={searchState.hiddenColumns.registerDate}
         style={{ width: MAP[4].columnWidth }}
       />
       <HeaderDataCell
@@ -85,6 +86,7 @@ const HeaderDataGrid = ({
           sortState.sortDirections[sortState.sortFields.indexOf('lastVisit')]
         }
         isSortable
+        isHidden={searchState.hiddenColumns.lastVisit}
         sortDataAction={sortDataAction}
         style={{ width: MAP[5].columnWidth }}
       />
@@ -112,6 +114,7 @@ HeaderDataGrid.propTypes = {
     searchValue: PropTypes.string,
     searchPopupName: PropTypes.string,
     isSearching: PropTypes.bool,
+    hiddenColumns: PropTypes.objectOf(PropTypes.bool),
   }).isRequired,
   sortDataAction: PropTypes.func.isRequired,
   setSearchPopupAction: PropTypes.func.isRequired,

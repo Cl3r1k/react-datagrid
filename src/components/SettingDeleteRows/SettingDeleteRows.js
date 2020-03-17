@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import './SettingDeleteRows.scss';
 
 const SettingDeleteRows = ({ selectionState, deleteRowsAction }) => {
-  console.log('selectionState', selectionState);
-
   return (
     <div className="setting-delete-block">
       <button
@@ -15,7 +13,7 @@ const SettingDeleteRows = ({ selectionState, deleteRowsAction }) => {
         onClick={deleteRowsAction}
         disabled={!selectionState}
       >
-        Delete rows
+        Delete selected rows
       </button>
     </div>
   );

@@ -68,12 +68,10 @@ const searchByFieldName = (data, searchField, searchValue) => {
 };
 
 const filterByEnums = (data, filterEnums) => {
-  // console.log('filterByEnums filterEnums:', filterEnums);
   return data.filter(item => filterEnums.includes(item[ENUM_FIELD]));
 };
 
 const filterByToggle = (data, filterToggle) => {
-  // console.log('filterByToggle filterToggle:', filterToggle);
   return data.filter(item => {
     return (
       (item[TOGGLE_FIELD] && filterToggle === ACTIVE_TOGGLE) ||
@@ -90,15 +88,10 @@ export const filterData = (
   filterToggle,
   filterEnums
 ) => {
-  console.log(
-    `in filterData searchField: ${searchField}, searchValue: ${searchValue}`
-  );
-
   let filteredData = [...data];
 
   if (searchField) {
     filteredData = searchByFieldName(filteredData, searchField, searchValue);
-    // console.log('%c filteredData: ', 'color: pink', filteredData);
   }
 
   if (globalSearchValue) {
@@ -110,7 +103,6 @@ export const filterData = (
   }
 
   if (filterToggle) {
-    // console.log('in filterData - filterToggle', filterToggle);
     filteredData = filterByToggle(filteredData, filterToggle);
   }
 
@@ -118,6 +110,5 @@ export const filterData = (
 };
 
 export const excludeById = (data, deletedItems) => {
-  console.log('deletedItems', deletedItems);
   return data.filter(item => !deletedItems.includes(item.id));
 };

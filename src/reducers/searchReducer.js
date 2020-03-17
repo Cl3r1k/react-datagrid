@@ -8,6 +8,7 @@ import {
   SET_VIRTUALIZATION,
   SET_SELECT,
   DELETE_ROWS,
+  SET_HIDDEN,
 } from 'actions/searchActions';
 
 const initialState = {
@@ -21,6 +22,12 @@ const initialState = {
   virtualizationState: true,
   selectedItems: [],
   deletedItems: [],
+  hiddenColumns: {
+    name: false,
+    score: false,
+    registerDate: false,
+    lastVisit: false,
+  },
 };
 
 export const searchReducer = (state = initialState, action) => {
@@ -70,6 +77,15 @@ export const searchReducer = (state = initialState, action) => {
         ...state,
         selectedItems: action.payload.selectedItems,
         deletedItems: action.payload.deletedItems,
+      };
+
+    case SET_HIDDEN:
+      return {
+        ...state,
+        hiddenColumns: {
+          ...state.hiddenColumns,
+          [action.payload.fieldName]: action.payload.hiddenState,
+        },
       };
 
     default:

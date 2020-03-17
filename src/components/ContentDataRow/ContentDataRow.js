@@ -20,6 +20,7 @@ const ContentDataRow = ({
   data,
   isVirtualization,
   selectedItems,
+  hiddenColumns,
   setSelectionAction,
 }) => {
   const selected = selectedItems.includes(data[index].id);
@@ -55,6 +56,7 @@ const ContentDataRow = ({
             dataContent={data[index][fieldName]}
             style={{ width: MAP[key].columnWidth }}
             largeText={MAP[key].largeText}
+            isHidden={hiddenColumns[fieldName]}
           />
         );
 
@@ -65,6 +67,7 @@ const ContentDataRow = ({
             dataContent={data[index][fieldName]}
             isNumber
             style={{ width: MAP[key].columnWidth }}
+            isHidden={hiddenColumns[fieldName]}
           />
         );
 
@@ -75,6 +78,7 @@ const ContentDataRow = ({
             dataContent={new Date(data[index][fieldName]).toLocaleDateString()}
             style={{ width: MAP[key].columnWidth }}
             largeText={MAP[key].largeText}
+            isHidden={hiddenColumns[fieldName]}
           />
         );
 
@@ -116,6 +120,7 @@ ContentDataRow.propTypes = {
   index: PropTypes.number.isRequired,
   isVirtualization: PropTypes.bool,
   selectedItems: PropTypes.arrayOf(PropTypes.string),
+  hiddenColumns: PropTypes.objectOf(PropTypes.bool),
   setSelectionAction: PropTypes.func,
   style: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
@@ -124,6 +129,7 @@ ContentDataRow.defaultProps = {
   data: [],
   isVirtualization: false,
   selectedItems: [],
+  hiddenColumns: {},
   setSelectionAction: undefined,
   style: '',
 };

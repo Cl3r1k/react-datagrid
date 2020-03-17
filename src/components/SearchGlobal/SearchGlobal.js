@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 const SearchGlobal = ({ setGlobalSearchAction }) => {
   const handleInputChange = ({ currentTarget: { value } }) => {
-    // console.log('evt: ', evt);
-    console.log('value: ', value);
     setGlobalSearchAction(value);
   };
 

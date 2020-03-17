@@ -3,16 +3,26 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Actions
-import { setVirtualization, deleteRows } from 'actions/searchActions';
+import {
+  setVirtualization,
+  deleteRows,
+  setVisibility,
+} from 'actions/searchActions';
 
 // Components
 import SettingVirtualization from 'components/SettingVirtualization/SettingVirtualization';
 import SettingDeleteRows from 'components/SettingDeleteRows/SettingDeleteRows';
+import SettingVisibility from 'components/SettingVisibility/SettingVisibility';
 
 // Styles
 import './Settings.scss';
 
-const Settings = ({ appState, setVirtualizationAction, deleteRowsAction }) => {
+const Settings = ({
+  appState,
+  setVirtualizationAction,
+  deleteRowsAction,
+  setVisibilityAction,
+}) => {
   return (
     <div className="settings-container">
       <SettingVirtualization
@@ -22,6 +32,10 @@ const Settings = ({ appState, setVirtualizationAction, deleteRowsAction }) => {
       <SettingDeleteRows
         selectionState={!!appState.selectedItems.length}
         deleteRowsAction={deleteRowsAction}
+      />
+      <SettingVisibility
+        hiddenColumns={appState.hiddenColumns}
+        setVisibilityAction={setVisibilityAction}
       />
     </div>
   );
@@ -38,6 +52,8 @@ const mapDispatchToProps = dispatch => {
     setVirtualizationAction: virtualizationState =>
       dispatch(setVirtualization(virtualizationState)),
     deleteRowsAction: () => dispatch(deleteRows()),
+    setVisibilityAction: (fieldName, hiddenState) =>
+      dispatch(setVisibility(fieldName, hiddenState)),
   };
 };
 
@@ -45,14 +61,17 @@ Settings.propTypes = {
   appState: PropTypes.shape({
     virtualizationState: PropTypes.bool,
     selectedItems: PropTypes.arrayOf(PropTypes.string),
+    hiddenColumns: PropTypes.objectOf(PropTypes.bool),
   }).isRequired,
   setVirtualizationAction: PropTypes.func,
   deleteRowsAction: PropTypes.func,
+  setVisibilityAction: PropTypes.func,
 };
 
 Settings.defaultProps = {
   setVirtualizationAction: undefined,
   deleteRowsAction: undefined,
+  setVisibilityAction: undefined,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

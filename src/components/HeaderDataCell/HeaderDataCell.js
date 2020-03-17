@@ -21,13 +21,13 @@ const HeaderDataCell = props => {
     searchPopupName,
     searchDataAction,
     setSearchPopupAction,
+    isHidden,
     style,
   } = props;
-  // console.log('HeaderDataCell title: ', title);
-  // console.log('HeaderDataCell fieldName: ', fieldName);
-  // console.log('HeaderDataCell sortFields: ', sortFields);
-  // console.log('HeaderDataCell sortDataAction: ', sortDataAction);
-  // console.log('HeaderDataCell sortState: ', sortState);
+
+  if (isHidden) {
+    return null;
+  }
 
   return (
     <div className="header-data-cell" style={style}>
@@ -67,6 +67,7 @@ HeaderDataCell.propTypes = {
   searchPopupName: PropTypes.string,
   searchDataAction: PropTypes.func,
   setSearchPopupAction: PropTypes.func,
+  isHidden: PropTypes.bool,
   style: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
@@ -82,6 +83,7 @@ HeaderDataCell.defaultProps = {
   searchPopupName: '',
   searchDataAction: undefined,
   setSearchPopupAction: undefined,
+  isHidden: false,
   style: '',
 };
 

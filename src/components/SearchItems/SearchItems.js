@@ -12,7 +12,6 @@ const SearchItems = ({
   searchDataAction,
   setSearchPopupAction,
 }) => {
-  // console.log('SearchItems title: ', fieldName);
   const [visibleState, setVisibleState] = useState(false);
   const [searchValueState, setSearchValueState] = useState({
     value: '',
@@ -25,8 +24,8 @@ const SearchItems = ({
 
       if (fieldName === searchField) {
         // Here we can set searched value for popup
-        console.log('%c searchValue: ', 'color: pink', searchValue);
-        console.log('!searchValue', !!searchValue);
+        // console.log('%c searchValue: ', 'color: pink', searchValue);
+        // console.log('!searchValue', !!searchValue);
         setSearchValueState({ value: searchValue, isActive: !!searchValue });
       }
     } else {
@@ -35,10 +34,7 @@ const SearchItems = ({
   }, [fieldName, searchField, searchValue, searchPopupName]);
 
   const searchHandler = () => {
-    // TODO: Here we should 'search' data and close popup
-    // console.log('searchValueState', searchValueState);
     searchDataAction(fieldName, searchValueState.value);
-    // setSearchValueState({ isActive: true });
     setSearchPopupAction('');
   };
 
@@ -54,7 +50,6 @@ const SearchItems = ({
   };
 
   const inputChangeHandler = evt => {
-    // console.log('evt.currentTarget.value: ', evt.currentTarget.value);
     setSearchValueState({
       ...searchValueState,
       value: evt.currentTarget.value,

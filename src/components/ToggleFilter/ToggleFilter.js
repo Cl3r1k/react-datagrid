@@ -2,17 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ToggleFilter = ({ filterToggleState, setToggleAction }) => {
-  console.log(
-    '%c ToggleFilter filterToggleState: ',
-    'color: green;',
-    filterToggleState
-  );
-  // console.log('ToggleFilter filterToggleState: ', setToggleAction);
-
   const toggleChangeHandler = ({ currentTarget: { value, checked } }) => {
-    // console.log('value: ', value);
-    // console.log('checked: ', checked);
-    // console.log('value: ', value);
     setToggleAction(+value, !checked);
   };
 

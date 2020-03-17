@@ -11,7 +11,6 @@ import './ReactDataGrid.scss';
 
 const ReactDataGrid = () => {
   const fakeData = generateFakeData();
-  // console.log('%c ReactDataGrid data: ', 'color: blue', fakeData);
 
   return (
     <div className="react-data-grid">

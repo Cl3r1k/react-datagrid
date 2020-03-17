@@ -32,6 +32,7 @@ const ItemWrapper = ({ data, index, style }) => {
     customData,
     selectedItems,
     setSelectionAction,
+    hiddenColumns,
   } = data;
   if (stickyIndices && stickyIndices.includes(index)) {
     return null;
@@ -43,27 +44,31 @@ const ItemWrapper = ({ data, index, style }) => {
       data={customData}
       selectedItems={selectedItems}
       setSelectionAction={setSelectionAction}
+      hiddenColumns={hiddenColumns}
     />
   );
 };
 
-const innerElementType = forwardRef(({ children, ...rest }, ref) => (
-  <StickyListContext.Consumer>
-    {() => (
-      <div ref={ref} {...rest}>
-        <HeaderDataGrid
-          style={{
-            top: 0,
-            left: 0,
-            height: DEFAULT_CONFIG.FIXED_ROW_HEIGHT,
-          }}
-        />
+const innerElementType = forwardRef(
+  ({ children, hiddenColumns, ...rest }, ref) => (
+    <StickyListContext.Consumer>
+      {() => (
+        <div ref={ref} {...rest}>
+          <HeaderDataGrid
+            style={{
+              top: 0,
+              left: 0,
+              height: DEFAULT_CONFIG.FIXED_ROW_HEIGHT,
+            }}
+            hiddenColumns={hiddenColumns}
+          />
 
-        {children}
-      </div>
-    )}
-  </StickyListContext.Consumer>
-));
+          {children}
+        </div>
+      )}
+    </StickyListContext.Consumer>
+  )
+);
 
 const StickyList = ({
   children,
@@ -71,6 +76,7 @@ const StickyList = ({
   customData,
   selectedItems,
   setSelectionAction,
+  hiddenColumns,
   ...rest
 }) => (
   <StickyListContext.Provider value={{ ItemRenderer: children, stickyIndices }}>
@@ -81,6 +87,7 @@ const StickyList = ({
         customData,
         selectedItems,
         setSelectionAction,
+        hiddenColumns,
       }}
       {...rest}
     >
@@ -104,7 +111,6 @@ const ContentDataGrid = ({
       );
     }
 
-    // console.log('%c renderTable() sortState: ', 'color: green;', sortState);
     const filteredData = filterData(
       data,
       searchState.searchField,
@@ -122,7 +128,6 @@ const ContentDataGrid = ({
 
     const excludedData = excludeById(sortedData, searchState.deletedItems);
 
-    // console.log('excludedData', excludedData);
     if (!searchState.virtualizationState) {
       return (
         <AutoSizer>
@@ -134,6 +139,7 @@ const ContentDataGrid = ({
                   left: 0,
                   height: DEFAULT_CONFIG.FIXED_ROW_HEIGHT,
                 }}
+                hiddenColumns={searchState.hiddenColumns}
               />
               {excludedData.map((item, i) => (
                 <ContentDataRow
@@ -165,6 +171,7 @@ const ContentDataGrid = ({
             customData={excludedData}
             selectedItems={searchState.selectedItems}
             setSelectionAction={setSelectionAction}
+            hiddenColumns={searchState.hiddenColumns}
           >
             {ContentDataRow}
           </StickyList>
@@ -194,6 +201,7 @@ ContentDataGrid.propTypes = {
     virtualizationState: PropTypes.bool,
     selectedItems: PropTypes.arrayOf(PropTypes.string),
     deletedItems: PropTypes.arrayOf(PropTypes.string),
+    hiddenColumns: PropTypes.objectOf(PropTypes.bool),
   }).isRequired,
   setSelectionAction: PropTypes.func,
 };
