@@ -7,6 +7,8 @@ export const TOGGLE_STATE = 'TOGGLE_STATE';
 export const SET_ENUM_FILTER = 'SET_ENUM_FILTER';
 export const GLOBAL_SEARCH_SUCCESS = 'GLOBAL_SEARCH_SUCCESS';
 export const SET_VIRTUALIZATION = 'SET_VIRTUALIZATION';
+export const SET_SELECT = 'SET_SELECT';
+export const DELETE_ROWS = 'DELETE_ROWS';
 
 export const searchData = (searchField, searchValue) => {
   console.log(
@@ -81,6 +83,38 @@ export const setVirtualization = virtualizationState => {
     dispatch({
       type: SET_VIRTUALIZATION,
       payload: virtualizationState,
+    });
+  };
+};
+
+export const setSelection = selectedItem => {
+  return (dispatch, getState) => {
+    const { selectedItems } = getState().searchState;
+    // Here we should probably look in store Array for selected ID
+    const itemIndex = selectedItems.indexOf(selectedItem);
+    if (itemIndex !== -1) {
+      selectedItems.splice(itemIndex, 1);
+    } else {
+      selectedItems.push(selectedItem);
+    }
+
+    dispatch({
+      type: SET_SELECT,
+      payload: selectedItems,
+    });
+  };
+};
+
+export const deleteRows = () => {
+  return (dispatch, getState) => {
+    const { selectedItems, deletedItems } = getState().searchState;
+
+    dispatch({
+      type: DELETE_ROWS,
+      payload: {
+        selectedItems: [],
+        deletedItems: [...deletedItems, ...selectedItems],
+      },
     });
   };
 };

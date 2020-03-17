@@ -14,18 +14,19 @@ export const DATA_TYPES = {
   OBJECT_TYPE: 'object',
   NUMBER_TYPE: 'number',
   BOOL_TYPE: 'boolean',
+  DATE_TYPE: 'date',
 };
 
 export const MAP = {
   0: {
     name: 'id',
-    columnWidth: 100,
+    columnWidth: 30,
     isHidden: true,
     dataType: DATA_TYPES.HIDDEN_TYPE,
   },
   1: {
     name: 'avatar',
-    columnWidth: 50,
+    columnWidth: 60,
     dataType: DATA_TYPES.AVATAR_TYPE,
   },
   2: {
@@ -56,7 +57,7 @@ export const MAP = {
   7: {
     name: 'instant',
     columnWidth: 150,
-    dataType: DATA_TYPES.TEXT_TYPE,
+    dataType: DATA_TYPES.DATE_TYPE,
   },
   8: {
     name: 'money',

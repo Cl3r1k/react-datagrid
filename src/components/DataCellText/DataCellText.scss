@@ -3,6 +3,12 @@
   justify-content: flex-start;
   align-items: center;
   padding: 0 5px;
+  box-sizing: border-box;
+  &.number-cell {
+    justify-content: flex-end;
+    color: #319781;
+    font-weight: 700;
+  }
   .large-text {
     overflow: hidden;
     white-space: nowrap;

@@ -6,6 +6,8 @@ import {
   SET_ENUM_FILTER,
   GLOBAL_SEARCH_SUCCESS,
   SET_VIRTUALIZATION,
+  SET_SELECT,
+  DELETE_ROWS,
 } from 'actions/searchActions';
 
 const initialState = {
@@ -17,6 +19,8 @@ const initialState = {
   filterToggleState: 0,
   filterEnums: [],
   virtualizationState: true,
+  selectedItems: [],
+  deletedItems: [],
 };
 
 export const searchReducer = (state = initialState, action) => {
@@ -25,6 +29,7 @@ export const searchReducer = (state = initialState, action) => {
       return {
         ...state,
         searchValue: action.payload,
+        selectedItems: [],
         isSearching: true,
       };
 
@@ -33,6 +38,7 @@ export const searchReducer = (state = initialState, action) => {
         ...state,
         searchField: action.payload.searchField,
         searchValue: action.payload.searchValue,
+        selectedItems: [],
         isSearching: false,
       };
 
@@ -40,20 +46,31 @@ export const searchReducer = (state = initialState, action) => {
       return { ...state, searchPopupName: action.payload };
 
     case TOGGLE_STATE:
-      return { ...state, filterToggleState: action.payload };
+      return { ...state, filterToggleState: action.payload, selectedItems: [] };
 
     case SET_ENUM_FILTER:
-      return { ...state, filterEnums: action.payload };
+      return { ...state, filterEnums: action.payload, selectedItems: [] };
 
     case GLOBAL_SEARCH_SUCCESS:
       return {
         ...state,
         globalSearchValue: action.payload,
+        selectedItems: [],
         isSearching: false,
       };
 
     case SET_VIRTUALIZATION:
       return { ...state, virtualizationState: action.payload };
+
+    case SET_SELECT:
+      return { ...state, selectedItems: action.payload };
+
+    case DELETE_ROWS:
+      return {
+        ...state,
+        selectedItems: action.payload.selectedItems,
+        deletedItems: action.payload.deletedItems,
+      };
 
     default:
       return state;

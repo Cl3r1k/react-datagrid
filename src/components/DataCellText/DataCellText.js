@@ -6,14 +6,11 @@ import './DataCellText.scss';
 
 const DataCellText = ({ dataContent, isNumber, largeText, style }) => {
   return (
-    <div style={style} className="text-block">
-      <p
-        className={`${isNumber ? 'number-cell' : undefined} ${
-          largeText ? 'large-text' : undefined
-        }`}
-      >
-        {dataContent}
-      </p>
+    <div
+      style={style}
+      className={`text-block ${isNumber ? 'number-cell' : ''}`}
+    >
+      <p className={largeText ? 'large-text' : ''}>{dataContent}</p>
     </div>
   );
 };

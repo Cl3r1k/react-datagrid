@@ -28,6 +28,7 @@ const HeaderDataGrid = ({
 
   return (
     <div className="sticky header-data-grid" style={style}>
+      <HeaderDataCell title="" style={{ width: MAP[0].columnWidth }} />
       <HeaderDataCell title="Avatar" style={{ width: MAP[1].columnWidth }} />
       <HeaderDataCell
         title="Name"
@@ -62,7 +63,7 @@ const HeaderDataGrid = ({
         style={{ width: MAP[3].columnWidth }}
       />
       <HeaderDataCell
-        title="RegisterDate"
+        title="Reg Date"
         fieldName="registerDate"
         sortState={
           sortState.sortDirections[sortState.sortFields.indexOf('registerDate')]

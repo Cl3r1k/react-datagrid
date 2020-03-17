@@ -116,3 +116,8 @@ export const filterData = (
 
   return filteredData;
 };
+
+export const excludeById = (data, deletedItems) => {
+  console.log('deletedItems', deletedItems);
+  return data.filter(item => !deletedItems.includes(item.id));
+};

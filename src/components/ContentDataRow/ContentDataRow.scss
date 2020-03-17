@@ -1,7 +1,10 @@
 .row-item {
   display: flex;
-  background-color: #d3dbe6;
+  background-color: #d3dbe6;  
   &:hover {
     background-color: #b4c7df;
+  }
+  &.selected-item {
+    background-color: #8aabd3;
   }
 }
