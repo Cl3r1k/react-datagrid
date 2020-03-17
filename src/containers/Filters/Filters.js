@@ -25,8 +25,14 @@ const Filters = ({
 }) => {
   return (
     <div className="filters-container">
-      <SearchGlobal setGlobalSearchAction={setGlobalSearchAction} />
-      <FilterEnum setEnumFilterAction={setEnumFilterAction} />
+      <SearchGlobal
+        globalSearchValue={appState.globalSearchValue}
+        setGlobalSearchAction={setGlobalSearchAction}
+      />
+      <FilterEnum
+        filterEnums={appState.filterEnums}
+        setEnumFilterAction={setEnumFilterAction}
+      />
       <ToggleFilter
         filterToggleState={appState.filterToggleState}
         setToggleAction={setToggleAction}
@@ -37,6 +43,7 @@ const Filters = ({
 
 Filters.propTypes = {
   appState: PropTypes.shape({
+    globalSearchValue: PropTypes.string,
     filterEnums: PropTypes.arrayOf(PropTypes.string),
     filterToggleState: PropTypes.number,
   }).isRequired,

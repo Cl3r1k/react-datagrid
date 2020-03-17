@@ -76,3 +76,5 @@ export const MAP = {
     largeText: true,
   },
 };
+
+export const THROTTLE_DELAY = 1000;

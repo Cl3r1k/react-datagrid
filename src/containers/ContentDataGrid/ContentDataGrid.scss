@@ -5,8 +5,19 @@
 
 .table-container {
   position: relative;
-  width: 1080px;
+  width: 1058px;
   overflow: auto;
   will-change: transform;
   direction: ltr;
+  border: 1px solid #b4b4b4;
+  box-shadow: 0 0 5px 1px #b4b4b4;
+}
+
+.table-wrapper {
+  display: flex;
+  flex-direction: column;
+  .csv-link {
+    white-space: nowrap;
+    padding: 10px;
+  }
 }

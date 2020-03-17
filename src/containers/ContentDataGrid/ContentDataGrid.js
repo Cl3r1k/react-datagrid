@@ -6,6 +6,9 @@ import { FixedSizeList as List } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { connect } from 'react-redux';
 
+// Modules
+import { CSVLink } from 'react-csv';
+
 // Actions
 import { setSelection } from 'actions/searchActions';
 
@@ -17,7 +20,7 @@ import HeaderDataGrid from 'components/HeaderDataGrid/HeaderDataGrid';
 import { sortDataByFieldName, filterData, excludeById } from 'utils/dataUtils';
 
 // Constants
-import { DEFAULT_CONFIG } from 'config/default';
+import { DEFAULT_CONFIG, MAP } from 'config/default';
 
 // Styles
 import './ContentDataGrid.scss';
@@ -34,6 +37,9 @@ const ItemWrapper = ({ data, index, style }) => {
     setSelectionAction,
     hiddenColumns,
   } = data;
+
+  console.log('to render item index: ', index);
+
   if (stickyIndices && stickyIndices.includes(index)) {
     return null;
   }
@@ -128,29 +134,55 @@ const ContentDataGrid = ({
 
     const excludedData = excludeById(sortedData, searchState.deletedItems);
 
+    const csvData = excludedData.map(item => {
+      const filteredItem = {};
+      Object.keys(item).forEach((key, index) => {
+        if (!MAP[index].isHidden && !searchState.hiddenColumns[key]) {
+          if (typeof item[key] === 'object') {
+            filteredItem[key] = Object.values(item[key]).join(' ');
+          } else {
+            filteredItem[key] = item[key];
+          }
+        }
+      });
+
+      return filteredItem;
+    });
+
     if (!searchState.virtualizationState) {
       return (
         <AutoSizer>
           {({ height }) => (
-            <div className="table-container" style={{ height }}>
-              <HeaderDataGrid
-                style={{
-                  top: 0,
-                  left: 0,
-                  height: DEFAULT_CONFIG.FIXED_ROW_HEIGHT,
-                }}
-                hiddenColumns={searchState.hiddenColumns}
-              />
-              {excludedData.map((item, i) => (
-                <ContentDataRow
-                  key={item.id}
-                  index={i}
-                  data={excludedData}
-                  isVirtualization={searchState.virtualizationState}
-                  selectedItems={searchState.selectedItems}
-                  setSelectionAction={setSelectionAction}
+            <div className="table-wrapper">
+              <CSVLink
+                className="csv-link"
+                data={csvData}
+                filename="data-grid.csv"
+                target="_blank"
+              >
+                Download CSV
+              </CSVLink>
+              <div className="table-container" style={{ height }}>
+                <HeaderDataGrid
+                  style={{
+                    top: 0,
+                    left: 0,
+                    height: DEFAULT_CONFIG.FIXED_ROW_HEIGHT,
+                  }}
+                  hiddenColumns={searchState.hiddenColumns}
                 />
-              ))}
+                {excludedData.map((item, i) => (
+                  <ContentDataRow
+                    key={item.id}
+                    index={i}
+                    data={excludedData}
+                    isVirtualization={searchState.virtualizationState}
+                    selectedItems={searchState.selectedItems}
+                    hiddenColumns={searchState.hiddenColumns}
+                    setSelectionAction={setSelectionAction}
+                  />
+                ))}
+              </div>
             </div>
           )}
         </AutoSizer>
@@ -160,21 +192,31 @@ const ContentDataGrid = ({
     return (
       <AutoSizer>
         {({ width, height }) => (
-          <StickyList
-            className="List"
-            height={height}
-            innerElementType={innerElementType}
-            itemCount={excludedData.length}
-            itemSize={DEFAULT_CONFIG.FIXED_ROW_HEIGHT}
-            stickyIndices={[0]}
-            width={width}
-            customData={excludedData}
-            selectedItems={searchState.selectedItems}
-            setSelectionAction={setSelectionAction}
-            hiddenColumns={searchState.hiddenColumns}
-          >
-            {ContentDataRow}
-          </StickyList>
+          <div className="table-wrapper">
+            <CSVLink
+              className="csv-link"
+              data={csvData}
+              filename="data-grid.csv"
+              target="_blank"
+            >
+              Download CSV
+            </CSVLink>
+            <StickyList
+              className="table-container"
+              height={height}
+              innerElementType={innerElementType}
+              itemCount={excludedData.length}
+              itemSize={DEFAULT_CONFIG.FIXED_ROW_HEIGHT}
+              stickyIndices={[]}
+              width={width}
+              customData={excludedData}
+              selectedItems={searchState.selectedItems}
+              setSelectionAction={setSelectionAction}
+              hiddenColumns={searchState.hiddenColumns}
+            >
+              {ContentDataRow}
+            </StickyList>
+          </div>
         )}
       </AutoSizer>
     );

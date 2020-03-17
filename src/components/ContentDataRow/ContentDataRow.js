@@ -108,7 +108,11 @@ const ContentDataRow = ({
   return (
     <div
       className={`row-item ${selected ? 'selected-item' : ''}`}
-      style={{ ...style, width: isVirtualization ? 'auto' : '135%' }}
+      style={{
+        ...style,
+        width: isVirtualization ? 'auto' : '135%',
+        top: !isVirtualization ? `${parseFloat(style.top) + 44}px` : '',
+      }}
     >
       {Object.keys(MAP).map(key => renderCell(key))}
     </div>

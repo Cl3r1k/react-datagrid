@@ -9,20 +9,26 @@ const ToggleFilter = ({ filterToggleState, setToggleAction }) => {
   return (
     <>
       <p>Toggle Filter</p>
-      <input
-        type="checkbox"
-        value={1}
-        checked={filterToggleState === 1}
-        onChange={toggleChangeHandler}
-      />
-      Active
-      <input
-        type="checkbox"
-        value={2}
-        checked={filterToggleState === 2}
-        onChange={toggleChangeHandler}
-      />
-      Inactive
+      <label htmlFor="toggle-1">
+        <input
+          type="checkbox"
+          id="toggle-1"
+          value={1}
+          checked={filterToggleState === 1}
+          onChange={toggleChangeHandler}
+        />
+        Active
+      </label>
+      <label htmlFor="toggle-2">
+        <input
+          type="checkbox"
+          id="toggle-2"
+          value={2}
+          checked={filterToggleState === 2}
+          onChange={toggleChangeHandler}
+        />
+        Inactive
+      </label>
     </>
   );
 };

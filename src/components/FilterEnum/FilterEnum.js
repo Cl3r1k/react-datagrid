@@ -12,7 +12,9 @@ import './FilterEnum.scss';
 const animatedComponent = makeAnimated();
 const options = ENUM_CONFIG.map(item => ({ value: item, label: item }));
 
-const FilterEnum = ({ setEnumFilterAction }) => {
+const FilterEnum = ({ filterEnums, setEnumFilterAction }) => {
+  const defaultValue = filterEnums.map(item => ({ value: item, label: item }));
+
   const handleChange = newValue => {
     if (newValue) {
       const enumsSelected = newValue.map(item => item.value);
@@ -26,6 +28,7 @@ const FilterEnum = ({ setEnumFilterAction }) => {
     <>
       <p className="enum-component-title">Enum Filter</p>
       <Select
+        defaultValue={defaultValue}
         closeMenuOnSelect={false}
         components={animatedComponent}
         isMulti
@@ -37,7 +40,12 @@ const FilterEnum = ({ setEnumFilterAction }) => {
 };
 
 FilterEnum.propTypes = {
+  filterEnums: PropTypes.arrayOf(PropTypes.string),
   setEnumFilterAction: PropTypes.func.isRequired,
+};
+
+FilterEnum.defaultProps = {
+  filterEnums: [],
 };
 
 export default FilterEnum;
