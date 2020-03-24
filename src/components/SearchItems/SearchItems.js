@@ -18,6 +18,8 @@ const SearchItems = ({
     isActive: false,
   });
 
+  // TODO: Improve this part - it's not working properly for opened popup and filtered value for current item
+
   useEffect(() => {
     if (fieldName === searchPopupName) {
       setVisibleState(true);

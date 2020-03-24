@@ -1,7 +1,6 @@
 import { SORT_DATA_SUCCESS } from 'actions/sortActions';
-// import { DIRECTION_VALUES } from 'utils/constants';
 
-const initialState = {
+export const initialState = {
   sortFields: [],
   sortDirections: [],
   isSorting: false,

@@ -41,6 +41,7 @@ const ItemWrapper = ({ data, index, style }) => {
   if (stickyIndices && stickyIndices.includes(index)) {
     return null;
   }
+
   return (
     <ItemRenderer
       index={index}

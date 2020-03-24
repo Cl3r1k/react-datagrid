@@ -11,7 +11,7 @@ import {
   SET_HIDDEN,
 } from 'actions/searchActions';
 
-const initialState = {
+export const initialState = {
   searchField: '',
   searchValue: '',
   searchPopupName: '',

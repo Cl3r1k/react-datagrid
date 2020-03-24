@@ -13,6 +13,7 @@ import {
 import SettingVirtualization from 'components/SettingVirtualization/SettingVirtualization';
 import SettingDeleteRows from 'components/SettingDeleteRows/SettingDeleteRows';
 import SettingVisibility from 'components/SettingVisibility/SettingVisibility';
+import SettingQueryString from 'components/SettingQueryString/SettingQueryString';
 
 // Styles
 import './Settings.scss';
@@ -37,6 +38,7 @@ const Settings = ({
         hiddenColumns={appState.hiddenColumns}
         setVisibilityAction={setVisibilityAction}
       />
+      <SettingQueryString />
     </div>
   );
 };

@@ -5,17 +5,19 @@ import { rootReducer } from 'reducers/rootReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 // Utils
+import { queryStingParse } from 'utils/queryParams';
 import { loadState, saveState } from 'utils/localStorage';
 import throttle from 'lodash/throttle';
 
 // Constants
 import { THROTTLE_DELAY } from 'config/default';
 
+const stateWithParams = queryStingParse();
 const persistedState = loadState();
 
 export const store = createStore(
   rootReducer,
-  persistedState,
+  stateWithParams || persistedState,
   composeWithDevTools(applyMiddleware(thunk, logger))
 );
 
