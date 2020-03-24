@@ -3,4 +3,8 @@
   border-bottom: 2px solid #b3b362;
   border-top: 2px solid #b3b362;
   display: flex;
+  background-color: #ffffff;
+  &.sticky {
+    z-index: 100;
+  }
 }

@@ -38,8 +38,6 @@ const ItemWrapper = ({ data, index, style }) => {
     hiddenColumns,
   } = data;
 
-  console.log('to render item index: ', index);
-
   if (stickyIndices && stickyIndices.includes(index)) {
     return null;
   }

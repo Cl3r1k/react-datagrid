@@ -33,9 +33,10 @@ const ContentDataRow = ({
         return (
           <DataCellSelect
             key={`${key}-${fieldName}`}
+            className="sticky"
             selectState={selected}
             id={data[index].id}
-            style={{ width: MAP[key].columnWidth }}
+            style={{ width: MAP[key].columnWidth, left: MAP[key].leftPosition }}
             setSelectionAction={setSelectionAction}
           />
         );
@@ -44,8 +45,12 @@ const ContentDataRow = ({
         return (
           <DataCellAvatar
             key={`${key}-${fieldName}`}
+            className="sticky"
             imageUrl={data[index][fieldName]}
-            style={{ width: MAP[key].columnWidth }}
+            style={{
+              width: MAP[key].columnWidth,
+              left: MAP[key].leftPosition,
+            }}
           />
         );
 
@@ -53,9 +58,12 @@ const ContentDataRow = ({
         return (
           <DataCellText
             key={`${key}-${fieldName}`}
+            className={fieldName === 'name' ? 'sticky' : ''}
             dataContent={data[index][fieldName]}
-            style={{ width: MAP[key].columnWidth }}
-            largeText={MAP[key].largeText}
+            style={{
+              width: MAP[key].columnWidth,
+              left: fieldName === 'name' ? MAP[key].leftPosition : 'auto',
+            }}
             isHidden={hiddenColumns[fieldName]}
           />
         );
@@ -77,7 +85,6 @@ const ContentDataRow = ({
             key={`${key}-${fieldName}`}
             dataContent={new Date(data[index][fieldName]).toLocaleDateString()}
             style={{ width: MAP[key].columnWidth }}
-            largeText={MAP[key].largeText}
             isHidden={hiddenColumns[fieldName]}
           />
         );

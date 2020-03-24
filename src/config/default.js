@@ -23,16 +23,19 @@ export const MAP = {
     columnWidth: 30,
     isHidden: true,
     dataType: DATA_TYPES.HIDDEN_TYPE,
+    leftPosition: 0,
   },
   1: {
     name: 'avatar',
     columnWidth: 60,
     dataType: DATA_TYPES.AVATAR_TYPE,
+    leftPosition: 30,
   },
   2: {
     name: 'name',
     columnWidth: 150,
     dataType: DATA_TYPES.TEXT_TYPE,
+    leftPosition: 90,
   },
   3: {
     name: 'score',

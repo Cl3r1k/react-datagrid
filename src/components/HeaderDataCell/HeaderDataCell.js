@@ -22,6 +22,7 @@ const HeaderDataCell = props => {
     searchDataAction,
     setSearchPopupAction,
     isHidden,
+    className,
     style,
   } = props;
 
@@ -30,7 +31,7 @@ const HeaderDataCell = props => {
   }
 
   return (
-    <div className="header-data-cell" style={style}>
+    <div className={`header-data-cell ${className}`} style={style}>
       <div className="title-container">
         <span className="cell-title">{title}</span>
         {isSortable && (
@@ -68,6 +69,7 @@ HeaderDataCell.propTypes = {
   searchDataAction: PropTypes.func,
   setSearchPopupAction: PropTypes.func,
   isHidden: PropTypes.bool,
+  className: PropTypes.string,
   style: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
@@ -84,6 +86,7 @@ HeaderDataCell.defaultProps = {
   searchDataAction: undefined,
   setSearchPopupAction: undefined,
   isHidden: false,
+  className: '',
   style: '',
 };
 

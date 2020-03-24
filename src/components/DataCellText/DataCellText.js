@@ -7,8 +7,8 @@ import './DataCellText.scss';
 const DataCellText = ({
   dataContent,
   isNumber,
-  largeText,
   isHidden,
+  className,
   style,
 }) => {
   if (isHidden) {
@@ -18,10 +18,10 @@ const DataCellText = ({
   return (
     <div
       style={style}
-      className={`text-block ${isNumber ? 'number-cell' : ''}`}
+      className={`text-block ${isNumber ? 'number-cell' : ''} ${className}`}
     >
       {isHidden && <p>hidden</p>}
-      <p className={largeText ? 'large-text' : ''}>{dataContent}</p>
+      <p className="cell-text">{dataContent}</p>
     </div>
   );
 };
@@ -29,16 +29,16 @@ const DataCellText = ({
 DataCellText.propTypes = {
   dataContent: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   isNumber: PropTypes.bool,
-  largeText: PropTypes.bool,
   isHidden: PropTypes.bool,
+  className: PropTypes.string,
   style: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 DataCellText.defaultProps = {
   dataContent: '',
   isNumber: false,
-  largeText: false,
   isHidden: false,
+  className: '',
   style: '',
 };
 

@@ -26,8 +26,16 @@ const HeaderDataGrid = ({
 }) => {
   return (
     <div className="sticky header-data-grid" style={style}>
-      <HeaderDataCell title="" style={{ width: MAP[0].columnWidth }} />
-      <HeaderDataCell title="Avatar" style={{ width: MAP[1].columnWidth }} />
+      <HeaderDataCell
+        title=""
+        className="sticky"
+        style={{ width: MAP[0].columnWidth, left: MAP[0].leftPosition }}
+      />
+      <HeaderDataCell
+        title="Avatar"
+        className="sticky"
+        style={{ width: MAP[1].columnWidth, left: MAP[1].leftPosition }}
+      />
       <HeaderDataCell
         title="Name"
         fieldName="name"
@@ -43,7 +51,8 @@ const HeaderDataGrid = ({
         setSearchPopupAction={setSearchPopupAction}
         searchDataAction={searchDataAction}
         isHidden={searchState.hiddenColumns.name}
-        style={{ width: MAP[2].columnWidth }}
+        className="sticky"
+        style={{ width: MAP[2].columnWidth, left: MAP[2].leftPosition }}
       />
       <HeaderDataCell
         title="Score"

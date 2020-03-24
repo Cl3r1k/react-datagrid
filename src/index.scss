@@ -16,5 +16,20 @@ code {
   position: sticky !important;
   position: -webkit-sticky !important;
   z-index: 2;
-  background: white;
+}
+
+.row-item {
+  &:hover {
+    .sticky {
+      background-color: #adc1da;
+    }
+  }
+  &.selected-item {
+    .sticky {
+      background-color: #80a4cf;
+    }
+  }
+  .sticky {
+    background-color: #cad4e2;
+  }
 }
