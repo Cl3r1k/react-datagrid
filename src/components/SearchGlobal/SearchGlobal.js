@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
+// Modules
+import debounce from 'lodash/debounce';
+
+// Constants
+import { SEARCH_DELAY } from 'constants/constants';
+
 const SearchGlobal = ({ globalSearchValue, setGlobalSearchAction }) => {
+  const [inputValue, setInputValue] = useState(globalSearchValue);
+
+  useEffect(() => {
+    setInputValue(globalSearchValue);
+  }, [globalSearchValue]);
+
+  const delayedSearchAction = useCallback(
+    debounce(value => {
+      setGlobalSearchAction(value);
+    }, SEARCH_DELAY),
+    []
+  );
+
   const handleInputChange = ({ currentTarget: { value } }) => {
-    setGlobalSearchAction(value);
+    setInputValue(value);
+    delayedSearchAction(value);
   };
 
   return (
@@ -11,7 +31,7 @@ const SearchGlobal = ({ globalSearchValue, setGlobalSearchAction }) => {
       <p>Search through all columns</p>
       <input
         type="text"
-        value={globalSearchValue}
+        value={inputValue}
         placeholder="Enter value to search"
         onChange={handleInputChange}
       />

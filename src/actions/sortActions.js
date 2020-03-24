@@ -1,4 +1,4 @@
-import { ACTION_DELAY, DIRECTION_VALUES } from 'utils/constants';
+import { ACTION_DELAY, DIRECTION_VALUES } from 'constants/constants';
 
 export const SORT_DATA_SUCCESS = 'SORT_DATA_SUCCESS';
 

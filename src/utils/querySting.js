@@ -1,7 +1,7 @@
 import { initialState as initialStateSearch } from 'reducers/searchReducer';
 import { initialState as initialStateSort } from 'reducers/sortReducer';
 
-export const queryStingParse = () => {
+export const queryStringParse = () => {
   const paramsString = window.location.search;
 
   const parsedParams = {};

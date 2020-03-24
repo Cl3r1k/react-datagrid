@@ -1,4 +1,4 @@
-import { ACTION_DELAY } from 'utils/constants';
+import { ACTION_DELAY } from 'constants/constants';
 
 export const SEARCH_DATA_REQUEST = 'SEARCH_DATA_REQUEST';
 export const SEARCH_DATA_SUCCESS = 'SEARCH_DATA_SUCCESS';

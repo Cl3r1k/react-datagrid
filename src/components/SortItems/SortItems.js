@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Constants
-import { DIRECTION_VALUES } from 'utils/constants';
+import { DIRECTION_VALUES } from 'constants/constants';
 
 // Styles
 import './SortItems.scss';

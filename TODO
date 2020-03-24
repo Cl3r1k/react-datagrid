@@ -101,8 +101,8 @@ Todo:
       ✔ Значения фильтров для текстовых и enum колонок можно передавать в querystring (приоритет выше, чем у localStorage). +10 @done(20-03-24 12:08)
     
     `Extra features`:
-      ☐ Use debounce for global search input           <========================================================= CURRENT TASK
-      ☐ UX - add numbers to multiple sorted columns to visually define sort order
+      ✔ Use debounce for global search input @done(20-03-24 17:53)
+      ☐ UX - add numbers to multiple sorted columns to visually define sort order           <========================================================= CURRENT TASK
       ☐ Implement own virtualization
       ☐ Rewrite app and move logic to reducers.
 
