@@ -1,5 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 const ToggleFilter = ({ filterToggleState, setToggleAction }) => {
   const toggleChangeHandler = ({ currentTarget: { value, checked } }) => {
@@ -7,29 +11,39 @@ const ToggleFilter = ({ filterToggleState, setToggleAction }) => {
   };
 
   return (
-    <>
-      <p>Toggle Filter</p>
-      <label htmlFor="toggle-1">
-        <input
-          type="checkbox"
-          id="toggle-1"
-          value={1}
-          checked={filterToggleState === 1}
-          onChange={toggleChangeHandler}
-        />
-        Active
-      </label>
-      <label htmlFor="toggle-2">
-        <input
-          type="checkbox"
-          id="toggle-2"
-          value={2}
-          checked={filterToggleState === 2}
-          onChange={toggleChangeHandler}
-        />
-        Inactive
-      </label>
-    </>
+    <Grid container item>
+      <Grid item sm={12}>
+        <Typography variant="overline" gutterBottom>
+          Activity
+        </Typography>
+      </Grid>
+      <Grid container item sm={12}>
+        <Grid item sm={6}>
+          <FormControlLabel
+            control={
+              <Switch
+                value={1}
+                checked={filterToggleState === 1}
+                onChange={toggleChangeHandler}
+              />
+            }
+            label="Active"
+          />
+        </Grid>
+        <Grid item sm={6}>
+          <FormControlLabel
+            control={
+              <Switch
+                value={2}
+                checked={filterToggleState === 2}
+                onChange={toggleChangeHandler}
+              />
+            }
+            label="Inactive"
+          />
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 

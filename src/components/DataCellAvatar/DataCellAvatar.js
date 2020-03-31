@@ -1,14 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Avatar from '@material-ui/core/Avatar';
 
 // Styles
 import './DataCellAvatar.scss';
 
+const useStyles = makeStyles(theme => ({
+  avatarBlock: {
+    padding: '5px',
+  },
+  smallImage: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+  },
+  sticky: {
+    backgroundColor: '#ffffff',
+  },
+}));
+
 const DataCellAvatar = ({ imageUrl, className, style }) => {
+  const classes = useStyles();
   return (
-    <div style={style} className={`avatar-block ${className}`}>
-      <img className="avatar-image" src={imageUrl} alt="avatar" />
-    </div>
+    // <div style={style} className={`avatar-block ${className}`}>
+    //   <img className="avatar-image" src={imageUrl} alt="avatar" />
+    // </div>
+    <Grid
+      container
+      alignItems="center"
+      className={clsx(
+        classes.avatarBlock,
+        className,
+        className === 'sticky' && classes.sticky
+      )}
+      style={style}
+    >
+      <Avatar
+        className={classes.smallImage}
+        alt="avatar image"
+        src={imageUrl}
+      />
+    </Grid>
   );
 };
 

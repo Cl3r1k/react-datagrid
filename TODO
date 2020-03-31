@@ -4,14 +4,17 @@
 @UI_Prototype - ``
 @Prototype - `https://app.rs.school/course/score?course=react-2020-Q1`
 @Example - `https://uimovement.com/design/data-table-filter/`
-@Example2 - `https://dribbble.com/shots/9404247-SaaS-Software-Budgets-Control-UGEM/attachments/1428945?mode=media/`
+@Example2 - `https://dribbble.com/shots/9404247-SaaS-Software-Budgets-Control-UGEM/`
 @Example3 - `https://dribbble.com/shots/5744805-OEM-Network-Dashboard/attachments/`
 @Example_complete_1 - `https://adoring-bose-963fac.netlify.com/`
 @Example_complete_2 - `https://datagrid-yuskiv.netlify.com/`
 @Example_complete_3 - `https://datagrid-slolkunchik.netlify.com/#/`
 @Example_complete_4 - `https://blackjack-data-grid.netlify.com/`
 @Example_complete_5 - `https://hopeful-kirch-b901c7.netlify.com/`
+@Good_example - `https://github.com/iosDeveloperDK/DataGrids`
 @Demo - `https://cl3r1k-react-datagrid.netlify.com/`
+@UX/UI_Prototype - `https://www.behance.net/gallery/55390583/Inventory-management-dashboard`
+@UX/UI_Prototype_ToConsider - `https://dribbble.com/shots/9404247-SaaS-Software-Budgets-Control-UGEM`
 
 Todo:
 
@@ -102,9 +105,13 @@ Todo:
     
     `Extra features`:
       ✔ Use debounce for global search input @done(20-03-24 17:53)
-      ☐ UX - add numbers to multiple sorted columns to visually define sort order           <========================================================= CURRENT TASK
+      ☐ Implement Material-UI           <========================================================= CURRENT TASK
+      ☐ UX - add numbers to multiple sorted columns to visually define 'multiple sort order'
+      ☐ Fix logic for search column popup - it's not working properly for opened popup and filtered value for current item
       ☐ Implement own virtualization
       ☐ Rewrite app and move logic to reducers.
+      ☐ Rewrite app using `Redux Saga`
+      ☐ Consider to use sticky header and add footer (with info about filtered data, and with button delete selected items)
 
 
 

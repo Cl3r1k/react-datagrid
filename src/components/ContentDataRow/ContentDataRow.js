@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
 // Components
 import DataCellAvatar from 'components/DataCellAvatar/DataCellAvatar';
@@ -12,21 +15,41 @@ import DataCellSelect from 'components/DataCellSelect/DataCellSelect';
 import { MAP, DATA_TYPES } from 'config/default';
 
 // Styles
-import './ContentDataRow.scss';
+// import './ContentDataRow.scss';
+
+const useStyles = makeStyles(theme => ({
+  rowItem: {
+    flexShrink: '0',
+    flexWrap: 'nowrap',
+    height: theme.spacing(6),
+    // width: '950px',
+    width: 'auto',
+    backgroundColor: '#ffffff',
+    borderTop: '1px solid #efefef',
+    '&:hover': {
+      backgroundColor: '#eeeeee',
+    },
+  },
+  selectedItem: {
+    backgroundColor: '#f4f4f4',
+  },
+}));
 
 const ContentDataRow = ({
   index,
-  style,
+  // style,
   data,
-  isVirtualization,
+  // isVirtualization,
   selectedItems,
   hiddenColumns,
   setSelectionAction,
 }) => {
   const selected = selectedItems.includes(data[index].id);
+  const classes = useStyles();
 
   const renderCell = key => {
     const fieldName = MAP[key].name;
+    const { columnWidth } = MAP[key];
 
     switch (MAP[key].dataType) {
       case DATA_TYPES.HIDDEN_TYPE:
@@ -36,7 +59,7 @@ const ContentDataRow = ({
             className="sticky"
             selectState={selected}
             id={data[index].id}
-            style={{ width: MAP[key].columnWidth, left: MAP[key].leftPosition }}
+            style={{ width: columnWidth, left: MAP[key].leftPosition }}
             setSelectionAction={setSelectionAction}
           />
         );
@@ -48,7 +71,7 @@ const ContentDataRow = ({
             className="sticky"
             imageUrl={data[index][fieldName]}
             style={{
-              width: MAP[key].columnWidth,
+              width: columnWidth,
               left: MAP[key].leftPosition,
             }}
           />
@@ -61,7 +84,7 @@ const ContentDataRow = ({
             className={fieldName === 'name' ? 'sticky' : ''}
             dataContent={data[index][fieldName]}
             style={{
-              width: MAP[key].columnWidth,
+              width: columnWidth,
               left: fieldName === 'name' ? MAP[key].leftPosition : 'auto',
             }}
             isHidden={hiddenColumns[fieldName]}
@@ -74,7 +97,7 @@ const ContentDataRow = ({
             key={`${key}-${fieldName}`}
             dataContent={data[index][fieldName]}
             isNumber
-            style={{ width: MAP[key].columnWidth }}
+            style={{ width: columnWidth }}
             isHidden={hiddenColumns[fieldName]}
           />
         );
@@ -84,7 +107,7 @@ const ContentDataRow = ({
           <DataCellText
             key={`${key}-${fieldName}`}
             dataContent={new Date(data[index][fieldName]).toLocaleDateString()}
-            style={{ width: MAP[key].columnWidth }}
+            style={{ width: columnWidth }}
             isHidden={hiddenColumns[fieldName]}
           />
         );
@@ -94,7 +117,7 @@ const ContentDataRow = ({
           <DataCellBool
             key={`${key}-${fieldName}`}
             flagState={data[index][fieldName]}
-            style={{ width: MAP[key].columnWidth }}
+            style={{ width: columnWidth }}
           />
         );
 
@@ -103,46 +126,60 @@ const ContentDataRow = ({
           <DataCellObject
             key={`${key}-${fieldName}`}
             data={data[index][fieldName]}
-            style={{ width: MAP[key].columnWidth }}
+            style={{ width: columnWidth }}
           />
         );
 
       default:
-        return <p>some item</p>;
+        return (
+          <DataCellText key={`${key}-${fieldName}`} dataContent="some item" />
+        );
     }
   };
 
   return (
-    <div
-      className={`row-item ${selected ? 'selected-item' : ''}`}
-      style={{
-        ...style,
-        width: isVirtualization ? 'auto' : '135%',
-        top: !isVirtualization ? `${parseFloat(style.top) + 44}px` : '',
-      }}
+    // <div
+    //   className={`row-item ${selected ? 'selected-item' : ''}`}
+    //   style={{
+    //     ...style,
+    //     width: isVirtualization ? 'auto' : '135%',
+    //     top: !isVirtualization ? `${parseFloat(style.top) + 44}px` : '',
+    //   }}
+    // >
+    //   {Object.keys(MAP).map(key => renderCell(key))}
+    // </div>
+
+    <Grid
+      container
+      item
+      className={clsx(
+        classes.rowItem,
+        'row-item',
+        selected && ['selected-item', classes.selectedItem]
+      )}
     >
       {Object.keys(MAP).map(key => renderCell(key))}
-    </div>
+    </Grid>
   );
 };
 
 ContentDataRow.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   index: PropTypes.number.isRequired,
-  isVirtualization: PropTypes.bool,
+  // isVirtualization: PropTypes.bool,
   selectedItems: PropTypes.arrayOf(PropTypes.string),
   hiddenColumns: PropTypes.objectOf(PropTypes.bool),
   setSelectionAction: PropTypes.func,
-  style: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  // style: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 ContentDataRow.defaultProps = {
   data: [],
-  isVirtualization: false,
+  // isVirtualization: false,
   selectedItems: [],
   hiddenColumns: {},
   setSelectionAction: undefined,
-  style: '',
+  // style: '',
 };
 
 export default ContentDataRow;

@@ -18,13 +18,14 @@
 
   .search-popup {
     position: absolute;
-    bottom: -50px;
+    bottom: -70px;
     right: 0;
     width: 150px;
     padding: 7px;
     border-radius: 2px;
     background-color: #fcfafa;
     box-shadow: 0 0 5px 2px #a0a0b3;
+    z-index: 20;
     .search-input {
       width: 95%;
     }

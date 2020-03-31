@@ -1,28 +1,55 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 // Constants
 import { DIRECTION_VALUES } from 'constants/constants';
 
-// Styles
-import './SortItems.scss';
+const useStyles = makeStyles({
+  iconSort: {
+    marginLeft: '0.2rem',
+    cursor: 'pointer',
+    '&:hover': {
+      opacity: '0.5',
+    },
+  },
+  selected: {
+    opacity: props => (props.sortState === '' ? '0.2' : '1'),
+    color: props => (props.sortState === '' ? 'initial' : 'aqua'),
+  },
+});
 
 const SortItems = ({ fieldName, sortState, sortDataAction }) => {
-  const { ASCENDING_DIRECTION, DESCENDING_DIRECTION } = DIRECTION_VALUES;
+  const { DESCENDING_DIRECTION } = DIRECTION_VALUES;
+  const classes = useStyles({ sortState });
 
   const sortBy = ({ shiftKey }) => {
     sortDataAction(fieldName, shiftKey);
   };
 
   return (
-    <div className="sort-icons-block">
-      <button
-        type="button"
-        className={`sort-icon ${sortState === ASCENDING_DIRECTION &&
-          'icon-up'} ${sortState === DESCENDING_DIRECTION && 'icon-down'}`}
-        onClick={sortBy}
-      />
-    </div>
+    <Grid container item>
+      {sortState !== DESCENDING_DIRECTION && (
+        <ExpandLessIcon
+          aria-label="sort ascending"
+          size="small"
+          className={`${classes.iconSort} ${classes.selected}`}
+          onClick={sortBy}
+        />
+      )}
+
+      {sortState === DESCENDING_DIRECTION && (
+        <ExpandMoreIcon
+          aria-label="sort ascending"
+          size="small"
+          className={`${classes.iconSort} ${classes.selected}`}
+          onClick={sortBy}
+        />
+      )}
+    </Grid>
   );
 };
 

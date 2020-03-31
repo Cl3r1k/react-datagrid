@@ -1,8 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
 
 // Styles
 import './SearchItems.scss';
+
+const useStyles = makeStyles({
+  activeSearch: {
+    backgroundColor: '#aff0da',
+  },
+});
 
 const SearchItems = ({
   fieldName,
@@ -17,8 +27,7 @@ const SearchItems = ({
     value: '',
     isActive: false,
   });
-
-  // TODO: Improve this part - it's not working properly for opened popup and filtered value for current item
+  const classes = useStyles();
 
   useEffect(() => {
     if (fieldName === searchPopupName) {
@@ -87,13 +96,20 @@ const SearchItems = ({
           </div>
         </div>
       )}
-      <button
+      {/* <button
         type="button"
         className={`search-icon ${
           searchValueState.isActive ? 'active-search' : ''
         }`}
         onClick={popupHandler}
-      />
+      /> */}
+      <IconButton aria-label="search icon" size="small">
+        <SearchIcon
+          size="inherit"
+          className={clsx(searchValueState.isActive && classes.activeSearch)}
+          onClick={popupHandler}
+        />
+      </IconButton>
     </div>
   );
 };

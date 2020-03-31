@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 // Actions
 import {
@@ -24,7 +26,16 @@ const Filters = ({
   setGlobalSearchAction,
 }) => {
   return (
-    <div className="filters-container">
+    <>
+      <Grid item>
+        <Typography
+          variant="h6"
+          gutterBottom
+          style={{ textTransform: 'uppercase' }}
+        >
+          Filter Data
+        </Typography>
+      </Grid>
       <SearchGlobal
         globalSearchValue={appState.globalSearchValue}
         setGlobalSearchAction={setGlobalSearchAction}
@@ -37,7 +48,7 @@ const Filters = ({
         filterToggleState={appState.filterToggleState}
         setToggleAction={setToggleAction}
       />
-    </div>
+    </>
   );
 };
 

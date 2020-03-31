@@ -21,15 +21,15 @@ code {
 .row-item {
   &:hover {
     .sticky {
-      background-color: #adc1da;
+      background-color: #eeeeee;
     }
   }
   &.selected-item {
     .sticky {
-      background-color: #80a4cf;
+      background-color: #f4f4f4;
     }
   }
-  .sticky {
-    background-color: #cad4e2;
-  }
+  // .sticky {
+  //   background-color: #cad4e2;
+  // }
 }
