@@ -42,9 +42,7 @@ const SearchGlobal = ({ globalSearchValue, setGlobalSearchAction }) => {
         onChange={handleInputChange}
       /> */}
       <FormControl fullWidth variant="outlined">
-        <InputLabel htmlFor="outlined-input-search">
-          Search through all columns
-        </InputLabel>
+        <InputLabel htmlFor="outlined-input-search">Search...</InputLabel>
         <OutlinedInput
           id="outlined-input-search"
           value={inputValue}

@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   selectedItem: {
-    backgroundColor: '#f4f4f4',
+    backgroundColor: theme.color.grayed,
   },
 }));
 

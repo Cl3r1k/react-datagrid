@@ -10,17 +10,18 @@ import Filters from 'containers/Filters/Filters';
 import ReactDataGrid from 'components/ReactDataGrid/ReactDataGrid';
 
 // Themes
-import theme from 'config/themeDark';
+import themeDark from 'config/themeDark';
 
 // Styles
 // import './App.scss';
 
-const useStyles = makeStyles({
-  root: {
-    backgroundColor: '#c2d6d6',
+const useStyles = makeStyles(defaultTheme => ({
+  appRoot: {
     height: '100vh',
     padding: '20px',
     boxSizing: 'border-box',
+    backgroundColor: '#3f51b508',
+    boxShadow: defaultTheme.shadows[20],
   },
   appWrapper: {
     height: '100%',
@@ -29,18 +30,18 @@ const useStyles = makeStyles({
   },
   filtersContainer: {
     padding: '20px 15px',
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.primary.main,
+    backgroundColor: themeDark.palette.secondary.main,
+    color: themeDark.palette.primary.main,
   },
   tableContainer: {
-    backgroundColor: '#f4f4f4',
+    backgroundColor: defaultTheme.color.grayed,
     padding: '25px 35px',
     height: '100%',
   },
   height100Percent: {
     height: '100%',
   },
-});
+}));
 
 const App = () => {
   const classes = useStyles();
@@ -98,22 +99,31 @@ const App = () => {
     <Grid
       container
       // justify="center"
-      className={classes.root}
+      className={classes.appRoot}
     >
       <Paper elevation={5} className={classes.appWrapper}>
         <Grid container className={classes.height100Percent}>
-          <ThemeProvider theme={theme}>
+          <ThemeProvider theme={themeDark}>
             <Grid
               container
               item
               direction="column"
-              xs={3}
+              xs={12}
+              sm={3}
+              md={2}
               className={classes.filtersContainer}
             >
               <Filters />
             </Grid>
           </ThemeProvider>
-          <Grid container item xs={9} className={classes.tableContainer}>
+          <Grid
+            container
+            item
+            xs={12}
+            sm={9}
+            md={10}
+            className={classes.tableContainer}
+          >
             <ReactDataGrid />
             {/* <Grid
               container

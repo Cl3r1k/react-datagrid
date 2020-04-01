@@ -27,7 +27,7 @@ import { DEFAULT_CONFIG } from 'config/default';
 // Styles
 // import './ContentDataGrid.scss';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   contentDataGrid: {
     alignItems: 'flex-start',
     alignContent: 'flex-start',
@@ -37,10 +37,22 @@ const useStyles = makeStyles({
     width: '100%',
     boxSizing: 'border-box',
     position: 'relative',
-    backgroundColor: '#ffffff',
+    // backgroundColor: '#ffffff',
     // backgroundColor: 'teal',
+    '&::-webkit-scrollbar': {
+      width: '10px',
+      height: '10px',
+    },
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: theme.color.grayed,
+    },
+    '&::-webkit-scrollbar-thumb': {
+      borderRadius: '10px',
+      backgroundColor: theme.palette.primary.light,
+      border: `3px solid ${theme.color.grayed}`,
+    },
   },
-});
+}));
 
 const StickyListContext = createContext();
 StickyListContext.displayName = 'StickyListContext';
