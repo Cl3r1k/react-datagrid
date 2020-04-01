@@ -54,7 +54,7 @@ const SearchGlobal = ({ globalSearchValue, setGlobalSearchAction }) => {
               </IconButton>
             </InputAdornment>
           }
-          labelWidth={200}
+          labelWidth={70}
         />
       </FormControl>
     </Grid>

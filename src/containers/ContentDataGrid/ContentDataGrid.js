@@ -7,6 +7,8 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Actions
 import { setSelection } from 'actions/searchActions';
@@ -39,6 +41,13 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
     // backgroundColor: '#ffffff',
     // backgroundColor: 'teal',
+
+    // * Scrollbars with styles
+    // The emerging W3C standard that is currently Firefox-only
+    scrollbarWidth: 'thin',
+    scrollbarColor: `${theme.palette.primary.light} ${theme.color.grayed}`,
+
+    /* Works on Chrome/Edge/Safari */
     '&::-webkit-scrollbar': {
       width: '10px',
       height: '10px',
@@ -51,6 +60,9 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.primary.light,
       border: `3px solid ${theme.color.grayed}`,
     },
+  },
+  backDropRoot: {
+    zIndex: '100',
   },
 }));
 
@@ -138,14 +150,6 @@ const ContentDataGrid = ({
 }) => {
   const classes = useStyles();
   const renderTable = () => {
-    if (sortState.isSorting || searchState.isSearching) {
-      return (
-        <div>
-          <p>Loading... (Spinner...)</p>
-        </div>
-      );
-    }
-
     const filteredData = filterData(
       data,
       searchState.searchField,
@@ -269,6 +273,12 @@ const ContentDataGrid = ({
       <HeaderDataGrid hiddenColumns={searchState.hiddenColumns} />
 
       {renderTable()}
+      <Backdrop
+        open={sortState.isSorting || searchState.isSearching}
+        className={classes.backDropRoot}
+      >
+        <CircularProgress />
+      </Backdrop>
       {/* {Array(30)
         .fill(0)
         .map((el, index) => (

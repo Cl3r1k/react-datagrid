@@ -2,17 +2,42 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
-// Styles
-import './SearchItems.scss';
-
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
+  searchContainer: {
+    position: 'relative',
+  },
+  searchPopup: {
+    position: 'absolute',
+    bottom: '-110px',
+    right: '0',
+    width: '200px',
+    padding: '7px',
+    borderRadius: '2px',
+    backgroundColor: '#fcfafa',
+    boxShadow: '0 0 5px 2px #a0a0b3',
+    zIndex: '20',
+  },
   activeSearch: {
     backgroundColor: '#aff0da',
   },
-});
+  inputRoot: {
+    '& .MuiOutlinedInput-root': {
+      '& input': {
+        backgroundColor: theme.palette.grey[50],
+        padding: '10px',
+      },
+    },
+  },
+  buttonsBlock: {
+    padding: '10px',
+  },
+}));
 
 const SearchItems = ({
   fieldName,
@@ -68,48 +93,39 @@ const SearchItems = ({
   };
 
   return (
-    <div className="search-container">
+    <Grid container item justify="flex-end" className={classes.searchContainer}>
       {visibleState && (
-        <div className="search-popup">
-          <input
-            className="search-input"
-            type="text"
-            placeholder="Enter search value"
+        <Grid container className={classes.searchPopup}>
+          <TextField
+            variant="outlined"
+            placeholder="Search value"
             value={searchValueState.value}
             onChange={inputChangeHandler}
+            className={classes.inputRoot}
           />
-          <div className="buttons-block">
-            <button
-              type="button"
-              className="button-styled"
-              onClick={searchHandler}
-            >
+          <Grid
+            container
+            item
+            justify="space-between"
+            spacing={1}
+            className={classes.buttonsBlock}
+          >
+            <Button variant="contained" onClick={searchHandler}>
               Search
-            </button>
-            <button
-              type="button"
-              className="button-styled"
-              onClick={resetHandler}
-            >
+            </Button>
+            <Button variant="contained" onClick={resetHandler}>
               Reset
-            </button>
-          </div>
-        </div>
+            </Button>
+          </Grid>
+        </Grid>
       )}
-      {/* <button
-        type="button"
-        className={`search-icon ${
-          searchValueState.isActive ? 'active-search' : ''
-        }`}
-        onClick={popupHandler}
-      /> */}
       <IconButton aria-label="search icon" size="small" onClick={popupHandler}>
         <SearchIcon
           size="inherit"
           className={clsx(searchValueState.isActive && classes.activeSearch)}
         />
       </IconButton>
-    </div>
+    </Grid>
   );
 };
 

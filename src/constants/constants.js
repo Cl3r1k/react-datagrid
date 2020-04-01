@@ -4,5 +4,5 @@ export const DIRECTION_VALUES = {
   DESCENDING_DIRECTION: 'desc',
 };
 
-export const ACTION_DELAY = 1;
+export const ACTION_DELAY = 700;
 export const SEARCH_DELAY = 500;
