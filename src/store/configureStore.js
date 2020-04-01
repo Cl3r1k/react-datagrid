@@ -25,7 +25,11 @@ store.subscribe(
   throttle(() => {
     saveState({
       sortState: store.getState().sortState,
-      searchState: store.getState().searchState,
+      searchState: {
+        ...store.getState().searchState,
+        selectedItems: [],
+        deletedItems: [],
+      },
     });
   }, THROTTLE_DELAY)
 );

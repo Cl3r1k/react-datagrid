@@ -1,5 +1,5 @@
 export const DEFAULT_CONFIG = {
-  DATA_LENGTH: 100, // TODO: Change back to 1000
+  DATA_LENGTH: 10, // TODO: Change back to 1000
   MAX_SCORE: 3000,
   MAX_AMOUNT: 10000,
   FIXED_ROW_HEIGHT: 40,
@@ -63,7 +63,7 @@ export const MAP = {
   },
   5: {
     name: 'lastVisit',
-    title: 'LastVisit',
+    title: 'Last Visit',
     columnWidth: 150,
     dataType: DATA_TYPES.TEXT_TYPE,
     isSortable: true,

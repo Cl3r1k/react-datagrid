@@ -66,7 +66,7 @@ const HeaderDataGrid = ({
           searchPopupName={searchState.searchPopupName}
           setSearchPopupAction={setSearchPopupAction}
           searchDataAction={searchDataAction}
-          isHidden={searchState.hiddenColumns.name}
+          isHidden={searchState.hiddenColumns[MAP[key].name]}
           isSticky={MAP[key].sticky}
           style={{ width: MAP[key].columnWidth, left: MAP[key].leftPosition }}
         />

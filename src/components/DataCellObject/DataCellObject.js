@@ -45,7 +45,10 @@ const DataCellObject = ({ data, style }) => {
 };
 
 DataCellObject.propTypes = {
-  data: PropTypes.objectOf(PropTypes.string),
+  data: PropTypes.shape({
+    currencySymbol: PropTypes.string,
+    amount: PropTypes.number,
+  }),
   style: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 

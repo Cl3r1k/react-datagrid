@@ -17,25 +17,24 @@ import SettingVirtualization from 'components/SettingVirtualization/SettingVirtu
 import SettingDeleteRows from 'components/SettingDeleteRows/SettingDeleteRows';
 import SettingVisibility from 'components/SettingVisibility/SettingVisibility';
 import SettingQueryString from 'components/SettingQueryString/SettingQueryString';
-
-// Modules
-import { CSVLink } from 'react-csv';
+import CSVExport from 'components/CSVExport/CSVExport';
 
 // Styles
-import './Settings.scss';
+// import './Settings.scss';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   sticky: {
     position: 'sticky',
     top: 0,
     left: 0,
     zIndex: 11,
   },
-  preHeader: {
+  settingsContainer: {
     height: '95px',
-    backgroundColor: '#aad5fb',
+    paddingLeft: theme.spacing(2),
+    backgroundColor: '#ffffff',
   },
-});
+}));
 
 const Settings = ({
   appState,
@@ -44,22 +43,6 @@ const Settings = ({
   setVisibilityAction,
 }) => {
   const classes = useStyles();
-  // const csvData = excludedData.map(item => {
-  //   const filteredItem = {};
-  //   Object.keys(item).forEach((key, index) => {
-  //     if (!MAP[index].isHidden && !searchState.hiddenColumns[key]) {
-  //       if (typeof item[key] === 'object') {
-  //         filteredItem[key] = Object.values(item[key]).join(' ');
-  //       } else {
-  //         filteredItem[key] = item[key];
-  //       }
-  //     }
-  //   });
-
-  //   return filteredItem;
-  // });
-
-  // TODO: Refactor CSV to separate componets
 
   return (
     // <div className="settings-container">
@@ -86,29 +69,47 @@ const Settings = ({
     //     Download CSV
     //   </CSVLink>
     // </div>
-    <Grid container item className={clsx(classes.sticky, classes.preHeader)}>
-      <SettingVirtualization
-        virtualizationState={appState.virtualizationState}
-        setVirtualizationAction={setVirtualizationAction}
-      />
-      <SettingDeleteRows
-        selectionState={!!appState.selectedItems.length}
-        deleteRowsAction={deleteRowsAction}
-      />
-      <SettingVisibility
-        hiddenColumns={appState.hiddenColumns}
-        setVisibilityAction={setVisibilityAction}
-      />
-      <SettingQueryString />
-      <CSVLink
-        className="csv-link"
-        data="to fix me"
-        // data={csvData}
-        filename="data-grid.csv"
-        target="_blank"
+    <Grid
+      container
+      item
+      justify="space-between"
+      className={clsx(classes.sticky, classes.settingsContainer)}
+    >
+      <Grid
+        container
+        item
+        alignItems="center"
+        xs={12}
+        sm={12}
+        md={6}
+        spacing={2}
       >
-        Download CSV
-      </CSVLink>
+        <SettingDeleteRows
+          selectionState={!!appState.selectedItems.length}
+          deleteRowsAction={deleteRowsAction}
+        />
+        <SettingVirtualization
+          virtualizationState={appState.virtualizationState}
+          setVirtualizationAction={setVirtualizationAction}
+        />
+      </Grid>
+      <Grid
+        container
+        item
+        alignItems="center"
+        justify="flex-end"
+        xs={12}
+        sm={12}
+        md={6}
+        spacing={1}
+      >
+        <SettingQueryString />
+        <CSVExport />
+        <SettingVisibility
+          hiddenColumns={appState.hiddenColumns}
+          setVisibilityAction={setVisibilityAction}
+        />
+      </Grid>
     </Grid>
   );
 };

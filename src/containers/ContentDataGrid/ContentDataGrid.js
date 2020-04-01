@@ -37,8 +37,8 @@ const useStyles = makeStyles({
     width: '100%',
     boxSizing: 'border-box',
     position: 'relative',
-    // backgroundColor: '#f4f4f4',
-    backgroundColor: 'teal',
+    backgroundColor: '#ffffff',
+    // backgroundColor: 'teal',
   },
 });
 

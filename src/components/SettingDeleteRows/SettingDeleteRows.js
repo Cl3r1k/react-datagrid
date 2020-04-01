@@ -1,25 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-// import ExpandLess from '@material-ui/icons/ExpandLess';
-
-// Styles
-// import styles from './SettingDeleteRowsStyles';
-// import './SettingDeleteRows.scss';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const SettingDeleteRows = ({ selectionState, deleteRowsAction }) => {
-  // const classes = styles();
   return (
-    <div className="setting-delete-block">
+    <Grid item>
       <Button
         variant="outlined"
-        color="primary"
+        color="secondary"
         disabled={!selectionState}
         onClick={deleteRowsAction}
+        startIcon={<DeleteIcon />}
       >
         Delete selected rows
       </Button>
-    </div>
+    </Grid>
   );
 };
 

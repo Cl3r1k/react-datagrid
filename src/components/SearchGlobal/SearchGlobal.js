@@ -34,7 +34,7 @@ const SearchGlobal = ({ globalSearchValue, setGlobalSearchAction }) => {
   };
 
   return (
-    <Grid item>
+    <Grid container item>
       {/* <input
         type="text"
         value={inputValue}

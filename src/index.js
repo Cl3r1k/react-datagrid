@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from '@material-ui/core/styles';
 
 // Store
 import { store } from 'store/configureStore';
+
+// Theme
+import theme from 'config/theme';
 
 // Modules
 import * as serviceWorker from './serviceWorker';
@@ -16,7 +20,9 @@ import './index.scss';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root')
 );

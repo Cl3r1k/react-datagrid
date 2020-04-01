@@ -1,14 +1,19 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
+// Containers
+import Filters from 'containers/Filters/Filters';
+
 // Components
-import AppActions from 'components/AppActions/AppActions';
 import ReactDataGrid from 'components/ReactDataGrid/ReactDataGrid';
 
+// Themes
+import theme from 'config/themeDark';
+
 // Styles
-import './App.scss';
+// import './App.scss';
 
 const useStyles = makeStyles({
   root: {
@@ -23,10 +28,9 @@ const useStyles = makeStyles({
     overflow: 'hidden',
   },
   filtersContainer: {
-    backgroundColor: '#2fbbbb',
     padding: '20px 15px',
-    // backgroundColor: '#272a34',
-    // color: 'white',
+    backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.primary.main,
   },
   tableContainer: {
     backgroundColor: '#f4f4f4',
@@ -38,7 +42,6 @@ const useStyles = makeStyles({
   },
 });
 
-// TODO: Don't forget to style with overflow: hidden, after all changes will be implemented
 const App = () => {
   const classes = useStyles();
 
@@ -99,15 +102,17 @@ const App = () => {
     >
       <Paper elevation={5} className={classes.appWrapper}>
         <Grid container className={classes.height100Percent}>
-          <Grid
-            container
-            item
-            direction="column"
-            xs={3}
-            className={classes.filtersContainer}
-          >
-            <AppActions />
-          </Grid>
+          <ThemeProvider theme={theme}>
+            <Grid
+              container
+              item
+              direction="column"
+              xs={3}
+              className={classes.filtersContainer}
+            >
+              <Filters />
+            </Grid>
+          </ThemeProvider>
           <Grid container item xs={9} className={classes.tableContainer}>
             <ReactDataGrid />
             {/* <Grid

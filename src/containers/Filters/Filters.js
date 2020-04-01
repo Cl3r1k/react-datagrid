@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
@@ -17,7 +18,12 @@ import FilterEnum from 'components/FilterEnum/FilterEnum';
 import ToggleFilter from 'components/ToggleFilter/ToggleFilter';
 
 // Styles
-import './Filters.scss';
+// import './Filters.scss';
+const useStyles = makeStyles({
+  filterContainer: {
+    // backgroundColor: 'red',
+  },
+});
 
 const Filters = ({
   appState,
@@ -25,8 +31,10 @@ const Filters = ({
   setEnumFilterAction,
   setGlobalSearchAction,
 }) => {
+  const classes = useStyles();
+
   return (
-    <>
+    <Grid container spacing={3} className={classes.filterContainer}>
       <Grid item>
         <Typography
           variant="h6"
@@ -48,7 +56,7 @@ const Filters = ({
         filterToggleState={appState.filterToggleState}
         setToggleAction={setToggleAction}
       />
-    </>
+    </Grid>
   );
 };
 

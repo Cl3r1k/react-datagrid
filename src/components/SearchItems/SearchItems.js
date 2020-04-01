@@ -103,11 +103,10 @@ const SearchItems = ({
         }`}
         onClick={popupHandler}
       /> */}
-      <IconButton aria-label="search icon" size="small">
+      <IconButton aria-label="search icon" size="small" onClick={popupHandler}>
         <SearchIcon
           size="inherit"
           className={clsx(searchValueState.isActive && classes.activeSearch)}
-          onClick={popupHandler}
         />
       </IconButton>
     </div>

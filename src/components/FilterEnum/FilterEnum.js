@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
@@ -9,12 +10,18 @@ import Typography from '@material-ui/core/Typography';
 import { ENUM_CONFIG } from 'config/default';
 
 // Styles
-import './FilterEnum.scss';
+// import './FilterEnum.scss';
+const useStyles = makeStyles(theme => ({
+  root: {
+    color: theme.palette.primary.contrastText,
+  },
+}));
 
 const animatedComponent = makeAnimated();
 const options = ENUM_CONFIG.map(item => ({ value: item, label: item }));
 
 const FilterEnum = ({ filterEnums, setEnumFilterAction }) => {
+  const classes = useStyles();
   const defaultValue = filterEnums.map(item => ({ value: item, label: item }));
 
   const handleChange = newValue => {
@@ -34,7 +41,7 @@ const FilterEnum = ({ filterEnums, setEnumFilterAction }) => {
           Person type
         </Typography>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} className={classes.root}>
         <Select
           defaultValue={defaultValue}
           closeMenuOnSelect={false}
