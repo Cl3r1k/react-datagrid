@@ -28,9 +28,9 @@ const useStyles = makeStyles(theme => ({
   headerTable: {
     flexShrink: '0',
     flexWrap: 'nowrap',
-    top: '95px',
+    // top: '95px',
     height: theme.spacing(5),
-    width: 'auto',
+    width: 'fit-content',
     backgroundColor: '#ffffff',
   },
 }));

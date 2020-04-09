@@ -48,7 +48,7 @@ const objectContainsValue = (record, value) => {
     key =>
       key !== EXCLUDED_FIELD &&
       record[key]
-        .toString()
+        .toString(/* some params */)
         .toLowerCase()
         .includes(value.toLowerCase())
   ).length;

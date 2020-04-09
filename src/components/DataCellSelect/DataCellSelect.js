@@ -4,20 +4,29 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Checkbox from '@material-ui/core/Checkbox';
+import Box from '@material-ui/core/Box';
 
 // STyles
 import './DataCellSelect.scss';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   selectBlock: {
     padding: '5px',
+    position: 'relative',
   },
   sticky: {
-    backgroundColor: '#ffffff',
+    backgroundColor: theme.palette.common.white,
   },
-});
+  index: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    fontSize: '0.65rem',
+  },
+}));
 
 const DataCellSelect = ({
+  index,
   selectState,
   id,
   className,
@@ -49,6 +58,11 @@ const DataCellSelect = ({
       )}
       style={style}
     >
+      {index !== undefined && (
+        <Box component="span" className={classes.index}>
+          index: {index}
+        </Box>
+      )}
       <Checkbox
         checked={selectState}
         onChange={handleChange}
@@ -59,6 +73,7 @@ const DataCellSelect = ({
 };
 
 DataCellSelect.propTypes = {
+  index: PropTypes.number,
   selectState: PropTypes.bool,
   id: PropTypes.string.isRequired,
   className: PropTypes.string,
@@ -67,6 +82,7 @@ DataCellSelect.propTypes = {
 };
 
 DataCellSelect.defaultProps = {
+  index: undefined,
   selectState: false,
   className: '',
   setSelectionAction: undefined,

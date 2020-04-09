@@ -105,10 +105,10 @@ Todo:
     
     `Extra features`:
       ✔ Use debounce for global search input @done(20-03-24 17:53)
-      ☐ Implement Material-UI           <========================================================= CURRENT TASK
+      ✔ Implement Material-UI @done(20-04-01 16:33)
+      ☐ Implement own virtualization           <========================================================= CURRENT TASK
       ☐ UX - add numbers to multiple sorted columns to visually define 'multiple sort order'
       ☐ Fix logic for search column popup - it's not working properly for opened popup and filtered value for current item
-      ☐ Implement own virtualization
       ☐ Rewrite app and move logic to reducers.
       ☐ Rewrite app using `Redux Saga`
       ☐ Consider to use sticky header and add footer (with info about filtered data, and with button delete selected items)
