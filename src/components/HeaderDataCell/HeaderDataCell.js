@@ -41,6 +41,7 @@ const HeaderDataCell = props => {
     isSearchable,
     fieldName,
     sortState,
+    sortOrder,
     sortDataAction,
     searchField,
     searchValue,
@@ -84,6 +85,7 @@ const HeaderDataCell = props => {
           <SortItems
             fieldName={fieldName}
             sortState={sortState}
+            sortOrder={sortOrder}
             sortDataAction={sortDataAction}
           />
         )}
@@ -106,6 +108,7 @@ HeaderDataCell.propTypes = {
   title: PropTypes.string,
   fieldName: PropTypes.string,
   sortState: PropTypes.string,
+  sortOrder: PropTypes.number,
   isSortable: PropTypes.bool,
   isSearchable: PropTypes.bool,
   sortDataAction: PropTypes.func,
@@ -123,6 +126,7 @@ HeaderDataCell.defaultProps = {
   title: 'CellTitle',
   fieldName: '',
   sortState: '',
+  sortOrder: -1,
   isSortable: false,
   isSearchable: false,
   sortDataAction: undefined,

@@ -14,11 +14,9 @@ const sortDataByField = (sortField, shiftKey, dispatch, getState) => {
   ) {
     sortFields.length = 0;
     sortDirections.length = 0;
-    sortFields.push(sortField);
-    sortDirections.push(DIRECTION_VALUES.ASCENDING_DIRECTION);
   }
 
-  if (fieldIndex < 0) {
+  if (fieldIndex < 0 || !shiftKey) {
     sortFields.push(sortField);
     sortDirections.push(DIRECTION_VALUES.ASCENDING_DIRECTION);
   } else if (

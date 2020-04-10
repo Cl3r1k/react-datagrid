@@ -53,6 +53,7 @@ const HeaderDataGrid = ({
               sortState.sortFields.indexOf(MAP[key].name)
             ]
           }
+          sortOrder={sortState.sortFields.indexOf(MAP[key].name)}
           isSortable={MAP[key].isSortable}
           isSearchable={MAP[key].isSearchable}
           sortDataAction={sortDataAction}
