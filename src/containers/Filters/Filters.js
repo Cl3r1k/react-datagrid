@@ -17,8 +17,6 @@ import SearchGlobal from 'components/SearchGlobal/SearchGlobal';
 import FilterEnum from 'components/FilterEnum/FilterEnum';
 import ToggleFilter from 'components/ToggleFilter/ToggleFilter';
 
-// Styles
-// import './Filters.scss';
 const useStyles = makeStyles({
   filterContainer: {
     // backgroundColor: 'red',

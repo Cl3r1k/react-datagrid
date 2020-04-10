@@ -19,9 +19,6 @@ import SettingVisibility from 'components/SettingVisibility/SettingVisibility';
 import SettingQueryString from 'components/SettingQueryString/SettingQueryString';
 import CSVExport from 'components/CSVExport/CSVExport';
 
-// Styles
-// import './Settings.scss';
-
 const useStyles = makeStyles(theme => ({
   sticky: {
     position: 'sticky',
@@ -45,30 +42,6 @@ const Settings = ({
   const classes = useStyles();
 
   return (
-    // <div className="settings-container">
-    //   <SettingVirtualization
-    //     virtualizationState={appState.virtualizationState}
-    //     setVirtualizationAction={setVirtualizationAction}
-    //   />
-    //   <SettingDeleteRows
-    //     selectionState={!!appState.selectedItems.length}
-    //     deleteRowsAction={deleteRowsAction}
-    //   />
-    //   <SettingVisibility
-    //     hiddenColumns={appState.hiddenColumns}
-    //     setVisibilityAction={setVisibilityAction}
-    //   />
-    //   <SettingQueryString />
-    //   <CSVLink
-    //     className="csv-link"
-    //     data="to fix me"
-    //     // data={csvData}
-    //     filename="data-grid.csv"
-    //     target="_blank"
-    //   >
-    //     Download CSV
-    //   </CSVLink>
-    // </div>
     <Grid
       container
       item

@@ -8,9 +8,6 @@ import { generateFakeData } from 'utils/dataUtils';
 // Containers
 import ContentDataGrid from 'containers/ContentDataGrid/ContentDataGrid';
 
-// Styles
-// import './ReactDataGrid.scss';
-
 const useStyles = makeStyles({
   reactDataGrid: {
     backgroundColor: '#ffffff',
@@ -23,10 +20,6 @@ const ReactDataGrid = () => {
   const fakeData = generateFakeData();
 
   return (
-    // <div className="react-data-grid">
-    //   <Settings />
-    //   <ContentDataGrid data={fakeData} />
-    // </div>
     <Grid container item direction="column" className={classes.reactDataGrid}>
       <ContentDataGrid data={fakeData} />
     </Grid>

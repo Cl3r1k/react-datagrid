@@ -4,9 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 
-// Styles
-import './DataCellBool.scss';
-
 const useStyles = makeStyles({
   flagBlock: {
     padding: '5px',
@@ -26,9 +23,6 @@ const DataCellBool = ({ flagState, style }) => {
   const classes = useStyles();
 
   return (
-    // <div style={style} className="flag-block">
-    //   <div className={`flag-state ${flagState ? 'active' : ''}`} />
-    // </div>
     <Grid
       container
       justify="center"

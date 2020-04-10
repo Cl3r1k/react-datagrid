@@ -5,9 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 
-// Styles
-import './DataCellAvatar.scss';
-
 const useStyles = makeStyles(theme => ({
   avatarBlock: {
     padding: '5px',
@@ -24,9 +21,6 @@ const useStyles = makeStyles(theme => ({
 const DataCellAvatar = ({ imageUrl, className, style }) => {
   const classes = useStyles();
   return (
-    // <div style={style} className={`avatar-block ${className}`}>
-    //   <img className="avatar-image" src={imageUrl} alt="avatar" />
-    // </div>
     <Grid
       container
       alignItems="center"

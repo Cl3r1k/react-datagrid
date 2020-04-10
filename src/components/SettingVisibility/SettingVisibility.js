@@ -8,9 +8,6 @@ import Menu from '@material-ui/core/Menu';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { MenuItem } from '@material-ui/core';
 
-// Styles
-// import './SettingVisibility.scss';
-
 const SettingVisibility = ({ hiddenColumns, setVisibilityAction }) => {
   const [anchorEl, setAnchorElement] = useState(null);
   const open = Boolean(anchorEl);
@@ -28,21 +25,6 @@ const SettingVisibility = ({ hiddenColumns, setVisibilityAction }) => {
   };
 
   return (
-    // <div className="setting-delete-block">
-    //   <p>Columns visibility</p>
-    //   {Object.keys(hiddenColumns).map(key => (
-    //     <label key={key} htmlFor={`visible-${key}`}>
-    //       <input
-    //         type="checkbox"
-    //         id={`visible-${key}`}
-    //         checked={!hiddenColumns[key]}
-    //         onChange={evt => handleChange(evt, key)}
-    //       />
-    //       {key}
-    //     </label>
-    //   ))}
-    // </div>
-
     <Grid item>
       <IconButton
         aria-label="more"

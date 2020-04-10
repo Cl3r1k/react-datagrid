@@ -9,8 +9,6 @@ import Typography from '@material-ui/core/Typography';
 // Constants
 import { ENUM_CONFIG } from 'config/default';
 
-// Styles
-// import './FilterEnum.scss';
 const useStyles = makeStyles(theme => ({
   root: {
     color: theme.palette.primary.contrastText,

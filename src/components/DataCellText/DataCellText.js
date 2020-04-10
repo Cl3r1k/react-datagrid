@@ -5,9 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-// Styles
-import './DataCellText.scss';
-
 const useStyles = makeStyles({
   textBlock: {
     padding: '5px',
@@ -42,13 +39,6 @@ const DataCellText = ({
   }
 
   return (
-    // <div
-    //   style={style}
-    //   className={`text-block ${isNumber ? 'number-cell' : ''} ${className}`}
-    // >
-    //   {isHidden && <p>hidden</p>}
-    //   <p className="cell-text">{dataContent}</p>
-    // </div>
     <Grid
       container
       alignItems="center"

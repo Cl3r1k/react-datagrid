@@ -4,8 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 
-// Styles
-// import './DataCellObject.scss';
 const useStyles = makeStyles({
   objectBlock: {
     padding: '5px',
@@ -20,14 +18,6 @@ const DataCellObject = ({ data, style }) => {
   const classes = useStyles();
 
   return (
-    // <div style={style} className="object-block">
-    //   {Object.keys(data).map(key => (
-    //     <span className="span-item" key={key}>
-    //       {data[key]}
-    //     </span>
-    //   ))}
-    // </div>
-
     <Grid
       container
       justify="flex-end"

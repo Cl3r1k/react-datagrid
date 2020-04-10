@@ -6,9 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import Checkbox from '@material-ui/core/Checkbox';
 import Box from '@material-ui/core/Box';
 
-// STyles
-import './DataCellSelect.scss';
-
 const useStyles = makeStyles(theme => ({
   selectBlock: {
     padding: '5px',
@@ -40,14 +37,6 @@ const DataCellSelect = ({
   };
 
   return (
-    // <div className={`select-block ${className}`} style={style}>
-    //   <input
-    //     type="checkbox"
-    //     className="select-item"
-    //     checked={selectState}
-    //     onChange={handleChange}
-    //   />
-    // </div>
     <Grid
       container
       justify="center"

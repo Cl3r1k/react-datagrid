@@ -15,9 +15,6 @@ import DataCellSelect from 'components/DataCellSelect/DataCellSelect';
 // Constants
 import { MAP, DATA_TYPES } from 'config/default';
 
-// Styles
-// import './ContentDataRow.scss';
-
 const useStyles = makeStyles(theme => ({
   rowItem: {
     flexShrink: '0',
@@ -46,17 +43,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const ContentDataRow = React.memo(
-  ({
-    index,
-    item,
-    style,
-    // data,
-    // isVirtualization,
-    isSelected,
-    hiddenColumns,
-    setSelectionAction,
-  }) => {
-    // const selected = selectedItems.includes(item.id);
+  ({ index, item, style, isSelected, hiddenColumns, setSelectionAction }) => {
     const classes = useStyles();
     const renders = useRef(0);
 
@@ -151,25 +138,7 @@ export const ContentDataRow = React.memo(
       }
     };
 
-    // console.log('in <ContentDataRow /> item:', item);
-
     return (
-      // <div
-      //   className={`row-item ${selected ? 'selected-item' : ''}`}
-      //   style={{
-      //     ...style,
-      //     width: isVirtualization ? 'auto' : '135%',
-      //     top: !isVirtualization ? `${parseFloat(style.top) + 44}px` : '',
-      //   }}
-      // >
-      //   {Object.keys(MAP).map(key => renderCell(key))}
-      // </div>
-
-      // <div className="row-item" style={style}>
-      //   {/* <p>Row with index: ...</p> */}
-      //   <p>item.id: {item.id}</p>
-      // </div>
-
       <Grid
         container
         item
@@ -180,22 +149,6 @@ export const ContentDataRow = React.memo(
         )}
         style={style}
       >
-        {/* <DataCellSelect
-        className="sticky"
-        selectState={isSelected}
-        id={item.id}
-        style={{ width: MAP[0].columnWidth, left: MAP[0].leftPosition }}
-        setSelectionAction={setSelectionAction}
-      />
-      <DataCellAvatar
-        className="sticky"
-        imageUrl={item[MAP[1].name]}
-        style={{
-          width: MAP[1].columnWidth,
-          left: MAP[1].leftPosition,
-        }}
-      /> */}
-        {/* <p>Some item.id {item.id}</p> */}
         <div className={classes.renderText}>renders: {renders.current++}</div>
         {Object.keys(MAP).map(key => renderCell(key))}
       </Grid>
@@ -215,13 +168,10 @@ export const ContentDataRow = React.memo(
 );
 
 ContentDataRow.propTypes = {
-  // data: PropTypes.arrayOf(PropTypes.object),
   index: PropTypes.number,
   item: PropTypes.shape({
     id: PropTypes.string,
   }),
-  // isVirtualization: PropTypes.bool,
-  // selectedItems: PropTypes.arrayOf(PropTypes.string),
   isSelected: PropTypes.bool,
   hiddenColumns: PropTypes.objectOf(PropTypes.bool),
   setSelectionAction: PropTypes.func,
@@ -229,11 +179,8 @@ ContentDataRow.propTypes = {
 };
 
 ContentDataRow.defaultProps = {
-  // data: [],
-  // isVirtualization: false,
   index: undefined,
   item: {},
-  // selectedItems: [],
   isSelected: false,
   hiddenColumns: {},
   setSelectionAction: undefined,

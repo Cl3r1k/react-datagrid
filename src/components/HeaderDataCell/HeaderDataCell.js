@@ -9,9 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import SortItems from 'components/SortItems/SortItems';
 import SearchItems from 'components/SearchItems/SearchItems';
 
-// Styles
-import './HeaderDataCell.scss';
-
 const useStyles = makeStyles({
   headerDataCell: {
     padding: '0 5px',
@@ -52,7 +49,6 @@ const HeaderDataCell = props => {
     setSearchPopupAction,
     isHidden,
     isSticky,
-    // className,
     style,
   } = props;
   const classes = useStyles();
@@ -62,29 +58,6 @@ const HeaderDataCell = props => {
   }
 
   return (
-    // <div className={`header-data-cell ${className}`} style={style}>
-    //   <div className="title-container">
-    //     <span className="cell-title">{title}</span>
-    //     {isSortable && (
-    //       <SortItems
-    //         fieldName={fieldName}
-    //         sortState={sortState}
-    //         sortDataAction={sortDataAction}
-    //       />
-    //     )}
-    //   </div>
-    //   {isSearchable && (
-    //     <SearchItems
-    //       fieldName={fieldName}
-    //       searchField={searchField}
-    //       searchValue={searchValue}
-    //       searchPopupName={searchPopupName}
-    //       searchDataAction={searchDataAction}
-    //       setSearchPopupAction={setSearchPopupAction}
-    //     />
-    //   )}
-    // </div>
-
     <Grid
       container
       item
@@ -143,7 +116,6 @@ HeaderDataCell.propTypes = {
   setSearchPopupAction: PropTypes.func,
   isHidden: PropTypes.bool,
   isSticky: PropTypes.bool,
-  // className: PropTypes.string,
   style: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
@@ -161,7 +133,6 @@ HeaderDataCell.defaultProps = {
   setSearchPopupAction: undefined,
   isHidden: false,
   isSticky: false,
-  // className: '',
   style: '',
 };
 
