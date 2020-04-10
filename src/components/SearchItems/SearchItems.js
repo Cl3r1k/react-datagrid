@@ -19,12 +19,12 @@ const useStyles = makeStyles(theme => ({
     width: '200px',
     padding: '7px',
     borderRadius: '2px',
-    backgroundColor: '#fcfafa',
+    backgroundColor: theme.color.grayed,
     boxShadow: '0 0 5px 2px #a0a0b3',
     zIndex: '20',
   },
   activeSearch: {
-    backgroundColor: '#aff0da',
+    color: theme.palette.secondary.light,
   },
   inputRoot: {
     '& .MuiOutlinedInput-root': {
@@ -59,9 +59,6 @@ const SearchItems = ({
       setVisibleState(true);
 
       if (fieldName === searchField) {
-        // Here we can set searched value for popup
-        // console.log('%c searchValue: ', 'color: pink', searchValue);
-        // console.log('!searchValue', !!searchValue);
         setSearchValueState({ value: searchValue, isActive: !!searchValue });
       }
     } else {
@@ -75,9 +72,7 @@ const SearchItems = ({
   };
 
   const resetHandler = () => {
-    // TODO: Here we should reset 'searched' data and close popup
     searchDataAction(fieldName, '');
-    // setSearchValueState({ isActive: false });
     setSearchPopupAction('');
   };
 
@@ -122,7 +117,9 @@ const SearchItems = ({
       <IconButton aria-label="search icon" size="small" onClick={popupHandler}>
         <SearchIcon
           size="inherit"
-          className={clsx(searchValueState.isActive && classes.activeSearch)}
+          className={clsx(
+            fieldName === searchField && searchValue && classes.activeSearch
+          )}
         />
       </IconButton>
     </Grid>

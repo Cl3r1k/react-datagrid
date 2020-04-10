@@ -109,7 +109,8 @@ Todo:
       ✔ Implement own virtualization @done(20-04-10 15:10)
       ✔ Change app icon @done(20-04-10 15:37)
       ✔ UX - add numbers to multiple sorted columns to visually define 'multiple sort order' @done(20-04-10 16:37)
-      ☐ Fix logic for search column popup - it's not working properly for opened popup and filtered value for current item           <========================================================= CURRENT TASK
+      ✔ Fix logic for search column popup - it's not working properly for opened popup and filtered value for current item @done(20-04-10 17:05)
+      ☐ Fix sort logic for one sorted form 'ascending to descending'           <========================================================= CURRENT TASK
       ☐ Rewrite app and move logic to reducers.
         ☐ Containers should only contain connection to components, (e.g. there shouldn't be any jsx)
       ☐ Rewrite app using `Redux Saga`
