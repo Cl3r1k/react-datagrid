@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
     bottom: '0',
     left: 0,
     fontSize: '0.65rem',
-    color: 'red',
+    color: theme.palette.secondary.light,
     zIndex: 10,
   },
 }));

@@ -10,7 +10,7 @@ export const VirtualizedList = ({
   renderItem,
   boundaryItems,
 }) => {
-  const containerHeight = dataLength * rowHeight;
+  const containerHeight = dataLength * rowHeight + headerHeight;
   const [scrollPosition, setScrollPosition] = useState(0);
   const [itemsToRender, setItemsToRender] = useState(
     Math.floor(window.innerHeight / rowHeight)

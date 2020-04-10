@@ -14,11 +14,12 @@ const useStyles = makeStyles(theme => ({
   sticky: {
     backgroundColor: theme.palette.common.white,
   },
-  index: {
+  indexText: {
     position: 'absolute',
     left: 0,
     top: 0,
     fontSize: '0.65rem',
+    color: theme.palette.primary.light,
   },
 }));
 
@@ -48,7 +49,7 @@ const DataCellSelect = ({
       style={style}
     >
       {index !== undefined && (
-        <Box component="span" className={classes.index}>
+        <Box component="span" className={classes.indexText}>
           index: {index}
         </Box>
       )}
