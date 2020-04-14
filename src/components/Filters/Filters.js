@@ -1,16 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-
-// Actions
-import {
-  setToggle,
-  setEnumFilter,
-  setGlobalSearch,
-} from 'actions/searchActions';
 
 // Components
 import SearchGlobal from 'components/SearchGlobal/SearchGlobal';
@@ -23,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Filters = ({
+export const Filters = ({
   appState,
   setToggleAction,
   setEnumFilterAction,
@@ -68,22 +60,3 @@ Filters.propTypes = {
   setEnumFilterAction: PropTypes.func.isRequired,
   setGlobalSearchAction: PropTypes.func.isRequired,
 };
-
-const mapStateToProps = state => {
-  return {
-    appState: state.searchState,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    setToggleAction: (toggleValue, checkedStatus) =>
-      dispatch(setToggle(toggleValue, checkedStatus)),
-    setEnumFilterAction: enumsSelected =>
-      dispatch(setEnumFilter(enumsSelected)),
-    setGlobalSearchAction: globalSearchValue =>
-      dispatch(setGlobalSearch(globalSearchValue)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filters);

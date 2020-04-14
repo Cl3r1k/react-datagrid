@@ -5,6 +5,12 @@ export const DEFAULT_CONFIG = {
   FIXED_ROW_HEIGHT: 40,
 };
 
+export const BASE_URL =
+  'https://vpic.nhtsa.dot.gov/api/vehicles/GetEquipmentPlantCodes?year=2020&equipmentType=1&reportType=all&format=json';
+
+// API with 10000+ records
+// 'http://apiv3.iucnredlist.org/api/v3/species/page/0?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee';
+
 export const ENUM_CONFIG = ['Admin', 'Student', 'Mentor', 'Worker'];
 
 export const DATA_TYPES = {
@@ -102,3 +108,4 @@ export const MAP = {
 };
 
 export const THROTTLE_DELAY = 1000;
+export const FETCH_DELAY = 1000;

@@ -4,10 +4,10 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
 // Containers
-import Filters from 'containers/Filters/Filters';
+import { FiltersContainer } from 'containers/FiltersContainer';
 
 // Components
-import ReactDataGrid from 'components/ReactDataGrid/ReactDataGrid';
+import { ReactDataGrid } from 'components/ReactDataGrid/ReactDataGrid';
 
 // Themes
 import themeDark from 'config/themeDark';
@@ -57,7 +57,7 @@ const App = () => {
               md={2}
               className={classes.filtersContainer}
             >
-              <Filters />
+              <FiltersContainer />
             </Grid>
           </ThemeProvider>
           <Grid

@@ -35,8 +35,8 @@ const generateFakeRecord = () => {
   };
 };
 
-export const generateFakeData = () => {
-  return Array.from({ length: DATA_LENGTH }, () => generateFakeRecord());
+export const generateFakeData = (dataLength = DATA_LENGTH) => {
+  return Array.from({ length: dataLength }, () => generateFakeRecord());
 };
 
 export const sortDataByFieldName = (data, sortFields, sortDirections) => {

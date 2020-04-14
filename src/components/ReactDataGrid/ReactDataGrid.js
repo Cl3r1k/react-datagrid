@@ -2,11 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-// Modules
-import { generateFakeData } from 'utils/dataUtils';
-
 // Containers
-import ContentDataGrid from 'containers/ContentDataGrid/ContentDataGrid';
+import { ContentDataGridContainer } from 'containers/ContentDataGridContainer';
 
 const useStyles = makeStyles({
   reactDataGrid: {
@@ -15,15 +12,12 @@ const useStyles = makeStyles({
   },
 });
 
-const ReactDataGrid = () => {
+export const ReactDataGrid = () => {
   const classes = useStyles();
-  const fakeData = generateFakeData();
 
   return (
     <Grid container item direction="column" className={classes.reactDataGrid}>
-      <ContentDataGrid data={fakeData} />
+      <ContentDataGridContainer />
     </Grid>
   );
 };
-
-export default ReactDataGrid;

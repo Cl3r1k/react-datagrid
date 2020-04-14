@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
-// Actions
-import { setSelection } from 'actions/searchActions';
+import Typography from '@material-ui/core/Typography';
 
 // Containers
-import Settings from 'containers/Settings/Settings';
+import { SettingsContainer } from 'containers/SettingsContainer';
 
 // Components
 import { ContentDataRow } from 'components/ContentDataRow/ContentDataRow';
@@ -27,59 +23,19 @@ import theme from 'config/theme';
 // Constants
 import { DEFAULT_CONFIG } from 'config/default';
 
-const useStyles = makeStyles(defaultTheme => ({
-  contentDataGrid: {
-    display: 'grid',
-    gridTemplateRows: 'auto 1fr',
-    alignItems: 'flex-start',
-    alignContent: 'flex-start',
-    // overflow: 'auto',
-    // padding: '5px',
-    height: '100%',
-    width: '100%',
-    boxSizing: 'border-box',
-    position: 'relative',
-    // backgroundColor: '#ffffff',
-    // backgroundColor: 'teal',
-  },
-  tableWrapper: {
-    width: '100%',
-    // height: '600px',
-    overflow: 'auto',
-    height: '100%',
-  },
-  styledScrollBar: {
-    // * Scrollbars with styles
-    // The emerging W3C standard that is currently Firefox-only
-    scrollbarWidth: 'thin',
-    scrollbarColor: `${defaultTheme.palette.primary.light} ${defaultTheme.color.grayed}`,
+// Styles
+import { useStyles } from './ContentDataGridStyles';
 
-    /* Works on Chrome/Edge/Safari */
-    '&::-webkit-scrollbar': {
-      width: '10px',
-      height: '10px',
-    },
-    '&::-webkit-scrollbar-track': {
-      backgroundColor: defaultTheme.color.grayed,
-    },
-    '&::-webkit-scrollbar-thumb': {
-      borderRadius: '10px',
-      backgroundColor: defaultTheme.palette.primary.light,
-      border: `3px solid ${defaultTheme.color.grayed}`,
-    },
-  },
-  backDropRoot: {
-    zIndex: '100',
-  },
-}));
-
-const ContentDataGrid = ({
+export const ContentDataGrid = ({
   data,
   sortState,
   searchState,
+  isPending,
+  error,
   setSelectionAction,
 }) => {
   const classes = useStyles();
+
   const renderTable = () => {
     const filteredData = filterData(
       data,
@@ -142,9 +98,27 @@ const ContentDataGrid = ({
     );
   };
 
+  if (error) {
+    return (
+      <Grid container>
+        <Typography variant="body1">
+          Error: {error.message} (Please, update page)
+        </Typography>
+      </Grid>
+    );
+  }
+
+  if (isPending) {
+    return (
+      <Backdrop open={isPending} className={classes.backDropRoot}>
+        <CircularProgress />
+      </Backdrop>
+    );
+  }
+
   return (
     <Grid container item className={classes.contentDataGrid}>
-      <Settings />
+      <SettingsContainer />
 
       {renderTable()}
 
@@ -178,25 +152,16 @@ ContentDataGrid.propTypes = {
     deletedItems: PropTypes.arrayOf(PropTypes.string),
     hiddenColumns: PropTypes.objectOf(PropTypes.bool),
   }).isRequired,
+  isPending: PropTypes.bool,
+  error: PropTypes.shape({
+    message: PropTypes.string,
+  }),
   setSelectionAction: PropTypes.func,
 };
 
 ContentDataGrid.defaultProps = {
   data: [],
+  isPending: false,
+  error: undefined,
   setSelectionAction: undefined,
 };
-
-const mapStoreToProps = state => {
-  return {
-    sortState: state.sortState,
-    searchState: state.searchState,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    setSelectionAction: selectedItem => dispatch(setSelection(selectedItem)),
-  };
-};
-
-export default connect(mapStoreToProps, mapDispatchToProps)(ContentDataGrid);

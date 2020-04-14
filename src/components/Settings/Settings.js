@@ -1,16 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
-// Actions
-import {
-  setVirtualization,
-  deleteRows,
-  setVisibility,
-} from 'actions/searchActions';
 
 // Components
 import SettingVirtualization from 'components/SettingVirtualization/SettingVirtualization';
@@ -33,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Settings = ({
+export const Settings = ({
   appState,
   setVirtualizationAction,
   deleteRowsAction,
@@ -87,22 +79,6 @@ const Settings = ({
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    appState: state.searchState,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    setVirtualizationAction: virtualizationState =>
-      dispatch(setVirtualization(virtualizationState)),
-    deleteRowsAction: () => dispatch(deleteRows()),
-    setVisibilityAction: (fieldName, hiddenState) =>
-      dispatch(setVisibility(fieldName, hiddenState)),
-  };
-};
-
 Settings.propTypes = {
   appState: PropTypes.shape({
     virtualizationState: PropTypes.bool,
@@ -119,5 +95,3 @@ Settings.defaultProps = {
   deleteRowsAction: undefined,
   setVisibilityAction: undefined,
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(Settings);

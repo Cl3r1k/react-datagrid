@@ -6,6 +6,9 @@ import { ThemeProvider } from '@material-ui/core/styles';
 // Store
 import { store } from 'store/configureStore';
 
+// Actions
+import { fetchData } from 'actions/fetchData';
+
 // Theme
 import theme from 'config/theme';
 
@@ -17,6 +20,9 @@ import App from './App';
 
 // Styles
 import './index.scss';
+
+// Initial fetch
+store.dispatch(fetchData());
 
 ReactDOM.render(
   <Provider store={store}>
