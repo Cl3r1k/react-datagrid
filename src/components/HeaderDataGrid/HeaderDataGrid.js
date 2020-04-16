@@ -1,16 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-// Actions
-import { sortData } from 'actions/sortActions';
-import { searchData, setSearchPopup } from 'actions/searchActions';
-
 // Components
-import HeaderDataCell from 'components/HeaderDataCell/HeaderDataCell';
+import { HeaderDataCell } from 'components/HeaderDataCell/HeaderDataCell';
 
 // Constants
 import { MAP } from 'config/default';
@@ -32,12 +27,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const HeaderDataGrid = ({
+export const HeaderDataGrid = ({
+  appState,
   sortState,
-  searchState,
-  sortDataAction,
+  filterState,
+  setSortParamsAction,
   setSearchPopupAction,
-  searchDataAction,
+  setFilterDataAction,
 }) => {
   const classes = useStyles();
 
@@ -49,20 +45,18 @@ const HeaderDataGrid = ({
           title={MAP[key].title}
           fieldName={MAP[key].name}
           sortState={
-            sortState.sortDirections[
-              sortState.sortFields.indexOf(MAP[key].name)
-            ]
+            sortState.directions[sortState.sortKeys.indexOf(MAP[key].name)]
           }
-          sortOrder={sortState.sortFields.indexOf(MAP[key].name)}
+          sortOrder={sortState.sortKeys.indexOf(MAP[key].name)}
           isSortable={MAP[key].isSortable}
           isSearchable={MAP[key].isSearchable}
-          sortDataAction={sortDataAction}
-          searchField={searchState.searchField}
-          searchValue={searchState.searchValue}
-          searchPopupName={searchState.searchPopupName}
+          setSortParamsAction={setSortParamsAction}
+          filterKey={filterState.filterKey}
+          filterValue={filterState.filterValue}
+          searchPopupName={filterState.searchPopupName}
           setSearchPopupAction={setSearchPopupAction}
-          searchDataAction={searchDataAction}
-          isHidden={searchState.hiddenColumns[MAP[key].name]}
+          setFilterDataAction={setFilterDataAction}
+          isHidden={appState.hiddenColumns[MAP[key].name]}
           isSticky={MAP[key].sticky}
           style={{ width: MAP[key].columnWidth, left: MAP[key].leftPosition }}
         />
@@ -72,39 +66,19 @@ const HeaderDataGrid = ({
 };
 
 HeaderDataGrid.propTypes = {
-  sortState: PropTypes.shape({
-    sortFields: PropTypes.arrayOf(PropTypes.string),
-    sortDirections: PropTypes.arrayOf(PropTypes.string),
-    isSorting: PropTypes.bool,
-  }).isRequired,
-  searchState: PropTypes.shape({
-    searchField: PropTypes.string,
-    searchValue: PropTypes.string,
-    searchPopupName: PropTypes.string,
-    isSearching: PropTypes.bool,
+  appState: PropTypes.shape({
     hiddenColumns: PropTypes.objectOf(PropTypes.bool),
   }).isRequired,
-  sortDataAction: PropTypes.func.isRequired,
+  sortState: PropTypes.shape({
+    sortKeys: PropTypes.arrayOf(PropTypes.string),
+    directions: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
+  filterState: PropTypes.shape({
+    filterKey: PropTypes.string,
+    filterValue: PropTypes.string,
+    searchPopupName: PropTypes.string,
+  }).isRequired,
+  setSortParamsAction: PropTypes.func.isRequired,
   setSearchPopupAction: PropTypes.func.isRequired,
-  searchDataAction: PropTypes.func.isRequired,
+  setFilterDataAction: PropTypes.func.isRequired,
 };
-
-const mapStateToProps = state => {
-  return {
-    sortState: state.sortState,
-    searchState: state.searchState,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    sortDataAction: (sortField, shiftKey) =>
-      dispatch(sortData(sortField, shiftKey)),
-    setSearchPopupAction: searchPopupName =>
-      dispatch(setSearchPopup(searchPopupName)),
-    searchDataAction: (searchField, searchValue) =>
-      dispatch(searchData(searchField, searchValue)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderDataGrid);

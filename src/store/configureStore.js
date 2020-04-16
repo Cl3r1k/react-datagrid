@@ -31,12 +31,9 @@ export const store = createStore(
 store.subscribe(
   throttle(() => {
     saveState({
+      appState: store.getState().appState,
+      filterState: store.getState().filterState,
       sortState: store.getState().sortState,
-      searchState: {
-        ...store.getState().searchState,
-        selectedItems: [],
-        deletedItems: [],
-      },
     });
   }, THROTTLE_DELAY)
 );

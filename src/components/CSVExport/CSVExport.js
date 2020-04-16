@@ -6,12 +6,12 @@ import SaveAltIcon from '@material-ui/icons/SaveAlt';
 // Modules
 import { CSVLink } from 'react-csv';
 
-const CSVExport = () => {
+export const CSVExport = () => {
   // TODO: To implement
   // const csvData = excludedData.map(item => {
   //   const filteredItem = {};
   //   Object.keys(item).forEach((key, index) => {
-  //     if (!MAP[index].isHidden && !searchState.hiddenColumns[key]) {
+  //     if (!MAP[index].isHidden && !filterState.hiddenColumns[key]) {
   //       if (typeof item[key] === 'object') {
   //         filteredItem[key] = Object.values(item[key]).join(' ');
   //       } else {
@@ -40,5 +40,3 @@ const CSVExport = () => {
     </Grid>
   );
 };
-
-export default CSVExport;

@@ -31,12 +31,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SortItems = ({ fieldName, sortState, sortOrder, sortDataAction }) => {
+export const SortItems = ({
+  fieldName,
+  sortState,
+  sortOrder,
+  setSortParamsAction,
+}) => {
   const { DESCENDING_DIRECTION } = DIRECTION_VALUES;
   const classes = useStyles({ sortState });
 
   const sortBy = ({ shiftKey }) => {
-    sortDataAction(fieldName, shiftKey);
+    setSortParamsAction(fieldName, shiftKey);
   };
 
   return (
@@ -71,13 +76,11 @@ SortItems.propTypes = {
   fieldName: PropTypes.string.isRequired,
   sortState: PropTypes.string,
   sortOrder: PropTypes.number,
-  sortDataAction: PropTypes.func,
+  setSortParamsAction: PropTypes.func,
 };
 
 SortItems.defaultProps = {
   sortState: '',
   sortOrder: -1,
-  sortDataAction: undefined,
+  setSortParamsAction: undefined,
 };
-
-export default SortItems;

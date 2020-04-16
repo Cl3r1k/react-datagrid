@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   focusVisible: {},
 }));
 
-const ToggleFilter = ({ filterToggleState, setToggleAction }) => {
+export const ToggleFilter = ({ filterToggleState, setToggleAction }) => {
   const classes = useStyles();
 
   const toggleChangeHandler = ({ currentTarget: { value, checked } }) => {
@@ -87,5 +87,3 @@ ToggleFilter.propTypes = {
   filterToggleState: PropTypes.number.isRequired,
   setToggleAction: PropTypes.func.isRequired,
 };
-
-export default ToggleFilter;

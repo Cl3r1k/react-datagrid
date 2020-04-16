@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 import {
   setToggle,
   setEnumFilter,
-  setGlobalSearch,
-} from 'actions/searchActions';
+  setFilterGlobal,
+} from 'actions/filterActions';
 
 // Components
 import { Filters } from 'components/Filters/Filters';
 
 const mapStateToProps = state => {
   return {
-    appState: state.searchState,
+    filterState: state.filterState,
   };
 };
 
@@ -22,8 +22,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(setToggle(toggleValue, checkedStatus)),
     setEnumFilterAction: enumsSelected =>
       dispatch(setEnumFilter(enumsSelected)),
-    setGlobalSearchAction: globalSearchValue =>
-      dispatch(setGlobalSearch(globalSearchValue)),
+    setFilterGlobalAction: filterGlobalValue =>
+      dispatch(setFilterGlobal(filterGlobalValue)),
   };
 };
 

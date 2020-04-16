@@ -5,4 +5,4 @@ export const DIRECTION_VALUES = {
 };
 
 export const ACTION_DELAY = 700;
-export const SEARCH_DELAY = 500;
+export const FILTER_DELAY = 500;

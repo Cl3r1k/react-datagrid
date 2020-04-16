@@ -8,7 +8,7 @@ import Menu from '@material-ui/core/Menu';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { MenuItem } from '@material-ui/core';
 
-const SettingVisibility = ({ hiddenColumns, setVisibilityAction }) => {
+export const SettingVisibility = ({ hiddenColumns, setVisibilityAction }) => {
   const [anchorEl, setAnchorElement] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -62,5 +62,3 @@ SettingVisibility.defaultProps = {
   hiddenColumns: {},
   setVisibilityAction: undefined,
 };
-
-export default SettingVisibility;

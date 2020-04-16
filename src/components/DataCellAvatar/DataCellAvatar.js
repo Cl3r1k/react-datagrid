@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const DataCellAvatar = ({ imageUrl, className, style }) => {
+export const DataCellAvatar = ({ imageUrl, className, style }) => {
   const classes = useStyles();
   return (
     <Grid
@@ -51,5 +51,3 @@ DataCellAvatar.defaultProps = {
   className: '',
   style: '',
 };
-
-export default DataCellAvatar;

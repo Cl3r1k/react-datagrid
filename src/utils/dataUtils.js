@@ -54,16 +54,13 @@ const objectContainsValue = (record, value) => {
   ).length;
 };
 
-const globalSearch = (data, globalSearchValue) => {
-  return data.filter(item => objectContainsValue(item, globalSearchValue));
+const filterGlobal = (data, filterGlobalValue) => {
+  return data.filter(item => objectContainsValue(item, filterGlobalValue));
 };
 
-const searchByFieldName = (data, searchField, searchValue) => {
+const filterByFieldName = (data, filterKey, filterValue) => {
   return data.filter(item =>
-    item[searchField]
-      .toString()
-      .toLowerCase()
-      .includes(searchValue.toLowerCase())
+    item[filterKey].toString().toLowerCase().includes(filterValue.toLowerCase())
   );
 };
 
@@ -82,20 +79,20 @@ const filterByToggle = (data, filterToggle) => {
 
 export const filterData = (
   data,
-  searchField,
-  searchValue,
-  globalSearchValue,
+  filterKey,
+  filterValue,
+  filterGlobalValue,
   filterToggle,
   filterEnums
 ) => {
   let filteredData = [...data];
 
-  if (searchField) {
-    filteredData = searchByFieldName(filteredData, searchField, searchValue);
+  if (filterKey) {
+    filteredData = filterByFieldName(filteredData, filterKey, filterValue);
   }
 
-  if (globalSearchValue) {
-    filteredData = globalSearch(filteredData, globalSearchValue);
+  if (filterGlobalValue) {
+    filteredData = filterGlobal(filteredData, filterGlobalValue);
   }
 
   if (filterEnums.length) {

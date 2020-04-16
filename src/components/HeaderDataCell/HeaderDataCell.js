@@ -6,8 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 // Components
-import SortItems from 'components/SortItems/SortItems';
-import SearchItems from 'components/SearchItems/SearchItems';
+import { SortItems } from 'components/SortItems/SortItems';
+import { FilterItems } from 'components/FilterItems/FilterItems';
 
 const useStyles = makeStyles({
   headerDataCell: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
   },
 });
 
-const HeaderDataCell = props => {
+export const HeaderDataCell = props => {
   const {
     title,
     isSortable,
@@ -42,11 +42,11 @@ const HeaderDataCell = props => {
     fieldName,
     sortState,
     sortOrder,
-    sortDataAction,
-    searchField,
-    searchValue,
+    setSortParamsAction,
+    filterKey,
+    filterValue,
     searchPopupName,
-    searchDataAction,
+    setFilterDataAction,
     setSearchPopupAction,
     isHidden,
     isSticky,
@@ -86,17 +86,17 @@ const HeaderDataCell = props => {
             fieldName={fieldName}
             sortState={sortState}
             sortOrder={sortOrder}
-            sortDataAction={sortDataAction}
+            setSortParamsAction={setSortParamsAction}
           />
         )}
       </Grid>
       {isSearchable && (
-        <SearchItems
+        <FilterItems
           fieldName={fieldName}
-          searchField={searchField}
-          searchValue={searchValue}
+          filterKey={filterKey}
+          filterValue={filterValue}
           searchPopupName={searchPopupName}
-          searchDataAction={searchDataAction}
+          setFilterDataAction={setFilterDataAction}
           setSearchPopupAction={setSearchPopupAction}
         />
       )}
@@ -111,11 +111,11 @@ HeaderDataCell.propTypes = {
   sortOrder: PropTypes.number,
   isSortable: PropTypes.bool,
   isSearchable: PropTypes.bool,
-  sortDataAction: PropTypes.func,
-  searchField: PropTypes.string,
-  searchValue: PropTypes.string,
+  setSortParamsAction: PropTypes.func,
+  filterKey: PropTypes.string,
+  filterValue: PropTypes.string,
   searchPopupName: PropTypes.string,
-  searchDataAction: PropTypes.func,
+  setFilterDataAction: PropTypes.func,
   setSearchPopupAction: PropTypes.func,
   isHidden: PropTypes.bool,
   isSticky: PropTypes.bool,
@@ -129,15 +129,13 @@ HeaderDataCell.defaultProps = {
   sortOrder: -1,
   isSortable: false,
   isSearchable: false,
-  sortDataAction: undefined,
-  searchField: '',
-  searchValue: '',
+  setSortParamsAction: undefined,
+  filterKey: '',
+  filterValue: '',
   searchPopupName: '',
-  searchDataAction: undefined,
+  setFilterDataAction: undefined,
   setSearchPopupAction: undefined,
   isHidden: false,
   isSticky: false,
   style: '',
 };
-
-export default HeaderDataCell;

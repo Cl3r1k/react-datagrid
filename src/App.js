@@ -10,7 +10,7 @@ import { FiltersContainer } from 'containers/FiltersContainer';
 import { ReactDataGrid } from 'components/ReactDataGrid/ReactDataGrid';
 
 // Themes
-import themeDark from 'config/themeDark';
+import { themeDark } from 'config/themeDark';
 
 const useStyles = makeStyles(defaultTheme => ({
   appRoot: {
@@ -40,7 +40,7 @@ const useStyles = makeStyles(defaultTheme => ({
   },
 }));
 
-const App = () => {
+export const App = () => {
   const classes = useStyles();
 
   return (
@@ -75,5 +75,3 @@ const App = () => {
     </Grid>
   );
 };
-
-export default App;

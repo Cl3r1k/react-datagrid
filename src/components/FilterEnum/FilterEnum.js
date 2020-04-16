@@ -18,18 +18,13 @@ const useStyles = makeStyles(theme => ({
 const animatedComponent = makeAnimated();
 const options = ENUM_CONFIG.map(item => ({ value: item, label: item }));
 
-const FilterEnum = ({ filterEnums, setEnumFilterAction }) => {
+export const FilterEnum = ({ filterEnums, setEnumFilterAction }) => {
   const classes = useStyles();
   const defaultValue = filterEnums.map(item => ({ value: item, label: item }));
 
   const handleChange = newValue => {
-    // TODO: Improve this part, try to use 'enumsSelected' to simplify (like) -> enumsSelected = newValue ? newValue.map(item => item.value) : []
-    if (newValue) {
-      const enumsSelected = newValue.map(item => item.value);
-      setEnumFilterAction(enumsSelected);
-    } else {
-      setEnumFilterAction([]);
-    }
+    const enumsSelected = newValue ? newValue.map(item => item.value) : [];
+    setEnumFilterAction(enumsSelected);
   };
 
   return (
@@ -61,5 +56,3 @@ FilterEnum.propTypes = {
 FilterEnum.defaultProps = {
   filterEnums: [],
 };
-
-export default FilterEnum;

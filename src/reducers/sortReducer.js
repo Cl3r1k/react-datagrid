@@ -1,19 +1,21 @@
-import { SORT_DATA_SUCCESS } from 'actions/sortActions';
+import * as actionTypes from 'constants/actionTypes';
 
 export const initialState = {
-  sortFields: [],
-  sortDirections: [],
-  isSorting: false,
+  sortKeys: [],
+  directions: [],
+  isSortPending: false,
 };
 
 export const sortReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SORT_DATA_SUCCESS:
+    case actionTypes.SET_SORT_PENDING:
+      return { ...state, isSortPending: true };
+
+    case actionTypes.SET_SORT_SUCCESS:
       return {
         ...state,
-        sortFields: action.payload.sortFields,
-        sortDirections: action.payload.sortDirections,
-        isSorting: false,
+        ...action.payload,
+        isSortPending: false,
       };
 
     default:

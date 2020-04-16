@@ -12,19 +12,19 @@ import SearchIcon from '@material-ui/icons/Search';
 import debounce from 'lodash/debounce';
 
 // Constants
-import { SEARCH_DELAY } from 'constants/constants';
+import { FILTER_DELAY } from 'constants/constants';
 
-const SearchGlobal = ({ globalSearchValue, setGlobalSearchAction }) => {
-  const [inputValue, setInputValue] = useState(globalSearchValue);
+export const FilterGlobal = ({ filterGlobalValue, setFilterGlobalAction }) => {
+  const [inputValue, setInputValue] = useState(filterGlobalValue);
 
   useEffect(() => {
-    setInputValue(globalSearchValue);
-  }, [globalSearchValue]);
+    setInputValue(filterGlobalValue);
+  }, [filterGlobalValue]);
 
   const delayedSearchAction = useCallback(
     debounce(value => {
-      setGlobalSearchAction(value);
-    }, SEARCH_DELAY),
+      setFilterGlobalAction(value);
+    }, FILTER_DELAY),
     []
   );
 
@@ -35,12 +35,6 @@ const SearchGlobal = ({ globalSearchValue, setGlobalSearchAction }) => {
 
   return (
     <Grid container item>
-      {/* <input
-        type="text"
-        value={inputValue}
-        placeholder="Search through all columns"
-        onChange={handleInputChange}
-      /> */}
       <FormControl fullWidth variant="outlined">
         <InputLabel htmlFor="outlined-input-search">Search...</InputLabel>
         <OutlinedInput
@@ -61,13 +55,11 @@ const SearchGlobal = ({ globalSearchValue, setGlobalSearchAction }) => {
   );
 };
 
-SearchGlobal.propTypes = {
-  globalSearchValue: PropTypes.string,
-  setGlobalSearchAction: PropTypes.func.isRequired,
+FilterGlobal.propTypes = {
+  filterGlobalValue: PropTypes.string,
+  setFilterGlobalAction: PropTypes.func.isRequired,
 };
 
-SearchGlobal.defaultProps = {
-  globalSearchValue: '',
+FilterGlobal.defaultProps = {
+  filterGlobalValue: '',
 };
-
-export default SearchGlobal;

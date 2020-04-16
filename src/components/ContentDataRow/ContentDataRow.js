@@ -6,11 +6,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 // Components
-import DataCellAvatar from 'components/DataCellAvatar/DataCellAvatar';
-import DataCellText from 'components/DataCellText/DataCellText';
-import DataCellBool from 'components/DataCellBool/DataCellBool';
-import DataCellObject from 'components/DataCellObject/DataCellObject';
-import DataCellSelect from 'components/DataCellSelect/DataCellSelect';
+import { DataCellAvatar } from 'components/DataCellAvatar/DataCellAvatar';
+import { DataCellText } from 'components/DataCellText/DataCellText';
+import { DataCellBool } from 'components/DataCellBool/DataCellBool';
+import { DataCellObject } from 'components/DataCellObject/DataCellObject';
+import { DataCellSelect } from 'components/DataCellSelect/DataCellSelect';
 
 // Constants
 import { MAP, DATA_TYPES } from 'config/default';

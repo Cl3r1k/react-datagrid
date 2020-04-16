@@ -5,11 +5,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 // Components
-import SettingVirtualization from 'components/SettingVirtualization/SettingVirtualization';
-import SettingDeleteRows from 'components/SettingDeleteRows/SettingDeleteRows';
-import SettingVisibility from 'components/SettingVisibility/SettingVisibility';
-import SettingQueryString from 'components/SettingQueryString/SettingQueryString';
-import CSVExport from 'components/CSVExport/CSVExport';
+import { SettingVirtualization } from 'components/SettingVirtualization/SettingVirtualization';
+import { SettingDeleteRows } from 'components/SettingDeleteRows/SettingDeleteRows';
+import { SettingVisibility } from 'components/SettingVisibility/SettingVisibility';
+import { SettingQueryString } from 'components/SettingQueryString/SettingQueryString';
+import { CSVExport } from 'components/CSVExport/CSVExport';
 
 const useStyles = makeStyles(theme => ({
   sticky: {
@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
 
 export const Settings = ({
   appState,
+  dataState,
   setVirtualizationAction,
   deleteRowsAction,
   setVisibilityAction,
@@ -50,7 +51,7 @@ export const Settings = ({
         spacing={2}
       >
         <SettingDeleteRows
-          selectionState={!!appState.selectedItems.length}
+          selectionState={!!dataState.selectedItems.length}
           deleteRowsAction={deleteRowsAction}
         />
         <SettingVirtualization
@@ -82,8 +83,10 @@ export const Settings = ({
 Settings.propTypes = {
   appState: PropTypes.shape({
     virtualizationState: PropTypes.bool,
-    selectedItems: PropTypes.arrayOf(PropTypes.string),
     hiddenColumns: PropTypes.objectOf(PropTypes.bool),
+  }).isRequired,
+  dataState: PropTypes.shape({
+    selectedItems: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
   setVirtualizationAction: PropTypes.func,
   deleteRowsAction: PropTypes.func,

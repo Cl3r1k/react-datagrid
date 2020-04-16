@@ -1,7 +1,10 @@
 import { connect } from 'react-redux';
 
 // Actions
-import { setSelection } from 'actions/searchActions';
+import { setSelection } from 'actions/dataActions';
+
+// Selectors
+import { processDataSelector } from 'selectors/processDataSelector';
 
 // Reducers
 import { getDataPending, getData, getDataError } from 'reducers/dataReducer';
@@ -11,9 +14,11 @@ import { ContentDataGrid } from 'components/ContentDataGrid/ContentDataGrid';
 
 const mapStoreToProps = state => {
   return {
-    data: state.dataState.data,
+    data: processDataSelector(state),
+    appState: state.appState,
+    dataState: state.dataState,
     sortState: state.sortState,
-    searchState: state.searchState,
+    filterState: state.filterState,
     isPending: getDataPending(state.dataState),
     fetchedData: getData(state.dataState),
     error: getDataError(state.dataState),

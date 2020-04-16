@@ -8,17 +8,14 @@ import Typography from '@material-ui/core/Typography';
 
 // Containers
 import { SettingsContainer } from 'containers/SettingsContainer';
+import { HeaderDataGridContainer } from 'containers/HeaderDataGridContainer';
 
 // Components
 import { ContentDataRow } from 'components/ContentDataRow/ContentDataRow';
-import HeaderDataGrid from 'components/HeaderDataGrid/HeaderDataGrid';
 import { VirtualizedList } from 'components/VirtualizedList/VirtualizedList';
 
-// Utils
-import { sortDataByFieldName, filterData, excludeById } from 'utils/dataUtils';
-
 // Themes
-import theme from 'config/theme';
+import { theme } from 'config/theme';
 
 // Constants
 import { DEFAULT_CONFIG } from 'config/default';
@@ -28,8 +25,10 @@ import { useStyles } from './ContentDataGridStyles';
 
 export const ContentDataGrid = ({
   data,
+  appState,
+  dataState,
   sortState,
-  searchState,
+  filterState,
   isPending,
   error,
   setSelectionAction,
@@ -37,34 +36,17 @@ export const ContentDataGrid = ({
   const classes = useStyles();
 
   const renderTable = () => {
-    const filteredData = filterData(
-      data,
-      searchState.searchField,
-      searchState.searchValue,
-      searchState.globalSearchValue,
-      searchState.filterToggleState,
-      searchState.filterEnums
-    );
-
-    const sortedData = sortDataByFieldName(
-      filteredData,
-      sortState.sortFields,
-      sortState.sortDirections
-    );
-
-    const excludedData = excludeById(sortedData, searchState.deletedItems);
-
-    if (!searchState.virtualizationState) {
+    if (!appState.virtualizationState) {
       return (
         <div className={clsx(classes.tableWrapper, classes.styledScrollBar)}>
-          <HeaderDataGrid hiddenColumns={searchState.hiddenColumns} />
-          {excludedData.map((item, index) => (
+          <HeaderDataGridContainer />
+          {data.map((item, index) => (
             <ContentDataRow
               key={item.id}
               index={index}
               item={item}
-              isSelected={searchState.selectedItems.includes(item.id)}
-              hiddenColumns={searchState.hiddenColumns}
+              isSelected={dataState.selectedItems.includes(item.id)}
+              hiddenColumns={appState.hiddenColumns}
               setSelectionAction={setSelectionAction}
             />
           ))}
@@ -74,23 +56,19 @@ export const ContentDataGrid = ({
 
     return (
       <VirtualizedList
-        dataLength={excludedData.length}
+        dataLength={data.length}
         rowHeight={theme.spacing(6)}
         headerHeight={DEFAULT_CONFIG.FIXED_ROW_HEIGHT}
-        stickyHeader={
-          <HeaderDataGrid hiddenColumns={searchState.hiddenColumns} />
-        }
+        stickyHeader={<HeaderDataGridContainer />}
         className={classes.styledScrollBar}
         renderItem={(index, style) => (
           <ContentDataRow
-            key={excludedData[index].id}
+            key={data[index].id}
             index={index}
-            item={excludedData[index]}
+            item={data[index]}
             style={style}
-            isSelected={searchState.selectedItems.includes(
-              excludedData[index].id
-            )}
-            hiddenColumns={searchState.hiddenColumns}
+            isSelected={dataState.selectedItems.includes(data[index].id)}
+            hiddenColumns={appState.hiddenColumns}
             setSelectionAction={setSelectionAction}
           />
         )}
@@ -123,7 +101,7 @@ export const ContentDataGrid = ({
       {renderTable()}
 
       <Backdrop
-        open={sortState.isSorting || searchState.isSearching}
+        open={sortState.isSorting || filterState.isFiltering}
         className={classes.backDropRoot}
       >
         <CircularProgress />
@@ -134,23 +112,27 @@ export const ContentDataGrid = ({
 
 ContentDataGrid.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
+  appState: PropTypes.shape({
+    virtualizationState: PropTypes.bool,
+    hiddenColumns: PropTypes.objectOf(PropTypes.bool),
+  }).isRequired,
+  dataState: PropTypes.shape({
+    selectedItems: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
   sortState: PropTypes.shape({
     sortFields: PropTypes.arrayOf(PropTypes.string),
     sortDirections: PropTypes.arrayOf(PropTypes.string),
     isSorting: PropTypes.bool,
   }).isRequired,
-  searchState: PropTypes.shape({
-    searchField: PropTypes.string,
-    searchValue: PropTypes.string,
-    searchPopupName: PropTypes.string,
-    isSearching: PropTypes.bool,
-    globalSearchValue: PropTypes.string,
+  filterState: PropTypes.shape({
+    filterKey: PropTypes.string,
+    filterValue: PropTypes.string,
+    filterGlobalValue: PropTypes.string,
     filterToggleState: PropTypes.number,
     filterEnums: PropTypes.arrayOf(PropTypes.string).isRequired,
-    virtualizationState: PropTypes.bool,
-    selectedItems: PropTypes.arrayOf(PropTypes.string),
-    deletedItems: PropTypes.arrayOf(PropTypes.string),
-    hiddenColumns: PropTypes.objectOf(PropTypes.bool),
+    isFiltering: PropTypes.bool,
+
+    searchPopupName: PropTypes.string,
   }).isRequired,
   isPending: PropTypes.bool,
   error: PropTypes.shape({

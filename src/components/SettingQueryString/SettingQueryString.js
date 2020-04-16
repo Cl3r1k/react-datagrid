@@ -4,10 +4,10 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import LinkIcon from '@material-ui/icons/Link';
 
-const SettingQueryString = () => {
+export const SettingQueryString = () => {
   return (
     <Grid item>
-      <Link href="?filterEnums=Mentor&globalSearchValue=Man">
+      <Link href="?filterEnums=Mentor&filterGlobalValue=Man">
         <Button variant="outlined" startIcon={<LinkIcon />}>
           QueryString
         </Button>
@@ -15,5 +15,3 @@ const SettingQueryString = () => {
     </Grid>
   );
 };
-
-export default SettingQueryString;

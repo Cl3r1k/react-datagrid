@@ -1,23 +1,33 @@
-import {
-  FETCH_DATA_PENDING,
-  FETCH_DATA_SUCCESS,
-  FETCH_DATA_ERROR,
-} from 'actions/fetchData';
+import * as actionTypes from 'constants/actionTypes';
 
 const initialState = {
   data: [],
+  selectedItems: [],
   isPending: false,
   error: null,
 };
 
 export const dataReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_DATA_PENDING:
+    case actionTypes.FETCH_DATA_PENDING:
       return { ...state, isPending: true, error: null };
-    case FETCH_DATA_SUCCESS:
+
+    case actionTypes.FETCH_DATA_SUCCESS:
       return { ...state, data: action.payload, isPending: false, error: null };
-    case FETCH_DATA_ERROR:
+
+    case actionTypes.FETCH_DATA_ERROR:
       return { ...state, isPending: false, error: action.payload };
+
+    case actionTypes.SET_SELECT_ROW:
+      return { ...state, selectedItems: action.payload };
+
+    case actionTypes.DELETE_ROWS:
+      return {
+        ...state,
+        selectedItems: action.payload.selectedItems,
+        data: action.payload.data,
+      };
+
     default:
       return state;
   }

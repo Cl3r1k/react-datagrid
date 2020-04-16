@@ -1,4 +1,4 @@
-import { initialState as initialStateSearch } from 'reducers/searchReducer';
+import { initialState as initialStateFilter } from 'reducers/filterReducer';
 import { initialState as initialStateSort } from 'reducers/sortReducer';
 
 export const queryStringParse = () => {
@@ -14,7 +14,7 @@ export const queryStringParse = () => {
 
     const resultState = {
       sortState: { ...initialStateSort },
-      searchState: { ...initialStateSearch, ...parsedParams },
+      filterState: { ...initialStateFilter, ...parsedParams },
     };
 
     return resultState;

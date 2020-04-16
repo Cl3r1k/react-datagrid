@@ -111,9 +111,9 @@ Todo:
       ✔ UX - add numbers to multiple sorted columns to visually define 'multiple sort order' @done(20-04-10 16:37)
       ✔ Fix logic for search column popup - it's not working properly for opened popup and filtered value for current item @done(20-04-10 17:05)
       ✔ Fix sort logic for one sorted column from 'ascending to descending' @done(20-04-11 09:44)
-      ☐ Rewrite app and move logic to reducers           <========================================================= CURRENT TASK
-        ☐ Containers should only contain connection to components, (e.g. there shouldn't be any jsx)
-      ☐ Rewrite app using `Redux Saga`
+      ✔ Rewrite app and move logic out of components @done(20-04-16 18:12)
+        ✔ Containers should only contain connection to components, (e.g. there shouldn't be any jsx) @done(20-04-16 18:12)
+      ☐ Rewrite app using `Redux Saga`           <========================================================= CURRENT TASK
       ☐ Consider to use sticky header and add footer (with info about filtered data, and with button delete selected items)
 
 

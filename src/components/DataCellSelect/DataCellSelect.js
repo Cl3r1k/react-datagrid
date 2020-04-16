@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const DataCellSelect = ({
+export const DataCellSelect = ({
   index,
   selectState,
   id,
@@ -78,5 +78,3 @@ DataCellSelect.defaultProps = {
   setSelectionAction: undefined,
   style: '',
 };
-
-export default DataCellSelect;

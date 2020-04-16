@@ -7,16 +7,16 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { store } from 'store/configureStore';
 
 // Actions
-import { fetchData } from 'actions/fetchData';
+import { fetchData } from 'actions/dataActions';
 
 // Theme
-import theme from 'config/theme';
+import { theme } from 'config/theme';
 
 // Modules
 import * as serviceWorker from './serviceWorker';
 
 // Components
-import App from './App';
+import { App } from './App';
 
 // Styles
 import './index.scss';

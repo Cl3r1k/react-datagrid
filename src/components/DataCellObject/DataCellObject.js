@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-const DataCellObject = ({ data, style }) => {
+export const DataCellObject = ({ data, style }) => {
   const classes = useStyles();
 
   return (
@@ -46,5 +46,3 @@ DataCellObject.defaultProps = {
   data: {},
   style: '',
 };
-
-export default DataCellObject;

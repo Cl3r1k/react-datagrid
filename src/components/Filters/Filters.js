@@ -5,9 +5,9 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 // Components
-import SearchGlobal from 'components/SearchGlobal/SearchGlobal';
-import FilterEnum from 'components/FilterEnum/FilterEnum';
-import ToggleFilter from 'components/ToggleFilter/ToggleFilter';
+import { FilterGlobal } from 'components/FilterGlobal/FilterGlobal';
+import { FilterEnum } from 'components/FilterEnum/FilterEnum';
+import { ToggleFilter } from 'components/ToggleFilter/ToggleFilter';
 
 const useStyles = makeStyles({
   filterContainer: {
@@ -16,10 +16,10 @@ const useStyles = makeStyles({
 });
 
 export const Filters = ({
-  appState,
+  filterState,
   setToggleAction,
   setEnumFilterAction,
-  setGlobalSearchAction,
+  setFilterGlobalAction,
 }) => {
   const classes = useStyles();
 
@@ -34,16 +34,16 @@ export const Filters = ({
           Filter Data
         </Typography>
       </Grid>
-      <SearchGlobal
-        globalSearchValue={appState.globalSearchValue}
-        setGlobalSearchAction={setGlobalSearchAction}
+      <FilterGlobal
+        filterGlobalValue={filterState.filterGlobalValue}
+        setFilterGlobalAction={setFilterGlobalAction}
       />
       <FilterEnum
-        filterEnums={appState.filterEnums}
+        filterEnums={filterState.filterEnums}
         setEnumFilterAction={setEnumFilterAction}
       />
       <ToggleFilter
-        filterToggleState={appState.filterToggleState}
+        filterToggleState={filterState.filterToggleState}
         setToggleAction={setToggleAction}
       />
     </Grid>
@@ -51,12 +51,12 @@ export const Filters = ({
 };
 
 Filters.propTypes = {
-  appState: PropTypes.shape({
-    globalSearchValue: PropTypes.string,
+  filterState: PropTypes.shape({
+    filterGlobalValue: PropTypes.string,
     filterEnums: PropTypes.arrayOf(PropTypes.string),
     filterToggleState: PropTypes.number,
   }).isRequired,
   setToggleAction: PropTypes.func.isRequired,
   setEnumFilterAction: PropTypes.func.isRequired,
-  setGlobalSearchAction: PropTypes.func.isRequired,
+  setFilterGlobalAction: PropTypes.func.isRequired,
 };

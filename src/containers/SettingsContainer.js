@@ -4,15 +4,13 @@ import { connect } from 'react-redux';
 import { Settings } from 'components/Settings/Settings';
 
 // Actions
-import {
-  setVirtualization,
-  deleteRows,
-  setVisibility,
-} from 'actions/searchActions';
+import { setVirtualization, setVisibility } from 'actions/settingsAction';
+import { deleteRows } from 'actions/dataActions';
 
 const mapStateToProps = state => {
   return {
-    appState: state.searchState,
+    appState: state.appState,
+    dataState: state.dataState,
   };
 };
 

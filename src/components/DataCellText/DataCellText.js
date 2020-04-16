@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-const DataCellText = ({
+export const DataCellText = ({
   dataContent,
   isNumber,
   isHidden,
@@ -72,5 +72,3 @@ DataCellText.defaultProps = {
   className: '',
   style: '',
 };
-
-export default DataCellText;

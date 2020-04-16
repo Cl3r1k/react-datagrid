@@ -39,12 +39,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SearchItems = ({
+export const FilterItems = ({
   fieldName,
-  searchField,
-  searchValue,
+  filterKey,
+  filterValue,
   searchPopupName,
-  searchDataAction,
+  setFilterDataAction,
   setSearchPopupAction,
 }) => {
   const [visibleState, setVisibleState] = useState(false);
@@ -58,21 +58,21 @@ const SearchItems = ({
     if (fieldName === searchPopupName) {
       setVisibleState(true);
 
-      if (fieldName === searchField) {
-        setSearchValueState({ value: searchValue, isActive: !!searchValue });
+      if (fieldName === filterKey) {
+        setSearchValueState({ value: filterValue, isActive: !!filterValue });
       }
     } else {
       setVisibleState(false);
     }
-  }, [fieldName, searchField, searchValue, searchPopupName]);
+  }, [fieldName, filterKey, filterValue, searchPopupName]);
 
-  const searchHandler = () => {
-    searchDataAction(fieldName, searchValueState.value);
+  const filterHandler = () => {
+    setFilterDataAction(fieldName, searchValueState.value);
     setSearchPopupAction('');
   };
 
   const resetHandler = () => {
-    searchDataAction(fieldName, '');
+    setFilterDataAction(fieldName, '');
     setSearchPopupAction('');
   };
 
@@ -105,7 +105,7 @@ const SearchItems = ({
             spacing={1}
             className={classes.buttonsBlock}
           >
-            <Button variant="contained" onClick={searchHandler}>
+            <Button variant="contained" onClick={filterHandler}>
               Search
             </Button>
             <Button variant="contained" onClick={resetHandler}>
@@ -118,7 +118,7 @@ const SearchItems = ({
         <SearchIcon
           size="inherit"
           className={clsx(
-            fieldName === searchField && searchValue && classes.activeSearch
+            fieldName === filterKey && filterValue && classes.activeSearch
           )}
         />
       </IconButton>
@@ -126,20 +126,18 @@ const SearchItems = ({
   );
 };
 
-SearchItems.propTypes = {
+FilterItems.propTypes = {
   fieldName: PropTypes.string,
-  searchField: PropTypes.string,
-  searchValue: PropTypes.string,
+  filterKey: PropTypes.string,
+  filterValue: PropTypes.string,
   searchPopupName: PropTypes.string,
-  searchDataAction: PropTypes.func.isRequired,
+  setFilterDataAction: PropTypes.func.isRequired,
   setSearchPopupAction: PropTypes.func.isRequired,
 };
 
-SearchItems.defaultProps = {
+FilterItems.defaultProps = {
   fieldName: 'fieldName',
-  searchField: '',
-  searchValue: '',
+  filterKey: '',
+  filterValue: '',
   searchPopupName: '',
 };
-
-export default SearchItems;

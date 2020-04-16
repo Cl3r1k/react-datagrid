@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-const DataCellBool = ({ flagState, style }) => {
+export const DataCellBool = ({ flagState, style }) => {
   const classes = useStyles();
 
   return (
@@ -47,5 +47,3 @@ DataCellBool.defaultProps = {
   flagState: false,
   style: '',
 };
-
-export default DataCellBool;
