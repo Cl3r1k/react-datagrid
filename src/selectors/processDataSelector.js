@@ -1,28 +1,20 @@
 import { createSelector } from 'reselect';
 
 // Utils
-import { filterData, sortDataByFieldName } from 'utils/dataUtils';
+import { sortDataByFieldName } from 'utils/dataUtils';
 
-const dataSelector = state => state.dataState && state.dataState.data;
-const filterSelector = state => state.filterState;
+// Selectors
+import { filterDataSelector } from 'selectors/filterDataSelector';
+
 const sortSelector = state => state.sortState;
 
 export const processDataSelector = createSelector(
-  [dataSelector, filterSelector, sortSelector],
-  (dataCollection, filter, sort) => {
+  [filterDataSelector, sortSelector],
+  (filteredData, sort) => {
     // console.log('%c processDataSelector() called: ', 'color: red;');
     // console.log('%c dataCollection: ', 'color: red;', dataCollection);
     // console.log('%c in processDataSelector() filter: ', 'color: red;', filter);
     // console.log('%c in processDataSelector() sort: ', 'color: red;', sort);
-
-    const filteredData = filterData(
-      dataCollection,
-      filter.filterKey,
-      filter.filterValue,
-      filter.filterGlobalValue,
-      filter.filterToggleState,
-      filter.filterEnums
-    );
 
     if (sort && sort.sortKeys.length) {
       const sortedData = sortDataByFieldName(

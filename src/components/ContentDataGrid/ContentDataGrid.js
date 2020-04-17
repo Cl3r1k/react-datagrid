@@ -101,7 +101,7 @@ export const ContentDataGrid = ({
       {renderTable()}
 
       <Backdrop
-        open={sortState.isSorting || filterState.isFiltering}
+        open={sortState.isSortPending || filterState.isFiltering}
         className={classes.backDropRoot}
       >
         <CircularProgress />
@@ -122,7 +122,7 @@ ContentDataGrid.propTypes = {
   sortState: PropTypes.shape({
     sortFields: PropTypes.arrayOf(PropTypes.string),
     sortDirections: PropTypes.arrayOf(PropTypes.string),
-    isSorting: PropTypes.bool,
+    isSortPending: PropTypes.bool,
   }).isRequired,
   filterState: PropTypes.shape({
     filterKey: PropTypes.string,
