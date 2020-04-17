@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 
 // Selectors
-import { processDataSelector } from 'selectors/processDataSelector';
+import { csvDataSelector } from 'selectors/csvDataSelector';
 
 // Components
 import { CSVExport } from 'components/CSVExport/CSVExport';
 
 const mapStateToProps = state => {
   return {
-    data: processDataSelector(state),
+    csvData: csvDataSelector(state),
   };
 };
 
