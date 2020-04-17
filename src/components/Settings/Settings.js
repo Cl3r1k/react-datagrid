@@ -4,12 +4,14 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
+// Containers
+import { CSVExportContainer } from 'containers/CSVExportContainer';
+
 // Components
 import { SettingVirtualization } from 'components/SettingVirtualization/SettingVirtualization';
 import { SettingDeleteRows } from 'components/SettingDeleteRows/SettingDeleteRows';
 import { SettingVisibility } from 'components/SettingVisibility/SettingVisibility';
 import { SettingQueryString } from 'components/SettingQueryString/SettingQueryString';
-import { CSVExport } from 'components/CSVExport/CSVExport';
 
 const useStyles = makeStyles(theme => ({
   sticky: {
@@ -70,7 +72,7 @@ export const Settings = ({
         spacing={1}
       >
         <SettingQueryString />
-        <CSVExport />
+        <CSVExportContainer />
         <SettingVisibility
           hiddenColumns={appState.hiddenColumns}
           setVisibilityAction={setVisibilityAction}

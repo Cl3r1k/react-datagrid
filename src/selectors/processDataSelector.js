@@ -10,6 +10,7 @@ const sortSelector = state => state.sortState;
 export const processDataSelector = createSelector(
   [dataSelector, filterSelector, sortSelector],
   (dataCollection, filter, sort) => {
+    // console.log('%c processDataSelector() called: ', 'color: red;');
     // console.log('%c dataCollection: ', 'color: red;', dataCollection);
     // console.log('%c in processDataSelector() filter: ', 'color: red;', filter);
     // console.log('%c in processDataSelector() sort: ', 'color: red;', sort);
