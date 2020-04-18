@@ -11,3 +11,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.sticky {
+  position: sticky !important;
+  position: -webkit-sticky !important;
+  z-index: 2;
+}
+
+.row-item {
+  &:hover {
+    .sticky {
+      background-color: #eeeeee;
+    }
+  }
+  &.selected-item {
+    .sticky {
+      background-color: #f5f5f5;
+    }
+  }
+  // .sticky {
+  //   background-color: #cad4e2;
+  // }
+}

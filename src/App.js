@@ -1,26 +1,77 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
-function App() {
+// Containers
+import { FiltersContainer } from 'containers/FiltersContainer';
+
+// Components
+import { ReactDataGrid } from 'components/ReactDataGrid/ReactDataGrid';
+
+// Themes
+import { themeDark } from 'config/themeDark';
+
+const useStyles = makeStyles(defaultTheme => ({
+  appRoot: {
+    height: '100vh',
+    padding: '20px',
+    boxSizing: 'border-box',
+    backgroundColor: '#3f51b508',
+    boxShadow: defaultTheme.shadows[20],
+  },
+  appWrapper: {
+    height: '100%',
+    width: '100%',
+    overflow: 'hidden',
+  },
+  filtersContainer: {
+    padding: '20px 15px',
+    backgroundColor: themeDark.palette.secondary.main,
+    color: themeDark.palette.primary.main,
+  },
+  tableContainer: {
+    backgroundColor: defaultTheme.color.grayed,
+    padding: '25px 35px',
+    height: '100%',
+  },
+  height100Percent: {
+    height: '100%',
+  },
+}));
+
+export const App = () => {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid container className={classes.appRoot}>
+      <Paper elevation={5} className={classes.appWrapper}>
+        <Grid container className={classes.height100Percent}>
+          <ThemeProvider theme={themeDark}>
+            <Grid
+              container
+              item
+              direction="column"
+              xs={12}
+              sm={3}
+              md={2}
+              className={classes.filtersContainer}
+            >
+              <FiltersContainer />
+            </Grid>
+          </ThemeProvider>
+          <Grid
+            container
+            item
+            xs={12}
+            sm={9}
+            md={10}
+            className={classes.tableContainer}
+          >
+            <ReactDataGrid />
+          </Grid>
+        </Grid>
+      </Paper>
+    </Grid>
   );
-}
-
-export default App;
+};

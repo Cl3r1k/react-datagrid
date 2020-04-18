@@ -1,0 +1,126 @@
+@Task - *datagrid* `https://github.com/rolling-scopes-school/tasks/blob/master/tasks/datagrid.md`
+@QA - `https://docs.google.com/spreadsheets/d/1E4ymczP9BBDsJbneq-IrJy6c-QYTpA3oHCN7iIHpRyo/edit#gid=0`
+@Repo - `https://github.com/Cl3r1k/react-datagrid`
+@UI_Prototype - ``
+@Prototype - `https://app.rs.school/course/score?course=react-2020-Q1`
+@Example - `https://uimovement.com/design/data-table-filter/`
+@Example2 - `https://dribbble.com/shots/9404247-SaaS-Software-Budgets-Control-UGEM/`
+@Example3 - `https://dribbble.com/shots/5744805-OEM-Network-Dashboard/attachments/`
+@Example_complete_1 - `https://adoring-bose-963fac.netlify.com/`
+@Example_complete_2 - `https://datagrid-yuskiv.netlify.com/`
+@Example_complete_3 - `https://datagrid-slolkunchik.netlify.com/#/`
+@Example_complete_4 - `https://blackjack-data-grid.netlify.com/`
+@Example_complete_5 - `https://hopeful-kirch-b901c7.netlify.com/`
+@Good_example - `https://github.com/iosDeveloperDK/DataGrids`
+@Demo - `https://cl3r1k-react-datagrid.netlify.com/`
+@UX/UI_Prototype - `https://www.behance.net/gallery/55390583/Inventory-management-dashboard`
+@UX/UI_Prototype_ToConsider - `https://dribbble.com/shots/9404247-SaaS-Software-Budgets-Control-UGEM`
+
+Todo:
+
+  Функциональные требования:
+    ✔ Таблица может содержать любые данные.
+      - Например, можно отображать список студентов курса rss-2019q3-react.  
+      
+    ✔ Источником данных может быть любой сторонний API, локальный json файл или можно генерировать случайные данные, например с помощью faker.js.      
+      ✔ Минимум 1000 рядов.
+      ✔ Минимум 7 колонок.  
+      ✔ Значения в колонках минимум трёх разных типов из списка ниже. 
+
+    Примеры типов для ячеек:
+      - string - отображается как есть, но но надо либо ограничить длину строки, либо использовать `text-overflow: ellipsis` 
+      - integer / decimal - числа обычно выравниваются по правой стороне и форматируются с учётом локали (см. `Number.toLocaleString`). 
+      - enum - строка принимающая ограниченный набор (3-10) значений.  
+      - local datetime - дата и/или время в виде строки.  
+      - instant - время как в `Date.getTime()`  
+      - составные объекты - например `money: {currency: 'PHP', amount: 7.4}`  
+      - boolean  
+      
+  Интерактивные функции таблицы:
+    ✔ Сортировка
+    ✔ Фильтрация
+    ✔ Выбор рядов и действия с ними
+
+
+  Технические требования: 
+    ✔ Для удобства проверки задания поддержка Redux DevTools должна быть не только в девелоперской версии (aka `npm run start`), но и в "продакшн" сборке (aka `npm run build`).
+
+    Нужно использовать:
+      ✔ React @done(20-03-04 10:46)
+      ✔ Redux with DevTools
+      ✔ приватный репозиторий на github @done(20-03-04 10:46)
+      ✔ хостинг для готового приложения - netlify, heroku, gh-pages или любой другой 
+
+    Можно использовать:
+      - create-react-app  
+      - lodash
+      - TypeScript 
+      - bootstrap и любые другие css фреймворки 
+      - react-select и подобные простые компоненты для фильтров  
+      - библиотека [react-window](https://github.com/bvaughn/react-window) для виртуализации рядов таблицы.
+      - библиотеки для форматирования значений в ячейках (для чисел и времени)  
+      - библиотеки для генерации данных  
+
+    Нельзя использовать:
+      ✔ любые другие компоненты из сторонних библиотек
+      ✔ любые другие библиотеки, реализующие ключевую функциональность задания (например - сортировка и фильтрация).
+
+    Можно не использовать:
+      - saga, thunk и любой другой middleware для сайд эффектов. Однако некоторые требования в hacker scope подразумевают использование middleware
+
+    
+  Критерии оценки:  
+
+    `Максимальный балл за задание: 300 баллов`:
+      ✔ Non-interactive scope +30 @done(20-03-06 09:47)
+        ✔ Данные отображаются в таблице в соответствии с функциональными требованиями. +30 @done(20-03-06 09:47)
+          - Подумайте, какую лучше выбрать технику вёрстки таблицы. 
+          - Обычные блоки, блоки с абсолютной позицией, \<table>, flexbox, etc - правильного варианта нет,
+          - но от выборанной техники будет зависеть реализация некоторых из требований ниже.
+
+    `Basic scope +70`:
+      ✔ Реализована сортировка по одной колонке. +10 @done(20-03-10 15:51)
+      ✔ Понятная индикация, по какой колонке применена сортировка и в каком направлении (по возрастанию или убыванию) +10 @done(20-03-10 15:53)
+      ✔ Реализована фильтрация по введённому тексту (поиск подстроки как минимум в значениях одной колонки). +10 @done(20-03-11 17:46)
+        ✔ (В дополнение к предыдущему) При фильтрации по тексту производится поиск подстроки в нескольких колонках. +10 @done(20-03-13 12:51)
+      ✔ Реализована фильтрация по boolean колонке с помощью UI-элемента toggle или аналогичного. +10 @done(20-03-12 13:14)
+      ✔ Реализована фильтрация по enum колонке. Можно использовать react-select или аналогичный UI-элемент. +10 @done(20-03-13 10:53)
+        ✔ (В дополнение к предыдущему) При фильтрации по enum колонке можно выбрать несколько значений (multiselect UI-элемент). +10 @done(20-03-13 10:53)
+
+    `Advanced scope +150`:
+      ✔ С зажатым shift можно сортировать по нескольким колонкам. +20 @done(20-03-13 18:09)
+      ✔ Реализована [виртуализация рядов](`https://web.dev/virtualize-long-lists-react-window/`) для отображении большого объёма данных. +30. @done(20-03-17 15:11)
+        - Можно использовать библиотеку *react-window* для виртуализации, но самостоятельная имплементация этой техники одобряется и поощрается авторами задания.
+      ✔ Функцию виртуализации можно выключить c помощью toggle и сравнить скорость работы и отрисовки страницы. +10
+      ✔ Ряд таблицы можно выделить кликом и применить к нему какое-либо действие. Выделенный ряд должен отличатся визуально. Самый простой пример действия - удаление из таблицы, но можно придумать любое другое. +20
+        ✔ (В дополнение к предыдущему) С помощью зажатых Ctrl/shift и/или колонки чекбоксов слева можно выделить одновременно *несколько* рядов и применить к ним действие.  +20
+      ✔ Можно настраивать видимость колонок (всех или некоторых) [демо1](`https://www.datatables.net/examples/api/show_hide.html`), [демо2](`http://filamentgroup.github.io/tablesaw/demo/toggle.html`) +20
+      ✔ Фиксированный заголовок таблицы aka sticky header, то есть при скролле таблицы строка с названиями колонок остаётся видна поверх данных. +10
+      ✔ Фиксированная левая колонка. Принцип тот же, что и для sticky header, но левая колонка (как правило идентифицирующая данные в ряде, например - имя человека) остаётся видна при горизонтальном скролле. +20 @done(20-03-24 10:42)
+
+    `Hacker scope +50`:
+      ✔ Сохранение значений для сортировки, фильтрации, видимости колонок (если реализовано) сохранаются в localStorage так, что при обновлении страницы состояние таблицы сохраняется. +20
+      ✔ Экспорт данных в CSV файл (только видимые ряды с сохранением сортировки). +20
+      ✔ Значения фильтров для текстовых и enum колонок можно передавать в querystring (приоритет выше, чем у localStorage). +10 @done(20-03-24 12:08)
+    
+    `Extra features`:
+      ✔ Use debounce for global search input @done(20-03-24 17:53)
+      ✔ Implement Material-UI @done(20-04-01 16:33)
+      ✔ Implement own virtualization @done(20-04-10 15:10)
+      ✔ Change app icon @done(20-04-10 15:37)
+      ✔ UX - add numbers to multiple sorted columns to visually define 'multiple sort order' @done(20-04-10 16:37)
+      ✔ Fix logic for search column popup - it's not working properly for opened popup and filtered value for current item @done(20-04-10 17:05)
+      ✔ Fix sort logic for one sorted column from 'ascending to descending' @done(20-04-11 09:44)
+      ✔ Rewrite app and move logic out of components @done(20-04-16 18:12)
+        ✔ Containers should only contain connection to components, (e.g. there shouldn't be any jsx) @done(20-04-16 18:12)
+      - Rewrite app using `Redux Saga` (*Overengineering*)
+      ☐ Consider to use sticky header and add footer (with info about filtered data, and with button delete selected items)           <========================================================= CURRENT TASK
+
+
+
+    Штрафы:
+      - ошибки в консоли, связанные с работой приложения: -10  
+      - любой сбой/поломка приложения, связанная с действиями пользователя: -20  
+      - нет поддержки Redux DevTools в продакшн сборке: -10
+      - заметные подтормаживания в работе на более-менее современном десктопе: -10
+
