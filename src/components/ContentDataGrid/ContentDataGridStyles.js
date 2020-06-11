@@ -2,10 +2,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(defaultTheme => ({
   contentDataGrid: {
-    display: 'grid',
-    gridTemplateRows: 'auto 1fr',
-    alignItems: 'flex-start',
-    alignContent: 'flex-start',
+    flexWrap: 'noWrap',
+    flexDirection: 'column',
+    // display: 'grid',
+    // gridTemplateRows: 'auto 1fr',
+    // alignItems: 'flex-start',
+    // alignContent: 'flex-start',
     // overflow: 'auto',
     // padding: '5px',
     height: '100%',
