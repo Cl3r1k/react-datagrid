@@ -42,7 +42,7 @@ export const ToggleFilter = ({ filterToggleState, setToggleAction }) => {
         </Typography>
       </Grid>
       <Grid container item sm={12}>
-        <Grid item sm={6}>
+        <Grid item xs={6} sm={12} md={12} lg={6}>
           <FormControlLabel
             control={
               <Switch
@@ -60,7 +60,7 @@ export const ToggleFilter = ({ filterToggleState, setToggleAction }) => {
             label="Active"
           />
         </Grid>
-        <Grid item sm={6}>
+        <Grid item xs={6} sm={12} md={12} lg={6}>
           <FormControlLabel
             control={
               <Switch

@@ -19,6 +19,7 @@ const useStyles = makeStyles(defaultTheme => ({
     boxSizing: 'border-box',
     backgroundColor: '#3f51b508',
     boxShadow: defaultTheme.shadows[20],
+    minWidth: '320px',
   },
   appWrapper: {
     height: '100%',

@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     zIndex: 11,
   },
   settingsContainer: {
-    height: '95px',
+    padding: theme.spacing(1),
     paddingLeft: theme.spacing(2),
     backgroundColor: '#ffffff',
   },
